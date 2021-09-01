@@ -1,0 +1,30 @@
+{% include 'Test/base.html' %}
+
+
+<div class="container bg-light p-5">
+    <h2>{{ user_details.username }}</h2>
+</div>
+<br>
+<div class="container bg-warning">
+    Buyer = {{ request.user }}
+    Seller = {{ user_details.username }}
+
+</div>
+
+
+
+
+<div class="container p-5 bg-light">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {% comment %} Receiver: {{ user_details.username }}<br> {% endcomment %}
+        {% comment %} <input type="text" name="user" value="{{ user_details.username }}"><br> {% endcomment %}
+        {% comment %} Sender: {{ request.user }}<br> {% endcomment %}
+        {% comment %} <input type="text" name="seller" value="{{ request.user }}"><br> {% endcomment %}
+        <br>
+        <label>Enter a welcome message (ROOM NAME)</label><br>
+        <textarea name="room_name" class="form-control"></textarea><br>
+        <button class="btn btn-dark" type="submit">Send Message</button>
+
+    </form>
+</div>

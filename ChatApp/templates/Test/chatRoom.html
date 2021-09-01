@@ -1,0 +1,25 @@
+{% include 'Test/base.html' %}
+<br><br>
+<div class="container bg-light">
+    MESSAGE SECTION 
+
+    {% for m in msgs %}
+
+        <p class="badge bg-dark">{{ m.sender }}</p><p class="bg-danger">{{ m.msg }}</p>
+
+    {% endfor %}
+</div><br><br>
+
+
+
+
+<div class="container p-2 bg-light">
+    <form action="" method="POST">
+        {%  csrf_token %}
+        <textarea type="text" class="form-control" placeholder="Enter Message...." name="msg"></textarea>
+        <br>
+        <button type="submit" class="btn btn-primary col-lg-12">SEND</button>
+        <br>
+    </form>
+
+</div>
