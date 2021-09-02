@@ -131,8 +131,10 @@
                     {% for offer in active_offers %}
                         <tr class="offer{{offer.id}}">
                             <td class="ps-3" colspan="2">
-                                <a href="#">
+                                <a href="{% url 'EditOffer' offer.id %}">
+                                    {% if offer.image %}
                                     <img src="{{ offer.image.url }}" />
+                                    {% endif %}
                                     {{ offer.offer_title }}
                                 </a>
                             </td>
@@ -198,8 +200,10 @@
                     {% for offer in pending_approvals %}
                         <tr>
                             <td class="ps-3" colspan="2">
-                                <a href="#">
+                                <a href="{% url 'EditOffer' offer.id %}">
+                                    {% if offer.image %}
                                     <img src="{{ offer.image.url }}" />
+                                    {% endif %}
                                     {{ offer.offer_title }}
                                 </a>
                             </td>
@@ -265,8 +269,10 @@
                     {% for offer in required_modifications %}
                         <tr>
                             <td class="ps-3" colspan="2">
-                                <a href="#">
+                                <a href="{% url 'EditOffer' offer.id %}">
+                                    {% if offer.image %}
                                     <img src="{{ offer.image.url }}" />
+                                    {% endif %}
                                     {{ offer.offer_title }}
                                 </a>
                             </td>
@@ -332,8 +338,10 @@
                     {% for offer in denieds %}
                         <tr>
                             <td class="ps-3" colspan="2">
-                                <a href="#">
+                                <a href="{% url 'EditOffer' offer.id %}">
+                                    {% if offer.image %}
                                     <img src="{{ offer.image.url }}" />
+                                    {% endif %}
                                     {{ offer.offer_title }}
                                 </a>
                             </td>
@@ -399,8 +407,10 @@
                     {% for offer in pauseds %}
                         <tr class="paused_offer">
                             <td class="ps-3" colspan="2">
-                                <a href="#">
+                                <a href="{% url 'EditOffer' offer.id %}">
+                                    {% if offer.image %}
                                     <img src="{{ offer.image.url }}" />
+                                    {% endif %}
                                     {{ offer.offer_title }}
                                 </a>
                             </td>

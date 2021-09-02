@@ -103,7 +103,7 @@
                             <p>SERVICE TYPE</p>
                         </div>
 
-                        <div>
+                        <div class="select-area">
                             <select class="select-input" name="service" id="">
                                 {% for service in services %}
                                     <option value="{{service.title}}">{{service.title}}</option>
@@ -228,7 +228,7 @@
                 </div>
 
                 <div class="info-box">
-                    <p> <i class="fas fa-info-circle"></i> You can now offer buyers delivery options for up to 90 days. Go ahead and update your offer!</p>
+                    <p> <i><span class="iconify" data-icon="entypo:info-with-circle"></span></i> You can now offer buyers delivery options for up to 90 days. Go ahead and update your offer!</p>
                 </div>
             </div>
                 <hr>
@@ -432,32 +432,12 @@
                                 <input type="number"
                                 class="input-for-price" name="price_premium" id="" aria-describedby="helpId" placeholder="Price" required />$
                             </td>
-                            
-                            
-
-                            
-                          </tr>
-                        
-                          
+                          </tr>                   
                         </tbody>
                       </table>
-
-
                 </div>
             </div>
-
-
-
-
-
-
             </div>
-
-
-
-
-
-
         </section>   
 
 
@@ -529,11 +509,13 @@
                     <h3>Showcase Your Services In A Gig Gallery</h3>
                     <p>Encourage buyers to choose your Gig by featuring a variety of your work.</p>
                 </div>
+
                 <div class="gallery-info">
                     <i><span class="iconify" data-icon="el:info-circle"></span></i>
                     <p>To comply with Fiverr’s terms of service, make sure to upload only content you either own or you have the permission or license to use.</p>
                 </div>
                 <hr />
+
                 <div class="gallery-img mt-5">
                     <h4>Offer Main Image</h4>
                     <p>Get noticed by the right buyers with visual examples of your services.</p>
@@ -544,13 +526,13 @@
                                  <p>  Upload your photo</p>
                             </label>
                             
-                            <input id="main-image" name="offer_main_image" style="visibility: hidden;" type="file" required />   
+                            <input id="main-image" name="offer_main_image" style="visibility: hidden;" accept="image/*" type="file" required />   
         
         
                 </div>
 <hr>
 
-        <div class="gallery-img mt-5">
+        <div class="gallery-img extra-img mt-5 ">
             <h4>Images (up to 3)</h4>
             <p>Get noticed by the right buyers with visual examples of your services.</p>
 
@@ -560,7 +542,7 @@
                          <p>  Upload your photos</p>
                     </label>
                     
-                    <input id="formFileMultiple" name="uploaded_photo" style="visibility: hidden;" type="file" multiple required />   
+                    <input id="formFileMultiple" name="uploaded_photo" style="visibility: hidden;" type="file" accept="image/*" multiple required />   
 
 
         </div>
@@ -577,7 +559,7 @@
                  <p>  Upload your video</p>
             </label>
             
-            <input id="video-upload" name="uploaded_video" style="visibility: hidden;" type="file" required/>   
+            <input id="video-upload" name="uploaded_video" style="visibility: hidden;" type="file" accept="video/mp4,video/x-m4v,video/*" required/>   
 
         </div>
 <hr>
@@ -594,7 +576,7 @@
                  <p>  Upload your Document</p>
             </label>
             
-            <input id="document-upload" name="document" style="visibility: hidden;" type="file" required />   
+            <input id="document-upload" name="document" style="visibility: hidden;" type="file" accept="application/pdf,application/vnd.ms-excel" required />   
 
         </div>
 
@@ -621,14 +603,15 @@
                 
 
             </div>
-<!-- image section -->
+
+<!-- image section main image -->
 
             <div class="for-image-hover">
                 <div class="inner-img-hover">                 
                     <div class="icon">
                         <span class="iconify bulb-icon" data-icon="mdi-light:lightbulb"></span>
                     </div>
-                    <h5 class="text-center">Images</h5>
+                    <h5 class="text-center">Image</h5>
                     
                     <p>Upload images in JPEG, JPG, PNG and ensure they’re at least 550 pixels width x 370 pixels height.</p>
 
@@ -638,8 +621,29 @@
 
                     <p>Need help? Check out Fiverr’s expert photoshop talent</p>
 
-                    <a href=""><i class="fas fa-play-circle"></i> General offer Policy </a>
-    
+                    
+                </div>
+            </div>
+
+
+<!-- image section extra image -->
+
+            <div class="for-extra-image-hover">
+                <div class="inner-extra-img-hover">
+                    <div class="icon">
+                        <span class="iconify bulb-icon" data-icon="mdi-light:lightbulb"></span>
+                    </div>
+                    <h5 class="text-center">Extra Images</h5>
+                    
+                    <p>Upload images in JPEG, JPG, PNG and ensure they’re at least 550 pixels width x 370 pixels height.</p>
+
+                    <p>We suggest uploading them in landscape format to make better use of the space.</p>
+
+                    <p>Lastly, put your best foot forward! Stand out on Fiverr with your favorite images.</p>
+
+                    <p>Need help? Check out Fiverr’s expert photoshop talent</p>
+
+                    
                 </div>
             </div>
 
@@ -659,7 +663,7 @@
 
                     <p>Need help with your video? Check out our Fiverr expert audio/video talent here.</p>
 
-                    <a href=""><i class="fas fa-play-circle"></i> General offer Policy </a>
+                    
                 </div>
             </div>
 
@@ -690,7 +694,7 @@
         <section class="for-button-lowwer container mt-4">
         <div class="row">
             <div class="col-md-9 for-button">
-                <button class="button-cancle" onclick="cancel_offer()">Cancel</button>
+                <button class="button-cancle" type="button" onclick="cancel_offer()">Cancel</button>
                 <button class="button-save" type="submit">Save</button>
             </div>
         </div>

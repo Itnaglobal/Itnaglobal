@@ -1,0 +1,102 @@
+
+
+{% load static %}
+{% include 'base.html' %}
+      
+
+<link rel="stylesheet" href="{% static 'css/adminpanel.css' %}">
+
+
+<style>
+    body{
+        background-color: #f5f5f5;
+    }
+    .go-back-button{
+        background: none;
+        border: none;
+        color: rgb(95, 95, 252);;
+    }
+    .go-back-button:hover{
+        
+    }
+</style>
+
+
+
+   <!-- Modal -->
+    <div class="container">
+
+        
+
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            
+        <div class="modal-content">
+        <div class="modal-body">
+     
+    <div class="main__content container">
+
+        <a href=""><button class="go-back-button mb-2"> << Go Back </button></a>
+
+
+        <div class="order____details">
+          <div class="order__first__colum">
+            <p class="star">Star</p>
+            <p><span class="order__info fw-bold">Order #{{order.id}}
+
+            <!-- </span> view gig</p> -->
+              <p>BUYER  <span class="second__star"> {{order_details.user}}</span> (view history) | {{order.created_at}}</p>
+          </div>
+          <div class="order__second__colum">
+            <p class="erned____amount">${{order_details.total}}</p>
+            <p><span class="badge bg-success">{{order_details.order_status}} Order</span><p>
+        </div>
+      </div>
+      <hr>
+
+      <div class="order___description">
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum praesentium esse sequi dolor et veritatis ea possimus qui, natus sed exercitationem quae dignissimos delectus est corporis porro molestias ipsum voluptatem quibusdam! Recusandae perspiciatis dolores voluptatem tenetur adipisci tempora iure cupiditate aut. Libero veniam quia dolorem porro odio exercitationem deleniti impedit, commodi provident laboriosam, eaque sequi debitis vitae accusamus et soluta reprehenderit voluptatibus nobis ipsam ipsa voluptas! Voluptatum voluptatem quis error, laborum temporibus ipsum, minus ea nam facilis repellendus quam accusamus laboriosam deleniti voluptate, tenetur aspernatur distinctio quia id. Repellat nihil quas sit fuga in mollitia cum velit et laborum tenetur.</p>
+        <hr>
+      </div>
+
+      <!-- order table -->
+
+      <div class="order___table table-responsive">
+        <table class="table">
+          <thead class="bg-light">
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><p>{{ order_details.package }}</p>
+                <p><span class="iconify" data-icon="akar-icons:check" style="color: #1dde7d;"></span> 20 Revisions</p>
+              </td>
+              <td>{{ order_details.quantity }}</td>
+              <td>{{ duration }}</td>
+              <td>${{ order_details.total }}</td>
+            </tr>
+            <tr>
+              <td class="fw-bold">Total</td>
+              <td></td>
+              <td></td>
+              <td class="fw-bold">${{ order_details.total }}</td>
+            </tr>
+            <tr>
+              <td class="fw-bold">Grand Total<span class="include__service">(included service fee)</span></td>
+              <td></td>
+              <td></td>
+            <td class="fw-bold">${{ order.grand_total }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+
+      </div>
+    </div>
+   </div>
+      </div>

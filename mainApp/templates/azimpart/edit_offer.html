@@ -1,6 +1,5 @@
 {% load static %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -95,7 +94,7 @@
                             <p>SERVICE TYPE</p>
                         </div>
 
-                        <div>
+                        <div class="select-area">
                             <select class="select-input" name="service" id="" required>
                                 <option value="{{ offer.service.title }}">{{ offer.service.title }}</option>
                                 {% for service in services %}
@@ -116,7 +115,7 @@
                         <div class="inner-defining-gig">
                             
                             <div class="icon">
-                            <i class="fas fa-lightbulb light"></i>
+                                <i><span class="iconify bulb-icon" data-icon="mdi-light:lightbulb"></span></i>
                             </div>
                             
                             <h5 class="text-center">Start Defining Your offer</h5>
@@ -132,7 +131,7 @@
                                 </li>                            
                                 
                             </ul>
-                            <a href=""><i class="fas fa-play-circle"></i> General offer Policy </a>
+                            
                             
                             
                         </div>
@@ -149,7 +148,7 @@
                 <!-- seo title -->
                     <div class="seo-title-hover">
                         <h4 class="text-center">SEO Titile</h4>
-                        <p>The most crucial on-page SEO component to handle on any web page is the Title Tag. Well-written page titles can HELP your pages rank higher in Search Engine Results Pages (SERPs) by including clever, natural, and extremely precise keywords.</p>
+                        <p>The most crucial on-page SEO component to handle on any web page is the Title Tag. Well-written page titles can HELP your pages rank higher in Search Engine Results Pages </p>
                         <h6>For example</h6>
                         <ul>
                             <li>I will design an exclusive Business Card</li>
@@ -232,19 +231,19 @@
     
                                 <td class="col-3 input-padding">
                                     
-                                      <input type="text" class="input-for-details"  placeholder="You can use maximum 100 char" value="{{ basic_package.package_desc }}" required>
+                                      <input type="text" class="input-for-details" name="basic_shortDesc" placeholder="You can use maximum 100 char" value="{{ basic_package.package_desc }}" required>
                                                                    
                                 </td>
     
                                 <td class="col-3 input-padding">
                                     
-                                      <input type="text" class="input-for-details"  placeholder="You can use maximum 100 char" value="{{ standard_package.package_desc }}" required>
+                                      <input type="text" class="input-for-details" name="standard_shortDesc"  placeholder="You can use maximum 100 char" value="{{ standard_package.package_desc }}" required>
                                                                    
                                 </td>
     
                                 <td class="col-3 input-padding">
                                     
-                                      <input type="text" class="input-for-details"  placeholder="You can use maximum 100 char" value="{{ premium_package.package_desc }}" required>
+                                      <input type="text" class="input-for-details" name="premium_shortDesc"  placeholder="You can use maximum 100 char" value="{{ premium_package.package_desc }}" required>
                                                                    
                                 </td>
     
@@ -255,7 +254,7 @@
     
                               <tr class="table table-for-row">
                                 
-                                <td></td>
+                                <td scope="row" class="align-middle">Delivery Time</td>
                                 
                                 <td scope="row">
                                     <select name="delivery_time_basic" id="" required>
@@ -419,34 +418,14 @@
                                     
                                     <input type="number"
                                     class="input-for-price" name="price_premium" id="" value="{{ premium_price }}" aria-describedby="helpId" placeholder="Price" required>$
-                                </td>
-                                
-                                
-    
-                                
-                              </tr>
-                            
-                              
+                                </td>     
+                              </tr>    
                             </tbody>
-                          </table>
-    
-    
+                          </table>   
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
             </div>
-
-
-
-
-
-
         </section>   
 
 
@@ -465,7 +444,7 @@
                 <p>Briefly Describe Your offer</p>
 
                 <div class="for-textarea">
-                    <textarea name="content" id="" cols="30" rows="10" required></textarea>
+                    <textarea name="content" id="" cols="30" rows="10" required>{{ offer.description }}</textarea>
                 </div>
 
             </div>
@@ -474,7 +453,7 @@
 
                 <div class="right-div-for-description">                 
                     <div class="icon">
-                        <i class="fas fa-lightbulb light"></i>
+                        <i><span class="iconify bulb-icon" data-icon="mdi-light:lightbulb"></span></i>
                     </div>
                     <h5>Write Your Description & FAQ
                     </h5>
@@ -488,7 +467,7 @@
 <!-- description hover div -->
                 <div class="description-hover-div">
                     <div class="icon">
-                        <i class="fas fa-lightbulb light"></i>
+                        <i><span class="iconify bulb-icon" data-icon="mdi-light:lightbulb"></span></i>
                     </div>
                     <h5>This is your chance to be creative. Explain your offer</h5>
                     
@@ -524,36 +503,61 @@
                 </div>
 <hr>
 
-        <div class="gallery-img mt-5">
+<div class="gallery-img mt-5">
+    <h4>Offer Main Image</h4>
+    <p>Get noticed by the right buyers with visual examples of your services.</p>
+
+    <div class="offer__img__grid">
+
+        {% if offer.image %}
+            <div class="gig__first__img m-3">
+                <img src="{{ offer.image.url }}" alt="">
+                <input type="hidden" class="main_image_id" name="main_image_id" value="" />
+                <button class="gig__edit__icon edit__icon" onclick="mainImageDelete({{ offer.id }})">
+                    <span class="iconify" data-icon="fluent:delete-28-regular"></span>
+                </button>
+            </div>
+        {% else %}
+            <div class="gig__first__img1 m-3">
+                <p class="text-muted">Drag & Drop a photo or</p>
+                <div class="text-center">
+                    <label class="form-label choose__file text-center w-100 mx-auto d-block" for="main-image">Browse</label>
+                    <input id="main-image" name="offer_main_image" style="visibility: hidden;" accept="image/*" type="file" required />   
+                </div>
+                <p> <span class="iconify drag__icon" data-icon="bi:image"></span></p>
+            </div>
+        {% endif %}
+      
+    </div>
+
+
+</div>
+
+        <div class="gallery-img extra-img mt-5">
             <h4>Images (up to 3)</h4>
             <p>Get noticed by the right buyers with visual examples of your services.</p>
 
             <div class="offer__img__grid">
-              
+                    {% for image in offer.extra_images.all %}
                     <div class="gig__first__img m-3">
-                        <img src="{% static 'images/goku.png' %}" alt="">
-                        <div class="gig__edit__icon">
-                            <a href="#"><span class="iconify" data-icon="fluent:delete-28-regular"></span></a>
-                        </div>
+                        <img src="/media/{{ image }}" alt="">
+                        <input type="hidden" class="extra_image_id{{ image.id }}" name="extra_image_id" value="" />
+                        <button class="gig__edit__icon edit__icon" onclick="extraImageDelete({{image.id}})">
+                            <span class="iconify" data-icon="fluent:delete-28-regular"></span>
+                        </button>
                     </div>
-               
-             
-                    <div class="gig__first__img m-3">
-                        <img src="{% static 'images/goku.png' %}" alt="">
-                        <div class="gig__edit__icon">
-                            <a href="#"><span class="iconify" data-icon="fluent:delete-28-regular"></span></a>
-                        </div>
-                    </div>
-              
+                    {% endfor %}
                 
+                    {% if offer.extra_images.all|length < 3 %}
                     <div class="gig__first__img1 m-3">
                         <p class="text-muted">Drag & Drop a photo or</p>
                         <div class="text-center">
-                            <label class="form-label choose__file text-center w-100 mx-auto d-block" for="customFile">Browse</label>
-                        <input type="file" style="visibility: hidden;"  class="form-control" id="customFile" required/>
+                            <label class="form-label choose__file text-center w-100 mx-auto d-block" for="extra-images">Browse</label>
+                        <input type="file" name="offer_extraImages" style="visibility: hidden;"  class="form-control" id="extra-images" accept="image/*" multiple/>
                         </div>
                        <p> <span class="iconify drag__icon" data-icon="bi:image"></span></p>
                     </div>
+                    {% endif %}
               
             </div>
 
@@ -568,25 +572,31 @@
             <p class="text-muted">Please choose a video shorter than 75 seconds and smaller than 50MB</p>
         
 
-       <div class="video__one">
+       <div class="video__one offer__img__grid">
         <div class="video__upload__option">
             <!-- upload video here.... -->
             <video controls>
-                <source src="" type="">
+                <source src="{{ offer.offer_video.url }}" type="">
+                Your browser does not support the video.
               </video>
+              
             <div class="video__edit__icon">
-                <a href="#"><span class="iconify video__icon" data-icon="fluent:delete-28-regular"></span></a>
+                <button class="edit__icon"><span class="iconify video__icon" data-icon="fluent:delete-28-regular"></span></button>
                 <a href="#"><span class="iconify video__icon" data-icon="akar-icons:edit"></span></a>
             </div>
         </div>
-       </div>
 
-            <!-- <label for="file-upload" class="for-file-upload mt-3">
-                <i class="fas fa-video"></i>
-                 <p>  Upload your video</p>
-            </label>
-            
-            <input id="file-upload" style="visibility: hidden;" type="file"/>    -->
+        {% if offer.offer_video is None %}
+        <div class="gig__first__img1 m-3">
+            <p class="text-muted">Drag & Drop a video or</p>
+            <div class="text-center">
+                <label class="form-label choose__file text-center w-100 mx-auto d-block" for="customFile">Browse</label>
+            <input type="file" name="offer_video" style="visibility: hidden;"  class="form-control" id="customFile" accept="video/mp4,video/x-m4v,video/*" required/>
+            </div>
+           <p> <span class="iconify drag__icon" data-icon="bi:image"></span></p>
+        </div>
+        {% endif %}
+       </div>
 
         </div>
 <hr>
@@ -594,32 +604,38 @@
 
 
         <div class="for-doc mt-5">
-            <h4>Documents (Up to 2)</h4>
+            <h4>Document</h4>
             <p>Show some of the best work you created in a document (PDFs only).</p>
         
-            <div class="docu__up__delete">
+            <div class="document___total__upload">
+               <div class="docu__up__delete mx-auto">
                 <div class="document__upload__delete m-3">
-                    <img src="{% static 'images/goku.png' %}" alt="">
-                    <div class="document__edit__icon">
-                        <a href="#"><span class="iconify" data-icon="fluent:delete-28-regular"></span></a>
+                    <span class="iconify" data-icon="icon-park-outline:file-pdf-one" style="color: red;"></span>
+                </div>
+                <div class="document___name">
+                   <div class="document__para">
+                        <p class="pdf__name">{{ document }}</p>
+                        <small class="text-muted">PDF only</small>
+                   </div>
+                    <div class="document___icon">
+                        <button class="document__edit__icon edit__icon">
+                            <span class="iconify" data-icon="fluent:delete-28-regular"></span>
+                        </button>
                     </div>
                 </div>
+               </div>
+
+                {% if offer.document is None %}
                 <div class="gig__first__img1 m-3">
-                    <p class="text-muted">Drag & Drop a photo or</p>
+                    <p class="text-muted">Drag & Drop a video or</p>
                     <div class="text-center">
                         <label class="form-label choose__file text-center w-100 mx-auto d-block" for="customFile">Browse</label>
-                    <input type="file" style="visibility: hidden;"  class="form-control" id="customFile" required/>
+                    <input type="file" name="offer_document" style="visibility: hidden;"  class="form-control" id="customFile" accept="application/pdf,application/vnd.ms-excel" required/>
                     </div>
                    <p> <span class="iconify drag__icon" data-icon="bi:image"></span></p>
                 </div>
+                {% endif %}
             </div>
-
-            <!-- <label for="file-upload" class="for-file-upload mt-3">
-                <i class="fas fa-file-download"></i>
-                 <p>  Upload your Document</p>
-            </label>
-            
-            <input id="file-upload" style="visibility: hidden;" type="file"/>    -->
 
         </div>
 
@@ -633,7 +649,7 @@
         <div class="col-md-3 for-hiding">
             <div class="showcase-talent">                 
                 <div class="icon">
-                    <i class="fas fa-lightbulb light"></i>
+                    <i><span class="iconify bulb-icon" data-icon="mdi-light:lightbulb"></span></i>
                 </div>
                 <h5 class="text-center">Showcase Your Talent</h5>
                 
@@ -650,7 +666,7 @@
             <div class="for-image-hover">
                 <div class="inner-img-hover">                 
                     <div class="icon">
-                        <i class="fas fa-lightbulb light"></i>
+                        <i><span class="iconify bulb-icon" data-icon="mdi-light:lightbulb"></span></i>
                     </div>
                     <h5 class="text-center">Images</h5>
                     
@@ -662,7 +678,7 @@
 
                     <p>Need help? Check out Fiverr’s expert photoshop talent</p>
 
-                    <a href=""><i class="fas fa-play-circle"></i> General offer Policy </a>
+                    
     
                 </div>
             </div>
@@ -673,7 +689,7 @@
             <div class="for-video-hover">
                 <div class="inner-video-hover">
                     <div class="icon">
-                        <i class="fas fa-lightbulb light"></i>
+                        <i><span class="iconify bulb-icon" data-icon="mdi-light:lightbulb"></span></i>
                     </div>
                     <h5 class="text-center">Video</h5>
                     
@@ -683,7 +699,7 @@
 
                     <p>Need help with your video? Check out our Fiverr expert audio/video talent here.</p>
 
-                    <a href=""><i class="fas fa-play-circle"></i> General offer Policy </a>
+                   
                 </div>
             </div>
 
@@ -692,9 +708,9 @@
                 <div class="inner-doc">
                     <div class="inner-doc-hover">
                         <div class="icon">
-                            <i class="fas fa-lightbulb light"></i>
+                            <i><span class="iconify bulb-icon" data-icon="mdi-light:lightbulb"></span></i>
                         </div>
-                        <h5 class="text-center">Documents (up to 2)</h5>
+                        <h5 class="text-center">Documents</h5>
                         
                         <p>The quality of the content in your PDFs will influence potential customers.</p>
     
@@ -711,17 +727,17 @@
 
         <!-- save button -->
 
-        <section class="for-button-lowwer container">
-        <div class="row">
-            <div class="col-md-9 for-button">
-                    <button class="button-cancle">Cancel</button>
-                <button class="button-save" type="submit">Save</button>
+        <section class="for-button-lowwer container mt-4">
+            <div class="row">
+                <div class="col-md-9 for-button">
+                    <button class="button-cancle" type="button" onclick="cancel_offer()">Cancel</button>
+                    <button class="button-save" type="submit">Save</button>
+                </div>
             </div>
-        </div>
-        </section>
+            </section>
 
 
-        <form>
+        </form>
             <div>
 
 
@@ -739,6 +755,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js"></script>
 
     <script src="{% static 'js/create_offer.js' %}"></script>
+    <script src="{% static 'js/edit_offer.js' %}"></script>
 
 </body>
 </html>

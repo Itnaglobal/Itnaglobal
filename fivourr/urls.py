@@ -158,7 +158,6 @@ urlpatterns = [
     # Search page
     path("search/", views.searchPageView, name="search"),
 
-
     # Test URL
     path('test/', views.level_up_seller, name="levelUp"),
     

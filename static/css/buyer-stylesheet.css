@@ -52,6 +52,8 @@ body{
 .form-control {
    height: 33px;
   }
+
+
 .btn {
    height: 33px;
    padding: 0px 20px ;
@@ -67,6 +69,8 @@ body{
    background-color: #2e57a5 !important;
    color: #fff !important;
 }
+
+
 .form-control:focus {
     box-shadow: none;
     z-index: -1;
@@ -431,8 +435,8 @@ Continue browsing for every card
     z-index: 1;
     width: 32px;
     height: 32px;
-    background: rgba(255, 255, 255, 0.726);
-    box-shadow: 0 0.3rem 0.5rem rgb(0 0 0 / 20%);
+    /* background: rgba(255, 255, 255, 0.726);
+    box-shadow: 0 0.3rem 0.5rem rgb(0 0 0 / 20%); */
     border-radius: 50%;
 }
 .slick-prev:before, .slick-next:before {
@@ -452,7 +456,7 @@ Continue browsing for every card
 .slick-next:focus, .slick-next:hover, .slick-prev:focus, .slick-prev:hover {
     color: #fff !important;
     outline: 0;
-    background: #fff !important;
+    background: none !important;
 }
 .slick-next {
     right: 0px;

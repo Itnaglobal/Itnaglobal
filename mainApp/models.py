@@ -235,7 +235,7 @@ class Offer(models.Model):
     seo_title = models.CharField(max_length=50, null=True)
     image = models.ImageField(upload_to='images/')
     extra_images = models.ManyToManyField(ExtraImage)
-    offer_video = models.FileField(upload_to="images/")
+    offer_video = models.FileField(upload_to="images/", blank=True, null=True)
     document = models.FileField(upload_to="files/", null=True)
     service = models.ForeignKey(Services, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
@@ -250,6 +250,7 @@ class Offer(models.Model):
     order_count = models.PositiveIntegerField(default=0, null=True, blank=True)
     cancellation = models.PositiveIntegerField(default=0, null=True, blank=True)
     offer_status = models.CharField(max_length=200, null=True, choices=Offer_STATUS, default="ACTIVE")
+    # is_favorite = models.BooleanField(null=True, default=False, blank=True)
     # is_complete = models.BooleanField(null=True, default=False)
 
     def __str__(self):

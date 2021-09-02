@@ -64,80 +64,12 @@
                                          <img src="{% static 'images/goku.png' %}">
                                      </th>
                     
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
-                                     
-                                         <!-- Modal -->
-                             <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                             <div class="modal-body">
-                                  
-                                 <div class="main__content">
- 
-                                     <div class="order____details">
-                                       <div class="order__first__colum">
-                                         <p class="star">Star</p>
-                                         <p><span class="order__info fw-bold">Order #{{order.id}}
-                           
-                                         <!-- </span> view gig</p> -->
-                                           <p>BUYER  <span class="second__star"> {{order.user}}</span> (view history) | {{order.created_at}}</p>
-                                       </div>
-                                       <div class="order__second__colum">
-                                         <p class="erned____amount">${{order.total}}</p>
-                                         <p><span class="badge bg-success">{{order.order_status}} Order</span><p>
-                                     </div>
-                                   </div>
-                                   <hr>
-                           
-                                   <div class="order___description">
-                                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum praesentium esse sequi dolor et veritatis ea possimus qui, natus sed exercitationem quae dignissimos delectus est corporis porro molestias ipsum voluptatem quibusdam! Recusandae perspiciatis dolores voluptatem tenetur adipisci tempora iure cupiditate aut. Libero veniam quia dolorem porro odio exercitationem deleniti impedit, commodi provident laboriosam, eaque sequi debitis vitae accusamus et soluta reprehenderit voluptatibus nobis ipsam ipsa voluptas! Voluptatum voluptatem quis error, laborum temporibus ipsum, minus ea nam facilis repellendus quam accusamus laboriosam deleniti voluptate, tenetur aspernatur distinctio quia id. Repellat nihil quas sit fuga in mollitia cum velit et laborum tenetur.</p>
-                                     <hr>
-                                   </div>
-                           
-                                   <!-- order table -->
-                           
-                                   <div class="order___table table-responsive">
-                                     <table class="table">
-                                       <thead class="bg-light">
-                                         <tr>
-                                           <th scope="col">Item</th>
-                                           <th scope="col">Quantity</th>
-                                           <th scope="col">Duration</th>
-                                           <th scope="col">Amount</th>
-                                         </tr>
-                                       </thead>
-                                       <tbody>
-                                         <tr>
-                                           <td><p>{{ order.package }}</p>
-                                             <p><span class="iconify" data-icon="akar-icons:check" style="color: #1dde7d;"></span> 20 Revisions</p>
-                                           </td>
-                                           <td>{{ order.quantity }}</td>
-                                           <td>{{ duration }}</td>
-                                           <td>${{ order.total }}</td>
-                                         </tr>
-                                         <tr>
-                                           <td class="fw-bold">Total</td>
-                                           <td></td>
-                                           <td></td>
-                                           <td class="fw-bold">${{ order.total }}</td>
-                                         </tr>
-                                         <tr>
-                                           <td class="fw-bold">Grand Total<span class="include__service">(included service fee)</span></td>
-                                           <td></td>
-                                           <td></td>
-                                         <td class="fw-bold">${{ order.grand_total }}</td>
-                                         </tr>
-                                       </tbody>
-                                     </table>
-                                   </div>
-                                   </div>
- 
-                                   </div>
-                                 </div>
-                                </div>
-                                   </div>
- 
+
+                                     <td>
+                                       <a href="#">View</a>
                                      </td>
+                                     
+                               
                             
                                  </tr>
                                  <tr>
@@ -149,79 +81,11 @@
                                     </th>
                         
                                     
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="">View</a>
                                      
                                          <!-- Modal -->
-                             <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                              <div class="modal-content">
-                             <div class="modal-body">
-                                  
-                                 <div class="main__content">
- 
-                                     <div class="order____details">
-                                       <div class="order__first__colum">
-                                         <p class="star">Star</p>
-                                         <p><span class="order__info fw-bold">Order #{{order.id}}
-                           
-                                         <!-- </span> view gig</p> -->
-                                           <p>BUYER  <span class="second__star"> {{order.user}}</span> (view history) | {{order.created_at}}</p>
-                                       </div>
-                                       <div class="order__second__colum">
-                                         <p class="erned____amount">${{order.total}}</p>
-                                         <p><span class="badge bg-success">{{order.order_status}} Order</span><p>
-                                     </div>
-                                   </div>
-                                   <hr>
-                           
-                                   <div class="order___description">
-                                     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum praesentium esse sequi dolor et veritatis ea possimus qui, natus sed exercitationem quae dignissimos delectus est corporis porro molestias ipsum voluptatem quibusdam! Recusandae perspiciatis dolores voluptatem tenetur adipisci tempora iure cupiditate aut. Libero veniam quia dolorem porro odio exercitationem deleniti impedit, commodi provident laboriosam, eaque sequi debitis vitae accusamus et soluta reprehenderit voluptatibus nobis ipsam ipsa voluptas! Voluptatum voluptatem quis error, laborum temporibus ipsum, minus ea nam facilis repellendus quam accusamus laboriosam deleniti voluptate, tenetur aspernatur distinctio quia id. Repellat nihil quas sit fuga in mollitia cum velit et laborum tenetur.</p>
-                                     <hr>
-                                   </div>
-                           
-                                   <!-- order table -->
-                           
-                                   <div class="order___table table-responsive">
-                                     <table class="table">
-                                       <thead class="bg-light">
-                                         <tr>
-                                           <th scope="col">Item</th>
-                                           <th scope="col">Quantity</th>
-                                           <th scope="col">Duration</th>
-                                           <th scope="col">Amount</th>
-                                         </tr>
-                                       </thead>
-                                       <tbody>
-                                         <tr>
-                                           <td><p>{{ order.package }}</p>
-                                             <p><span class="iconify" data-icon="akar-icons:check" style="color: #1dde7d;"></span> 20 Revisions</p>
-                                           </td>
-                                           <td>{{ order.quantity }}</td>
-                                           <td>{{ duration }}</td>
-                                           <td>${{ order.total }}</td>
-                                         </tr>
-                                         <tr>
-                                           <td class="fw-bold">Total</td>
-                                           <td></td>
-                                           <td></td>
-                                           <td class="fw-bold">${{ order.total }}</td>
-                                         </tr>
-                                         <tr>
-                                           <td class="fw-bold">Grand Total<span class="include__service">(included service fee)</span></td>
-                                           <td></td>
-                                           <td></td>
-                                         <td class="fw-bold">${{ order.grand_total }}</td>
-                                         </tr>
-                                       </tbody>
-                                     </table>
-                                   </div>
-                                   </div>
- 
-                                   </div>
-                                 </div>
-                                </div>
-                                   </div>
- 
+
+                            
                                      </td>
  
                        
@@ -235,7 +99,7 @@
                                     </th>
                    
                                      
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -321,7 +185,7 @@
                                     </th>
                         
                                      
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -407,7 +271,7 @@
                                     </th>
                        
                                      
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -492,7 +356,7 @@
                                     </th>
                  
                                      
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -578,7 +442,7 @@
                                     </th>
                         
                                      
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -663,7 +527,7 @@
                                         <img src="{% static 'images/goku.png' %}">
                                     </th>
                         
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -748,7 +612,7 @@
                                     </th>
                         
                                      
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -833,7 +697,7 @@
                                     </th>
           
                                   
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -918,7 +782,7 @@
                                     </th>
    
                                     
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1003,7 +867,7 @@
                                     </th>
    
                                      
-                                     <td><a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">View</a>
+                                     <td><a href="#">View</a>
                                      
                                          <!-- Modal -->
                              <div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

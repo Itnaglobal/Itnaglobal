@@ -90,6 +90,9 @@ def offer_details(request, id):
     offers = Offer.objects.filter(id=id).first()
     cart_session = request.session.get("cart", None)
 
+
+
+
     for image in offers.extra_images.all():
         print(image)
 
@@ -117,6 +120,9 @@ def offer_details(request, id):
     # ISSUE ##
 
     # print(packages)
+
+    if request.method == 'POST':
+        pass
 
     args = {
         'offers': offers,
@@ -789,6 +795,8 @@ def createOfferView(request):
             else:
                 is_responsive_basic = False
 
+
+            # Saving Package
             package = Package(title="Basic", delivery_time=dt_basic, package_desc=basic_shortDesc, 
                             revision_basic=re_basic, num_of_pages_for_basic=num_page_basic, is_responsive_basic=is_responsive_basic,
                             )
@@ -846,6 +854,7 @@ def edit_offer(request, id):
     basic_num_pages, standard_num_pages, premium_num_pages = None, None, None
     basic_revisions, standard_revisions, premium_revisions = None, None, None
     basic_price, standard_price, premium_price = None, None, None
+    document = None
 
     try:
         offer = Offer.objects.get(id=id)
@@ -855,6 +864,8 @@ def edit_offer(request, id):
         categories = Category.objects.exclude(title=offer.category.title)
         services = Services.objects.exclude(title=offer.service.title)
         offermanager = OfferManager.objects.filter(offer=offer)
+        document = str(offer.document).split("/")[-1]
+        # print(document)
 
         if offermanager.exists():
             for i, item, in enumerate(offermanager):
@@ -879,6 +890,159 @@ def edit_offer(request, id):
     
     # print(basic_package, standard_package, premium_package)
 
+    if request.method == "POST":
+        main_image_id = request.POST.get("main_image_id", None)
+        extra_image_id = request.POST.get("extra_image_id", None)
+        offer_title = request.POST.get("offer_title")
+        seo_title = request.POST.get("seo_title")
+        category = request.POST.get("category")
+        service = request.POST.get("service")
+        basic_shortDesc = request.POST.get("basic_shortDesc")
+        standard_shortDesc = request.POST.get("standard_shortDesc")
+        premium_shortDesc = request.POST.get("premium_shortDesc")
+        delivery_time_basic = request.POST.get("delivery_time_basic")
+        delivery_time_standard = request.POST.get("delivery_time_standard")
+        delivery_time_premium = request.POST.get("delivery_time_premium")
+        num_page_basic = request.POST.get("num_pages_basic")
+        num_page_standard = request.POST.get("num_pages_standard")
+        num_page_premium = request.POST.get("num_pages_premium")
+        basic_responsive = request.POST.get("is_responsive_basic")
+        standard_responsive = request.POST.get("is_responsive_standard")
+        premium_responsive = request.POST.get("is_responsive_premium")
+        revision_basic = request.POST.get("revision_basic")
+        revision_standard = request.POST.get("revision_standard")
+        revision_premium = request.POST.get("revision_premimum")
+        price_basic = request.POST.get("price_basic")
+        price_standard = request.POST.get("price_standard")
+        price_premium = request.POST.get("price_premium")
+        content = request.POST.get("content")
+        offer_mainImage = request.FILES.get("offer_main_image")
+        offer_extraImages = request.FILES.getlist("offer_extraImages")
+        offer_video = request.FILES.get("offer_video")
+        offer_document = request.FILES.get("offer_document")
+
+        print(offer_title)
+        print(seo_title)
+        print(category)
+        print(service)
+        print(basic_shortDesc)
+        print(standard_shortDesc)
+        print(premium_shortDesc)
+        print(delivery_time_basic)
+        print(delivery_time_standard)
+        print(delivery_time_premium)
+        print(num_page_basic)
+        print(num_page_standard)
+        print(num_page_premium)
+        print(basic_responsive)
+        print(standard_responsive)
+        print(premium_responsive)
+        print(revision_basic)
+        print(revision_standard)
+        print(revision_premium)
+        print(price_basic)
+        print(price_standard)
+        print(price_premium)
+        print(content)
+        print(offer_mainImage)
+        print(offer_extraImages)
+        print(offer_video)
+        print(offer_document)
+
+        print("Main image id:", main_image_id)
+
+        print(f"EXTRA IMAGE ID: {extra_image_id}")
+
+        # Deleting offer main image
+        if main_image_id:
+            offer.image = None
+
+        # Deleting an extra image from offer 
+        if extra_image_id:
+            offer.extra_images.remove(int(extra_image_id))
+
+        service = Services.objects.get(title=service)
+        category = Category.objects.get(title=category)
+
+        offer.offer_title = offer_title
+        offer.seo_title = seo_title
+
+        if offer_mainImage:
+            offer.image = offer_mainImage
+        if offer_video:
+            offer.offer_video = offer_video
+        if offer_document:
+            offer.document = offer_document
+        offer.service = service
+        offer.category = category
+        offer.description = content
+
+        offer.save()
+
+        if offer_extraImages:
+            for item in offer_extraImages[:3]:
+                image_obj = ExtraImage(image=item)
+                image_obj.save()
+                offer.extra_images.add(image_obj.id)
+        # offermanager.package = 
+        for i, item, in enumerate(offermanager):
+            if i == 0:
+                item.package.package_desc = basic_shortDesc
+                revision_basic = Revision.objects.get(title=revision_basic)
+                delivery_time_basic = DeliveryTime.objects.get(title=delivery_time_basic)
+                item.package.revision_basic = revision_basic
+                item.package.delivery_time = delivery_time_basic
+                num_page_basic = NumberOfPage.objects.get(title=num_page_basic)
+                item.package.num_of_pages_for_basic = num_page_basic
+                
+                if basic_responsive == "on":
+                    is_basic_responsive = True
+                else:
+                    is_basic_responsive = False
+
+                item.package.is_responsive_basic = is_basic_responsive
+                item.price = price_basic
+                item.package.save()
+                item.save()
+            elif i == 1:
+                item.package.package_desc = standard_shortDesc
+                revision_standard = Revision.objects.get(title=revision_standard)
+                delivery_time_standard = DeliveryTime.objects.get(title=delivery_time_standard)
+                item.package.revision_standard = revision_standard
+                item.package.delivery_time = delivery_time_standard
+                num_page_standard = NumberOfPage.objects.get(title=num_page_standard)
+                item.package.num_of_pages_for_standard = num_page_standard
+                
+                if standard_responsive == "on":
+                    is_standard_responsive = True
+                else:
+                    is_standard_responsive = False
+
+                item.package.is_responsive_standard = is_standard_responsive
+                item.price = price_standard
+                item.package.save()
+                item.save()
+            elif i == 2:
+                item.package.package_desc = premium_shortDesc
+                revision_premium = Revision.objects.get(title=revision_premium)
+                delivery_time_premium = DeliveryTime.objects.get(title=delivery_time_premium)
+                item.package.revision_premium = revision_premium
+                item.package.delivery_time = delivery_time_premium
+                num_page_premium = NumberOfPage.objects.get(title=num_page_premium)
+                item.package.num_of_pages_for_premium = num_page_premium
+                
+                if premium_responsive == "on":
+                    is_premium_responsive = True
+                else:
+                    is_premium_responsive = False
+
+                item.package.is_responsive_premium = is_premium_responsive
+                item.price = price_premium
+                item.package.save()
+                item.save()
+
+        return redirect(f"/edit_offer/{offer.id}/")
+
     args = {
         "offer": offer,
         "categories": categories,
@@ -898,6 +1062,7 @@ def edit_offer(request, id):
         "basic_price": basic_price,
         "standard_price": standard_price,
         "premium_price": premium_price,
+        "document": document,
     }
     return render(request, 'azimpart/edit_offer.html', args)
 
@@ -1038,8 +1203,11 @@ def download(request, path):
 def searchPageView(request):
     query = request.GET.get("search")
 
-    args = {
+    results = Services.objects.filter(title__icontains = query)
 
+
+    args = {
+        "results": results
     }
     return render(request, "buyingview/search-box-Result.html", args)
 
@@ -1051,3 +1219,18 @@ def buyer_requestView(request):
 
 def my_contacts_page(request):
     return render(request, "azimpart/my_contacts.html")
+
+
+# Favortie Offer Function & Algorithms
+# def favorite_function(request):
+
+#     # if request.method == 'POST':
+#     #     favorite = request.POST.get('favorite')
+
+#     #     if favorite:
+            
+#     pass
+    
+
+    
+

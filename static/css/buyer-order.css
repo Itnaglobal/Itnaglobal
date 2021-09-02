@@ -64,7 +64,7 @@ body{
     font-size: 15px !important;
 }
 .guiz-awards-star{
-    width: 35%;
+    width: 25%;
 }
 .guiz-awards-title {
   width: 20%;
@@ -72,9 +72,12 @@ body{
   font-weight: normal;
 }
 .guiz-awards-track, .guiz-awards-time {
-  width: 15%;
+  width: 17%;
   min-width: 80px;
   font-size: 18px;
+}
+.guiz-awards-time{
+  text-align: center;
 }
 .guiz-awards-buttons {
   background: #fff;
@@ -83,7 +86,6 @@ body{
 }
 .button{
     width: 100%;
-    padding: 10px;
 }
 .button button{
     width: 100%;
@@ -97,6 +99,21 @@ body{
     overflow: hidden;
     text-align: center;
     border-radius: 5px;
+    padding: 8px;
+}
+
+
+.badge {
+  display: inline-block;
+  font-size: .75em;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+  padding: 12px 38px;
 }
 
 .button button::after{

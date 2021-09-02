@@ -30,7 +30,7 @@ const expertise = document.querySelector('.expertise');
 const getButton = document.getElementById('get');
 const multiInput = document.querySelector('multi-input'); 
 const values = document.querySelector('#values'); 
-
+const imageFixed = document.querySelector('.showcase-talent');
 
 
 // for hovering div
@@ -64,9 +64,15 @@ const innerDes = document.querySelector('.inner-des');
 const desRightDiv = document.querySelector('.right-div-for-description');
 
 // for image section
-const imageFixed = document.querySelector('.showcase-talent');
+
 const galleryImg = document.querySelector('.gallery-img');
 const hoverImgDiv = document.querySelector('.inner-img-hover');
+
+// for extra image section
+const galleryExtraImg = document.querySelector('.extra-img');
+const hoverExtraImgDiv = document.querySelector('.inner-extra-img-hover');
+
+
 // for video section
 const videoHover = document.querySelector('.for-video-hover');
 const videosection = document.querySelector('.for-video');
@@ -107,6 +113,21 @@ galleryImg.addEventListener('mouseleave', function () {
   hoverImgDiv.style.display = 'none';
   imageFixed.style.display = 'block';
 })
+
+
+// image extra hover
+galleryExtraImg.addEventListener('mouseenter', function () {
+  hoverExtraImgDiv.style.display = 'block';
+  imageFixed.style.display = 'none';
+})
+galleryExtraImg.addEventListener('mouseleave', function () {
+  hoverExtraImgDiv.style.display = 'none';
+  imageFixed.style.display = 'block';
+})
+
+
+
+
 
 
 
