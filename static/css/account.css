@@ -13,6 +13,7 @@ p{
     background-color: #fff;
     margin-top: 18px;
     padding: 23px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .right__colum{
     margin-top: -4px;
@@ -93,15 +94,28 @@ p{
 .new__nav__link{
     color: #000 !important;
 }
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #000 !important;
+    outline: none !important;
+    background-color: transparent !important;
+    border-bottom: 2px solid #0d6efd;
+}
+.new__nav__pill .new__nav__link {
+    background: 0 0;
+    border: 0;
+    border-radius: 0 !important;
+}
 .new__nav__pill{
     background-color: #fff;
     padding: 12px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .tab__view__card{
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-items: center;
+    
 }
 .tab___card__new{
     width: 200px !important;
@@ -113,6 +127,7 @@ p{
     background-color: #fff !important;
     border-radius: 3px;
     margin: 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .tab___card__new1{
     width: 200px !important;
@@ -125,6 +140,7 @@ p{
     background-color: #fff !important;
     border-radius: 3px;
     margin: 8px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 .create___icon{
     font-size: 56px !important;
@@ -178,6 +194,7 @@ p{
     border-bottom: 1px solid #000;
     font-size: 14px !important;
 }
+
 
 @media (max-width:470px){
     .tab__view__card{

@@ -129,9 +129,11 @@
 
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
+                        {% if offers.image %}
                         <div class="swiper-slide-container">
                             <img class="cover" src="{{ offers.image.url }}" alt="">
                         </div>
+                        {% endif %}
                     </div>
                     {% for image in offers.extra_images.all %}
                     <div class="swiper-slide">

@@ -21,8 +21,8 @@ class ServiceApiView(APIView):
 
 
 class OfferApiView(APIView):
-    permission_classes = [IsAuthenticated, ]
-    authentication_classes = [TokenAuthentication, ]
+    # permission_classes = [IsAuthenticated, ]
+    # authentication_classes = [TokenAuthentication, ]
 
     def get(self, request):
         offers = Offer.objects.all()

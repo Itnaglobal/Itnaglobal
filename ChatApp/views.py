@@ -54,6 +54,7 @@ def chatRoomView(request, id):
             sender=sender, msg=msg, chatroom=chatroom
         )
         return redirect(f"/chat/chatroom/{chatroom.id}")
+        
     args = {
         'chatroom': chatroom,
         'msgs': msgs,

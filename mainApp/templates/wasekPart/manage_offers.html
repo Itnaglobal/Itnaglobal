@@ -133,7 +133,7 @@
                             <td class="ps-3" colspan="2">
                                 <a href="{% url 'EditOffer' offer.id %}">
                                     {% if offer.image %}
-                                    <img src="{{ offer.image.url }}" />
+                                        <img src="{{ offer.image.url }}" />
                                     {% endif %}
                                     {{ offer.offer_title }}
                                 </a>

@@ -19,11 +19,11 @@
                 <!-- <button class="public__mode">
                     Preview Public Mode</button> -->
                 </div>
-                <div id="changingEffect" class="after__click__edit d-flex justify-content-center">
-                    <input type="text" maxlength="70" placeholder="type here.." autocomplete="off" value="Web and Application Developer">
+                <div id="changingEffect" class="after__click__edit">
+                    <input id="userInput" class="mx-auto d-block w-100" type="text" maxlength="70" placeholder="type here.." autocomplete="off" value="Web and Application Developer">
                    <div class="cancel__update">
-                    <button onclick="mySecondFunction()">Cancel</button>
-                    <button>Update</button>
+                    <button id="cancelButton" onclick="mySecondFunction()">Cancel</button>
+                    <button id="updateButton" onclick="newFun()">Update</button>
                    </div>
                 </div>
 
@@ -153,25 +153,12 @@
                   </div>
             </div>
 
-            <script>
-
-                  const changeButton = document.getElementById("changingEffect")
-                  changeButton.style.display = "none"
-
-              function myFunction() {
-                  var desig = document.getElementById("designation");
-                      if (desig.style.display === "none") {
-                        desig.style.display = "block";
-                    } else {
-                      desig.style.display = "none";
-                    }
-                  }
-
-                  
+            <script src="{% static 'js/account.js' %}">
               </script>
 
 
 
 
+              {% include 'buyingview/buying_footer.html' %}
 
 {% endblock %}

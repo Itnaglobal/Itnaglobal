@@ -20,7 +20,7 @@ def get_adminpanel_url(request):
 
     increase = completed_orders / 100
 
-    orders_paginator = Paginator(orders, 20)
+    orders_paginator = Paginator(orders, 10)
 
     page_number = request.GET.get('page')
 
@@ -67,12 +67,16 @@ def allUsersView(request):
 
     return render(request, "all_users.html", args)
 
+
+
 def allOrdersView(request):
     orders = Checkout.objects.all().order_by('-id')
     args = {
         "orders": orders
     }
     return render(request, "all_order.html", args)
+
+
 
 def adminLoginView(request):
     return render(request, "admin_login.html")

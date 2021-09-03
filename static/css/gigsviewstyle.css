@@ -313,15 +313,16 @@ margin:auto;
     font-size: 22px;
 }
 .contact{
-    width: 60%;
+    width: 40%;
     margin-top: 20px;
-    border: 1px solid rgb(160, 159, 159);
-    padding: 10px 20px;
+    border: 1px solid #428ad3 ;
+    padding: 10px 10px;
     font-size: 18px;
     font-weight: 500;
     border-radius: 5px;
-    background-color: transparent;
+    background-color: transparent ;
     transition: all .3s ease-in-out;
+    color: #fff;
 }
 .contact:hover{
     background-color: #7A7D85;

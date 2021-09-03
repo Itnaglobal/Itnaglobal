@@ -7,7 +7,7 @@
 <div class="main-nav">
   <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
-          <a class="navbar-brand navBar" href="#"><img src="{% static 'images/marketage.png' %}" alt="marketage logo"></a>
+          <a class="navbar-brand navBar" href="{% url 'get_landing_page' %}"><img src="{% static 'images/marketage.png' %}" alt="marketage logo"></a>
           <button class="navbar-toggler tog-icon" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -27,13 +27,13 @@
                 <a class="nav-link fw-bold" href="#">$ USD</a>
               </li>
               <li class="nav-item nav-element">
-                <a class="nav-link fw-bold" href="#">Become a Seller</a>
+                <a class="nav-link fw-bold" href="{% url 'user_login' %}">Become a Seller</a>
               </li>
               <li class="nav-item nav-element">
-                <a class="nav-link fw-bold" href="#">Sign In</a>
+                <a class="nav-link fw-bold" href="{% url 'user_login' %}">Sign In</a>
               </li>
               <li class="nav-item nav-element">
-                <a class="nav-link fw-bold" href="#">Sign Up</a>
+                <a class="nav-link fw-bold" href="{% url 'logoutview' %}">Sign Up</a>
               </li>
             </ul>
           </div>

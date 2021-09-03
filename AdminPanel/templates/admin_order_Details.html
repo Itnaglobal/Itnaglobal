@@ -17,7 +17,7 @@
         color: rgb(95, 95, 252);;
     }
     .go-back-button:hover{
-        
+     
     }
 </style>
 
@@ -35,16 +35,16 @@
      
     <div class="main__content container">
 
-        <a href=""><button class="go-back-button mb-2"> << Go Back </button></a>
+        <a href="{% url 'AdminHome' %}"><button class="go-back-button mb-2 btn btn-dark"> << Go Back </button></a>
 
 
         <div class="order____details">
           <div class="order__first__colum">
-            <p class="star">Star</p>
-            <p><span class="order__info fw-bold">Order #{{order.id}}
+            
+            <p><span class="order__info fw-bold">Order #{{order_details.id}}
 
             <!-- </span> view gig</p> -->
-              <p>BUYER  <span class="second__star"> {{order_details.user}}</span> (view history) | {{order.created_at}}</p>
+              <p>Buyer:  <span class="badge bg-dark"> {{order_details.user}}</span><br>{{order_details.created_at}}</p>
           </div>
           <div class="order__second__colum">
             <p class="erned____amount">${{order_details.total}}</p>
@@ -54,7 +54,7 @@
       <hr>
 
       <div class="order___description">
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cum praesentium esse sequi dolor et veritatis ea possimus qui, natus sed exercitationem quae dignissimos delectus est corporis porro molestias ipsum voluptatem quibusdam! Recusandae perspiciatis dolores voluptatem tenetur adipisci tempora iure cupiditate aut. Libero veniam quia dolorem porro odio exercitationem deleniti impedit, commodi provident laboriosam, eaque sequi debitis vitae accusamus et soluta reprehenderit voluptatibus nobis ipsam ipsa voluptas! Voluptatum voluptatem quis error, laborum temporibus ipsum, minus ea nam facilis repellendus quam accusamus laboriosam deleniti voluptate, tenetur aspernatur distinctio quia id. Repellat nihil quas sit fuga in mollitia cum velit et laborum tenetur.</p>
+        <p></p>
         <hr>
       </div>
 
@@ -72,8 +72,8 @@
           </thead>
           <tbody>
             <tr>
-              <td><p>{{ order_details.package }}</p>
-                <p><span class="iconify" data-icon="akar-icons:check" style="color: #1dde7d;"></span> 20 Revisions</p>
+              <td><p>{{ order_details.package.package.title }}</p>
+                {% comment %} <p><span class="iconify" data-icon="akar-icons:check" style="color: #1dde7d;"></span> 20 Revisions</p> {% endcomment %}
               </td>
               <td>{{ order_details.quantity }}</td>
               <td>{{ duration }}</td>
@@ -89,7 +89,7 @@
               <td class="fw-bold">Grand Total<span class="include__service">(included service fee)</span></td>
               <td></td>
               <td></td>
-            <td class="fw-bold">${{ order.grand_total }}</td>
+            <td class="fw-bold">${{ order_details.grand_total }}</td>
             </tr>
           </tbody>
         </table>

@@ -341,17 +341,17 @@
                                 
                                 <td class="col-3 align-middle">
                                     {% if standard_package.is_responsive_standard %}
-                                        <input type="checkbox" class="text-center w-100" align-self-center value="on" checked name="is_responsive_standard" id="res1" onchange="checkResponsive1()">
+                                        <input type="checkbox" class="text-center w-100" align-self-center value="on" checked name="is_responsive_standard" id="res2" onchange="checkResponsive2()">
                                     {% else %}
-                                        <input type="checkbox" class="text-center w-100" align-self-center value="off" name="is_responsive_standard" id="res1" onchange="checkResponsive1()">
+                                        <input type="checkbox" class="text-center w-100" align-self-center value="off" name="is_responsive_standard" id="res2" onchange="checkResponsive2()">
                                     {% endif %}
                                 </td>
                                 
                                 <td class="col-3 align-middle p-3">
                                     {% if premium_package.is_responsive_premium %}
-                                        <input type="checkbox" class="text-center w-100" align-self-center value="on" checked name="is_responsive_premium" id="res1" onchange="checkResponsive1()">
+                                        <input type="checkbox" class="text-center w-100" align-self-center value="on" checked name="is_responsive_premium" id="res3" onchange="checkResponsive3()">
                                     {% else %}
-                                        <input type="checkbox" class="text-center w-100" align-self-center value="off" name="is_responsive_premium" id="res1" onchange="checkResponsive1()">
+                                        <input type="checkbox" class="text-center w-100" align-self-center value="off" name="is_responsive_premium" id="res3" onchange="checkResponsive3()">
                                     {% endif %}
                                 </td>
     
@@ -522,7 +522,7 @@
                 <p class="text-muted">Drag & Drop a photo or</p>
                 <div class="text-center">
                     <label class="form-label choose__file text-center w-100 mx-auto d-block" for="main-image">Browse</label>
-                    <input id="main-image" name="offer_main_image" style="visibility: hidden;" accept="image/*" type="file" required />   
+                    <input id="main-image" name="offer_main_image" style="visibility: hidden;" accept="image/*" type="file" />   
                 </div>
                 <p> <span class="iconify drag__icon" data-icon="bi:image"></span></p>
             </div>
@@ -538,15 +538,35 @@
             <p>Get noticed by the right buyers with visual examples of your services.</p>
 
             <div class="offer__img__grid">
-                    {% for image in offer.extra_images.all %}
-                    <div class="gig__first__img m-3">
-                        <img src="/media/{{ image }}" alt="">
-                        <input type="hidden" class="extra_image_id{{ image.id }}" name="extra_image_id" value="" />
-                        <button class="gig__edit__icon edit__icon" onclick="extraImageDelete({{image.id}})">
-                            <span class="iconify" data-icon="fluent:delete-28-regular"></span>
-                        </button>
-                    </div>
-                    {% endfor %}
+                    {% if offer.extra_images.all|length > 0 %}
+                        {% if offer_first_img %}
+                            <div class="gig__first__img m-3">
+                                <img src="/media/{{ offer_first_img }}" alt="">
+                                <input type="hidden" class="extra_image_id1" name="extra_image_id1" value="" />
+                                <button class="gig__edit__icon edit__icon offer_extra_image_button1">
+                                    <span class="iconify" data-icon="fluent:delete-28-regular"></span>
+                                </button>
+                            </div>
+                        {% endif %}
+                        {% if offer_second_img %}
+                            <div class="gig__first__img m-3">
+                                <img src="/media/{{ offer_second_img }}" alt="">
+                                <input type="hidden" class="extra_image_id2" name="extra_image_id2" value="" />
+                                <button class="gig__edit__icon edit__icon offer_extra_image_button2">
+                                    <span class="iconify" data-icon="fluent:delete-28-regular"></span>
+                                </button>
+                            </div>
+                        {% endif %}
+                        {% if offer_third_img %}
+                            <div class="gig__first__img m-3">
+                                <img src="/media/{{ offer_third_img }}" alt="">
+                                <input type="hidden" class="extra_image_id3" name="extra_image_id3" value="" />
+                                <button class="gig__edit__icon edit__icon offer_extra_image_button3">
+                                    <span class="iconify" data-icon="fluent:delete-28-regular"></span>
+                                </button>
+                            </div>
+                        {% endif %}
+                    {% endif %}
                 
                     {% if offer.extra_images.all|length < 3 %}
                     <div class="gig__first__img1 m-3">
@@ -573,25 +593,27 @@
         
 
        <div class="video__one offer__img__grid">
+        {% if offer.offer_video %}
         <div class="video__upload__option">
             <!-- upload video here.... -->
+            <input type="hidden" class="offer_video_id" name="offer_video_id" value="" />
             <video controls>
                 <source src="{{ offer.offer_video.url }}" type="">
                 Your browser does not support the video.
               </video>
               
             <div class="video__edit__icon">
-                <button class="edit__icon"><span class="iconify video__icon" data-icon="fluent:delete-28-regular"></span></button>
+                <button class="edit__icon" onclick="offerVideoDelete({{ offer.id }})"><span class="iconify video__icon" data-icon="fluent:delete-28-regular"></span></button>
                 <a href="#"><span class="iconify video__icon" data-icon="akar-icons:edit"></span></a>
             </div>
         </div>
 
-        {% if offer.offer_video is None %}
+        {% else %}
         <div class="gig__first__img1 m-3">
             <p class="text-muted">Drag & Drop a video or</p>
             <div class="text-center">
                 <label class="form-label choose__file text-center w-100 mx-auto d-block" for="customFile">Browse</label>
-            <input type="file" name="offer_video" style="visibility: hidden;"  class="form-control" id="customFile" accept="video/mp4,video/x-m4v,video/*" required/>
+            <input type="file" name="offer_video" style="visibility: hidden;"  class="form-control" id="customFile" accept="video/mp4,video/x-m4v,video/*"/>
             </div>
            <p> <span class="iconify drag__icon" data-icon="bi:image"></span></p>
         </div>
@@ -608,7 +630,9 @@
             <p>Show some of the best work you created in a document (PDFs only).</p>
         
             <div class="document___total__upload">
+                {% if offer.document %}
                <div class="docu__up__delete mx-auto">
+                <input type="hidden" class="offer_document_id" name="offer_document_id" value="" />
                 <div class="document__upload__delete m-3">
                     <span class="iconify" data-icon="icon-park-outline:file-pdf-one" style="color: red;"></span>
                 </div>
@@ -618,19 +642,19 @@
                         <small class="text-muted">PDF only</small>
                    </div>
                     <div class="document___icon">
-                        <button class="document__edit__icon edit__icon">
+                        <button class="document__edit__icon edit__icon" onclick="offerDocumentDelete({{ offer.id }})">
                             <span class="iconify" data-icon="fluent:delete-28-regular"></span>
                         </button>
                     </div>
                 </div>
                </div>
 
-                {% if offer.document is None %}
-                <div class="gig__first__img1 m-3">
+                {% else %}
+                <div class="gig__first__img1 m-3 mx-auto d-flex justify-content-center">
                     <p class="text-muted">Drag & Drop a video or</p>
                     <div class="text-center">
                         <label class="form-label choose__file text-center w-100 mx-auto d-block" for="customFile">Browse</label>
-                    <input type="file" name="offer_document" style="visibility: hidden;"  class="form-control" id="customFile" accept="application/pdf,application/vnd.ms-excel" required/>
+                    <input type="file" name="offer_document" style="visibility: hidden;"  class="form-control" id="customFile" accept="application/pdf,application/vnd.ms-excel"/>
                     </div>
                    <p> <span class="iconify drag__icon" data-icon="bi:image"></span></p>
                 </div>
