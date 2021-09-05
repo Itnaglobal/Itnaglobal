@@ -9,7 +9,7 @@
     <div class="card main-div-for-form">
     
 
-   <form action="" method="POST" enctype="multipart/form-data" class="form">
+   <form action="" method="POST" enctype="multipart/form-data" class="form post__requestForm">
     {% csrf_token %}
         {{ post_form|crispy }}
         <button type="submit" class="btn button mt-4 ">Submit Request</button>

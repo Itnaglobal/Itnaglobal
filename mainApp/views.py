@@ -19,11 +19,13 @@ from datetime import date
 from datetime import datetime
 import string    
 import random
+from ChatApp.models import *
+
 
 
 def get_landing_page(request):
     user_session = request.session.get("user", None)
-    print(f"{user_session=}")
+    print(f"{user_session}")
 
     if (user_session is None):
         landing_slider = LandingSlider.objects.all().order_by('-id')
@@ -220,7 +222,7 @@ def manageOrder(request):
         elif order.order_status == "CANCELLED":
             cancelled_orders.append(order)
 
-    print(review_orders)
+    # print(review_orders)
     # print(cancelled_orders)
 
     args = {
@@ -255,7 +257,7 @@ def manageOffers(request):
 
     if request.method == "POST":
         offer_id = request.POST.get("offer_id", None)
-        print(f"{offer_id=}")
+        # print(f"{offer_id}")
 
         if offer_id is not None:
             try:
@@ -286,8 +288,28 @@ def manageOffers(request):
 
 
 @login_required(login_url='user_login')
-def chatInbox(requrest):
-    return render(requrest, "wasekPart/chat_inbox.html")
+def chatInbox(request):
+    all_rooms = ChatRoom.objects.filter(sellers=request.user)
+    
+
+    print("HELLLLLLLLLLLLLLLLLLLLLLLOOOOOOOOOOOOO" + str(all_rooms))
+    args = {
+        "all_rooms": all_rooms
+    }
+    return render(request, "wasekPart/chat_inbox.html", args)
+
+
+# Buyer Chat
+@login_required(login_url='user_login')
+def buyer_chat_messages(request):
+    chatroom = ChatRoom.objects.filter(buyer=request.user)
+    print(chatroom)
+    args = {
+        'chatroom': chatroom
+    }
+    return render(request, "buyingview/buyer_chat.html", args)
+
+
 
 # Seller Dashboard
 
@@ -409,7 +431,7 @@ def cartView(request):
         del request.session["cart"]
         return redirect("buying_view")
 
-    print(request.session.get("cart"))
+    # print(request.session.get("cart"))
     if not cart:
         request.session['cart'] = {}
     ids = list(request.session.get('cart').keys())
@@ -484,8 +506,9 @@ def get_buyer_orders_url(request):
     return render(request, 'buyingview/buying_orders.html', args)
 
 
+
 # category wise Page
-@login_required(login_url='user_login')
+# @login_required(login_url='user_login')
 def category_wise_offers(request, slug):
     cats = Category.objects.all()
     category = Category.objects.all()
@@ -635,13 +658,13 @@ def extendedUserView(request):
 
 @login_required(login_url='user_login')
 def sellerSubmitView(request, pk):
-    print(pk)
+    # print(pk)
     if request.method == "POST":
         file_field = request.FILES.get("file_field")
         try:
             checkout = Checkout.objects.get(id=pk)
-            print(f"{checkout=}")
-            print(file_field)
+            # print(f"{checkout}")
+            # print(file_field)
         except:
             return redirect("manage-order")
         else:
@@ -789,7 +812,7 @@ def createOfferView(request):
             dt_basic = DeliveryTime.objects.get(title=delivery_time_basic)
             re_basic = Revision.objects.get(title=revision_basic)
             num_page_basic = NumberOfPage.objects.get(title=num_pages_basic)
-            print(num_page_basic)
+            # print(num_page_basic)
 
             if is_responsive_basic == "on":
                 is_responsive_basic = True
@@ -1254,23 +1277,47 @@ def searchPageView(request):
 
 @login_required
 def buyer_requestView(request):
-    return render(request, "azimpart/buyer_request.html")
+    if request.user:
+        buyer_post_requests = BuyerPostRequest.objects.all().order_by("-id")
+        send_offer_requests = SendOfferModel.objects.all().order_by("-id")
+    else:
+        return redirect("user_login")
+
+    args = {
+        "buyer_post_requests": buyer_post_requests,
+        "send_offer_requests": send_offer_requests,
+    }
+    return render(request, "azimpart/buyer_request.html", args)
 
 
 def my_contacts_page(request):
     return render(request, "azimpart/my_contacts.html")
 
 
-# Favortie Offer Function & Algorithms
-# def favorite_function(request):
 
-#     # if request.method == 'POST':
-#     #     favorite = request.POST.get('favorite')
+# User Details 
 
-#     #     if favorite:
-            
-#     pass
+def account_detailsView(request, user_id):
+    offers = Offer.objects.filter(user=request.user)
+    user_details = User.objects.get(pk=user_id)
+    
+    args = {
+        'user_details': user_details,
+        'offers': offers
+    }
+
+    return render(request, 'sellingview/account.html', args)
+
+
+
+
+
+
+def earnings(request):
+    return render(request, 'azimpart/earnings.html')
+
+
     
 
-    
-
+def seondOfferView(request):
+    return render(request, "azimpart/send_offer.html")

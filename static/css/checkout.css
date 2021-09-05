@@ -16,18 +16,18 @@ body{
     padding: 25px;
 }
 .orderText1 a{
-  text-decoration: none;
-  color: #1dbf73;
-}
-.orderText a{
-  text-decoration: none;
-  color: #1dbf73;
+    text-decoration: none;
+    color: #428ad3;
+  }
+.orderText a {
+    text-decoration: none;
+    color: #428ad3;
 }
 .orderText, .orderText1{
     padding: 15px;
 }
 .orderText1{
-    color: #1dbf73;
+    color: #428ad3;
     font-size: 18px;
 }
 .orderText{
@@ -136,9 +136,17 @@ body{
 }
 /* button color */
 .confirm{
-    background-color: #1dbf73;
+    background-color: #428ad3;
+    border: none !important;
+    outline: none !important;
+    padding: 8px 12px;
+    color: #fff !important;
+    transition: .2s ease-in-out;
+    border-radius: 4px;
 }
-
+.confirm:hover{
+    background-color: #2859a6 !important;
+}
 /* half differnet color */
 
 .gigimg, .gigDetails{

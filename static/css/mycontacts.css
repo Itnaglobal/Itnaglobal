@@ -99,6 +99,8 @@ body {
     /* td button */
 .msg-button{
     border: 1px solid #4c5b64;
+    padding: 8px 10px;
+    border-radius: 4px;
 }
 .sent-offer-button{
     background-color: #428ad3 !important;

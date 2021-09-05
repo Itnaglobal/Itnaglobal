@@ -1,3 +1,6 @@
+const nav_header = document.querySelector(".nav__header");
+
+nav_header.classList.add("account__header");
 
 const changeButton = document.getElementById("changingEffect");
 changeButton.style.display = "none"

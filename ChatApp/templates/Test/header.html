@@ -37,7 +37,13 @@
         <li>Offers</li>
       </a>
       <a href="#">
+        <li>Analytics</li>
+      </a>
+      <a href="#">
         <li>Earnings</li>
+      </a>
+      <a href="#">
+        <li>Community</li>
       </a>
       <li
         class="dropdown-toggle more__content"
@@ -94,16 +100,9 @@
           class="dropdown-menu user__options"
           aria-labelledby="user__alternateOption"
         >
-        {% if request.session.user %}
           <li>
-            <a class="dropdown-item" href="{% url 'account' request.user.id %}">Profile</a>
+            <a class="dropdown-item" href="{% url 'account' %}">Profile</a>
           </li>
-
-        {% else %}
-        <li>
-          <a class="dropdown-item" href="{% url 'get_landing_page' %}">Profile</a>
-        </li>
-        {% endif %}
           {% comment %}
           <li>
             <a class="dropdown-item" href="#">Refer &amp; Get up to $100</a>

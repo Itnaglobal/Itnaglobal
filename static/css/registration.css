@@ -116,6 +116,43 @@ body{
         justify-content: center;
         margin-top: 40px;
 }
+
+@media (max-width:435px){
+    .socialIcon button{
+        font-size:18px;
+    }
+}
+@media (max-width:405px){
+    .socialIcon button{
+        font-size:16px;
+    }
+}
+@media (max-width:382px){
+    .socialIcon button{
+        font-size:14px;
+    }
+}
+@media (max-width:360px){
+    .socialIcon button{
+        font-size:12px;
+    }
+    .create{
+        font-size: 16px;
+    }
+}
+@media (max-width:345px){
+    .socialIcon button{
+        font-size:11px;
+    }
+}
+@media (max-width:320px){
+    .socialIcon button{
+        font-size:10px;
+    }
+}
+
+
+
 /* @media (max-width: 992px){
     .total-reg{
         margin-top: 185px;

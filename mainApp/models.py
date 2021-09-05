@@ -49,6 +49,7 @@ class SellerAccount(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     level = models.IntegerField(default=0, blank=True)
+    # recently_viewed = models.BooleanField(default=False, null= True)
 
     def __str__(self):
         return str(self.user)
@@ -181,7 +182,7 @@ class Package(models.Model):
     setup_payment = models.BooleanField(default=False, null=True, blank=True)
     will_deploy = models.BooleanField(default=False, null=True, blank=True)
     is_compitable = models.BooleanField(default=False, null=True, blank=True)
-    supported_formats = models.ManyToManyField(FileFormats, null=True, blank=True)
+    supported_formats = models.ManyToManyField(FileFormats, blank=True)
     # For Logo Design
     provide_vector = models.BooleanField(default=False, null=True, blank=True)
     is_3dmockup = models.BooleanField(default=False, null=True, blank=True)
@@ -384,12 +385,36 @@ class PromoCode(models.Model):
 
 
 class BuyerPostRequest(models.Model):
-    postrequest_title = models.CharField(max_length=220)
+    POST_STATUS = (
+        ("ACTIVE", "ACTIVE"),
+        ("RESERVED", "RESERVED"),
+        ("DELETE", "DELETE")
+    )
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    postrequest_title = models.CharField(max_length=220, unique=True, null=True)
     description = models.TextField(null=True)
     attachment = models.FileField(upload_to="images/")
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    deliver_time = models.ForeignKey(DeliveryTime, on_delete=models.CASCADE)
+    delivery_time = models.ForeignKey(DeliveryTime, on_delete=models.CASCADE)
     budget = models.IntegerField()
+    post_status = models.CharField(max_length=100, null=True, choices=POST_STATUS, default="ACTIVE")
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         return self.postrequest_title
+
+
+class SendOfferModel(models.Model):
+    send_offer_slug = models.SlugField(max_length=200, null=True, unique=True)
+    buyer_post_request = models.ForeignKey(BuyerPostRequest, on_delete=models.CASCADE, related_name="buyer_post_request", null=True)
+    buyer = models.ForeignKey(User, on_delete=models.CASCADE, related_name="send_offer_buyer", null=True)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="send_offer_seller", null=True)
+    offer_letter = models.TextField(null=True)
+    offered_price = models.PositiveIntegerField(null=True)
+    delivery_time = models.ForeignKey(DeliveryTime, on_delete=models.CASCADE, related_name="send_offer_delivery_time", null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    def __str__(self):
+        return self.send_offer_slug

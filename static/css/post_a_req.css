@@ -1,6 +1,11 @@
 #post_req{
     background-color: #fafafa;
 }
+
+.post__requestForm .form-control {
+    padding-left: 0.5rem !important;
+}
+
 .card{
     padding: 35px;
 }

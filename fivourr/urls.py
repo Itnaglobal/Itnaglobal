@@ -83,7 +83,7 @@ urlpatterns = [
     path('settings/', views.settings_page, name="settings"),
 
     # Account url
-    path('account/', views.account_page, name="account"),
+    path('account/<int:user_id>/', views.account_detailsView, name="account"),
 
     # security url
 
@@ -157,6 +157,8 @@ urlpatterns = [
     path('seller_order_details/<int:id>/', views.seller_order_details, name="SellerOrderDetails"),
     # Search page
     path("search/", views.searchPageView, name="search"),
+    # Send offer form
+    path("send-offer/", views.seondOfferView, name="send-offer"),
 
     # Test URL
     path('test/', views.level_up_seller, name="levelUp"),
@@ -164,9 +166,15 @@ urlpatterns = [
     path('test_details/<int:id>/', views.level_up_function, name="levelFunction"),
     
     # Buyer Request URL
-    path("Buyer_Requests/", views.buyer_requestView, name="BuyeRequestView"),
+    path("buyer_requests/", views.buyer_requestView, name="BuyeRequestView"),
     # My Contacts Page
     path("my_contacts/", views.my_contacts_page, name="my_contacts_page"),
+
+    # Earnings Page url
+    path("earnings/", views.earnings, name="earnings"),
+
+    # Buyer Chat url
+    path("buyer_chat/", views.buyer_chat_messages, name="BuyerChat")
 ]
 
 

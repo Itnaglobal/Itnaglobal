@@ -1,4 +1,4 @@
-{% extends "Test/base.html" %}
+{% extends "wasekpart/base.html" %}
 
 {% load static %}
 
@@ -19,7 +19,7 @@
             <div class="dropdown user__dropdown">
                 <button class="dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    Recently Viewed
+                    All Conversations
                 </button>
                 <ul class="dropdown-menu user__Alloptions" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="#">All Conversations</a></li>
@@ -62,7 +62,7 @@
         <!-- Left main content section starts -->
         <div class="user__chatGroup">
             <ul class="list-group user__chatList">
-                {% for rm in rooms %}
+                {% for rm in chatroom %}
                 <li class="list-group-item list-group-item-action">
                     <a class="user__chatInfo" href="{% url 'chatroom' rm.id %}">
                         <div class="left__userChat">
@@ -73,7 +73,7 @@
                             </div>
                             <div class="user__username">
                                 <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">{{ rm.buyer }}</p>
+                                <p class="fw-bold text-dark">{{ rm.sellers.username }}</p>
                                 <!-- This should be truncate chars. Use django truncatechars -->
                                 <small class="text-muted">Message: <span>{{ rm.room_name }}</span></small>
                             </div>

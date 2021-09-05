@@ -37,13 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "template_helpers",
     'mainApp',
     'crispy_forms',
     'rest_framework',
     'API',
     'AdminPanel',
     'rest_framework.authtoken',
-    'ChatApp'
+    'ChatApp',
 ]
 
 MIDDLEWARE = [

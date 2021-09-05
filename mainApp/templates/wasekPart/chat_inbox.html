@@ -1,6 +1,8 @@
-{% extends "wasekPart/base.html" %}
+{% extends "wasekpart/base.html" %}
 
 {% load static %}
+
+
 
 {% block content %}
 
@@ -60,55 +62,25 @@
         <!-- Left main content section starts -->
         <div class="user__chatGroup">
             <ul class="list-group user__chatList">
+                {% for rm in all_rooms %}
                 <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person1">
+                    <a class="user__chatInfo" href="{% url 'chatroom' rm.id %}">
                         <div class="left__userChat">
                             <div class="user__chatImg">
                                 <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
-                                <span class="iconify not__online" data-icon="emojione:sleeping-face" data-inline="false"></span>
-                            </div>
-                            <div class="user__username">
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
-                            </div>
-                        </div>
-
-                        <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
-                            <div class="user__chooseIcons">
-                                <div class="make__fav">
-                                    <span class="iconify text-muted" data-icon="ant-design:star-outlined"
-                                        data-inline="false"></span>
-                                </div>
-                                <div class="mark__asUnread">
-                                    <span class="iconify text-muted" data-icon="line-md:email-opened"
-                                        data-inline="false"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person2">
-                        <div class="left__userChat">
-                            <div class="user__chatImg">
-                                <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
+                                <img src="{{ rm.buyer.selleraccount.profile_picture.url }}" alt="">
                                 <div class="user__onlineDot"></div>
                             </div>
                             <div class="user__username">
                                 <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
+                                <p class="fw-bold text-dark">{{ rm.room_name }}</p>
                                 <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
+                                <small class="text-muted">Message: <span>{{ rm.room_name }}</span></small>
                             </div>
                         </div>
 
                         <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
+                            <small class="text-muted fw-bold">{{ rm.chatroom.sent_date }}</small>
                             <div class="user__chooseIcons">
                                 <div class="make__fav">
                                     <span class="iconify text-muted" data-icon="ant-design:star-outlined"
@@ -122,254 +94,7 @@
                         </div>
                     </a>
                 </li>
-                <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person3">
-                        <div class="left__userChat">
-                            <div class="user__chatImg">
-                                <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
-                                <span class="iconify not__online" data-icon="emojione:sleeping-face" data-inline="false"></span>
-                            </div>
-                            <div class="user__username">
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
-                            </div>
-                        </div>
-
-                        <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
-                            <div class="user__chooseIcons">
-                                <div class="make__fav">
-                                    <span class="iconify text-muted" data-icon="ant-design:star-outlined"
-                                        data-inline="false"></span>
-                                </div>
-                                <div class="mark__asUnread">
-                                    <span class="iconify text-muted" data-icon="line-md:email-opened"
-                                        data-inline="false"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person4">
-                        <div class="left__userChat">
-                            <div class="user__chatImg">
-                                <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
-                                <div class="user__onlineDot"></div>
-                            </div>
-                            <div class="user__username">
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
-                            </div>
-                        </div>
-
-                        <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
-                            <div class="user__chooseIcons">
-                                <div class="make__fav">
-                                    <span class="iconify text-muted" data-icon="ant-design:star-outlined"
-                                        data-inline="false"></span>
-                                </div>
-                                <div class="mark__asUnread">
-                                    <span class="iconify text-muted" data-icon="line-md:email-opened"
-                                        data-inline="false"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person5">
-                        <div class="left__userChat">
-                            <div class="user__chatImg">
-                                <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
-                                <span class="iconify not__online" data-icon="emojione:sleeping-face" data-inline="false"></span>
-                            </div>
-                            <div class="user__username">
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
-                            </div>
-                        </div>
-
-                        <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
-                            <div class="user__chooseIcons">
-                                <div class="make__fav">
-                                    <span class="iconify text-muted" data-icon="ant-design:star-outlined"
-                                        data-inline="false"></span>
-                                </div>
-                                <div class="mark__asUnread">
-                                    <span class="iconify text-muted" data-icon="line-md:email-opened"
-                                        data-inline="false"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person6">
-                        <div class="left__userChat">
-                            <div class="user__chatImg">
-                                <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
-                                <div class="user__onlineDot"></div>
-                            </div>
-                            <div class="user__username">
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
-                            </div>
-                        </div>
-
-                        <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
-                            <div class="user__chooseIcons">
-                                <div class="make__fav">
-                                    <span class="iconify text-muted" data-icon="ant-design:star-outlined"
-                                        data-inline="false"></span>
-                                </div>
-                                <div class="mark__asUnread">
-                                    <span class="iconify text-muted" data-icon="line-md:email-opened"
-                                        data-inline="false"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person7">
-                        <div class="left__userChat">
-                            <div class="user__chatImg">
-                                <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
-                                <span class="iconify not__online" data-icon="emojione:sleeping-face" data-inline="false"></span>
-                            </div>
-                            <div class="user__username">
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
-                            </div>
-                        </div>
-
-                        <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
-                            <div class="user__chooseIcons">
-                                <div class="make__fav">
-                                    <span class="iconify text-muted" data-icon="ant-design:star-outlined"
-                                        data-inline="false"></span>
-                                </div>
-                                <div class="mark__asUnread">
-                                    <span class="iconify text-muted" data-icon="line-md:email-opened"
-                                        data-inline="false"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person8">
-                        <div class="left__userChat">
-                            <div class="user__chatImg">
-                                <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
-                                <span class="iconify not__online" data-icon="emojione:sleeping-face" data-inline="false"></span>
-                            </div>
-                            <div class="user__username">
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
-                            </div>
-                        </div>
-
-                        <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
-                            <div class="user__chooseIcons">
-                                <div class="make__fav">
-                                    <span class="iconify text-muted" data-icon="ant-design:star-outlined"
-                                        data-inline="false"></span>
-                                </div>
-                                <div class="mark__asUnread">
-                                    <span class="iconify text-muted" data-icon="line-md:email-opened"
-                                        data-inline="false"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person9">
-                        <div class="left__userChat">
-                            <div class="user__chatImg">
-                                <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
-                                <div class="user__onlineDot"></div>
-                            </div>
-                            <div class="user__username">
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
-                            </div>
-                        </div>
-
-                        <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
-                            <div class="user__chooseIcons">
-                                <div class="make__fav">
-                                    <span class="iconify text-muted" data-icon="ant-design:star-outlined"
-                                        data-inline="false"></span>
-                                </div>
-                                <div class="mark__asUnread">
-                                    <span class="iconify text-muted" data-icon="line-md:email-opened"
-                                        data-inline="false"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="list-group-item list-group-item-action">
-                    <a class="user__chatInfo" href="#person10">
-                        <div class="left__userChat">
-                            <div class="user__chatImg">
-                                <span class="iconify star__icon text-muted" data-icon="ant-design:star-outlined" data-inline="false"></span>
-                                <img src="{% static 'images/user_img.jpg'%}" alt="">
-                                <span class="iconify not__online" data-icon="emojione:sleeping-face" data-inline="false"></span>
-                            </div>
-                            <div class="user__username">
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <p class="fw-bold text-dark">Wasek Samin</p>
-                                <!-- This should be truncate chars. Use django truncatechars -->
-                                <small class="text-muted">Me: <span>Hello Samin...</span></small>
-                            </div>
-                        </div>
-
-                        <div class="msg__timestamp">
-                            <small class="text-muted fw-bold">3 weeks</small>
-                            <div class="user__chooseIcons">
-                                <div class="make__fav">
-                                    <span class="iconify text-muted" data-icon="ant-design:star-outlined"
-                                        data-inline="false"></span>
-                                </div>
-                                <div class="mark__asUnread">
-                                    <span class="iconify text-muted" data-icon="line-md:email-opened"
-                                        data-inline="false"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </li>
+                {% endfor %}
             </ul>
         </div>
         <!-- Left main content section ends -->
@@ -384,9 +109,9 @@
                 <span class="iconify text-muted" data-icon="bx:bx-arrow-back" data-inline="false"></span>
             </span>
             <span class="iconify text-muted" data-icon="emojione-monotone:sleeping-face" data-inline="false"></span>
-            <span class="fw-bold">Wasek Samin</span>
+            <span class="fw-bold">{{ request.user }}</span>
             <div class="user__lastSeen">
-                <small class="text-muted">Last seen 1h ago | Local Time Aug 4, 4:30 PM</small>
+                <small class="text-muted">Last seen {{ ago }} ago | Local Time Aug 4, 4:30 PM</small>
             </div>
         </div>
         <!-- Middle side top section ends -->
@@ -394,281 +119,52 @@
         <!-- Middle side main content section starts -->
         <div class="middle__mainContent">
             <div class="user__allChats">
-                <!-- The opposite user -->
-                <div class="opposite__user">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Sakib Ovii</span>
-                            <small class="text-muted">Jun 27, 2:39 PM</small>
-                        </div>
-                        <p>Hello Wasek Samin!</p>
-                    </div>
-                </div>
-
-                <!-- Me -->
+            <!-- Me -->
+                {% for m in values %}
                 <div class="user__me">
                     <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
+                        <img src="{{ m.sender.selleraccount.profile_picture.url }}" alt="">
                     </div>
                     <div class="chat__msg">
                         <div class="chat__timestamp">
-                            <span class="fw-bold">Me</span>
+                            <span class="fw-bold">{{ m.sender }}</span>
                             <small class="text-muted">Jun 27, 2:40 PM</small>
                         </div>
-                        <p>Hello Sakib Ovii!</p>
+                        <p>{{ m.msg }}</p>
                     </div>
                 </div>
-
-                <!-- The opposite user -->
-                <div class="opposite__user">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Sakib Ovii</span>
-                            <small class="text-muted">Jun 27, 2:39 PM</small>
-                        </div>
-                        <p>Hello Wasek Samin!</p>
-                    </div>
-                </div>
-
+                {% endfor %}
                 <!-- Me -->
-                <div class="user__me">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Me</span>
-                            <small class="text-muted">Jun 27, 2:40 PM</small>
-                        </div>
-                        <p>Hello Sakib Ovii!</p>
-                    </div>
-                </div>
-
-                <!-- The opposite user -->
-                <div class="opposite__user">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Sakib Ovii</span>
-                            <small class="text-muted">Jun 27, 2:39 PM</small>
-                        </div>
-                        <p>Hello Wasek Samin!</p>
-                    </div>
-                </div>
-
-                <!-- Me -->
-                <div class="user__me">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Me</span>
-                            <small class="text-muted">Jun 27, 2:40 PM</small>
-                        </div>
-                        <p>Hello Sakib Ovii!</p>
-                    </div>
-                </div>
-
-                <!-- The opposite user -->
-                <div class="opposite__user">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Sakib Ovii</span>
-                            <small class="text-muted">Jun 27, 2:39 PM</small>
-                        </div>
-                        <p>Hello Wasek Samin!</p>
-                    </div>
-                </div>
-
-                <!-- Me -->
-                <div class="user__me">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Me</span>
-                            <small class="text-muted">Jun 27, 2:40 PM</small>
-                        </div>
-                        <p>Hello Sakib Ovii!</p>
-                    </div>
-                </div>
-
-                <!-- The opposite user -->
-                <div class="opposite__user">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Sakib Ovii</span>
-                            <small class="text-muted">Jun 27, 2:39 PM</small>
-                        </div>
-                        <p>Hello Wasek Samin!</p>
-                    </div>
-                </div>
-
-                <!-- Me -->
-                <div class="user__me">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Me</span>
-                            <small class="text-muted">Jun 27, 2:40 PM</small>
-                        </div>
-                        <p>Hello Sakib Ovii!</p>
-                    </div>
-                </div>
-
-                <!-- The opposite user -->
-                <div class="opposite__user">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Sakib Ovii</span>
-                            <small class="text-muted">Jun 27, 2:39 PM</small>
-                        </div>
-                        <p>Hello Wasek Samin!</p>
-                    </div>
-                </div>
-
-                <!-- Me -->
-                <div class="user__me">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Me</span>
-                            <small class="text-muted">Jun 27, 2:40 PM</small>
-                        </div>
-                        <p>Hello Sakib Ovii!</p>
-                    </div>
-                </div>
-
-                <!-- The opposite user -->
-                <div class="opposite__user">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Sakib Ovii</span>
-                            <small class="text-muted">Jun 27, 2:39 PM</small>
-                        </div>
-                        <p>Hello Wasek Samin!</p>
-                    </div>
-                </div>
-
-                <!-- Me -->
-                <div class="user__me">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Me</span>
-                            <small class="text-muted">Jun 27, 2:40 PM</small>
-                        </div>
-                        <p>Hello Sakib Ovii!</p>
-                    </div>
-                </div>
-
-                <!-- The opposite user -->
-                <div class="opposite__user">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Sakib Ovii</span>
-                            <small class="text-muted">Jun 27, 2:39 PM</small>
-                        </div>
-                        <p>Hello Wasek Samin!</p>
-                    </div>
-                </div>
-
-                <!-- Me -->
-                <div class="user__me">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Me</span>
-                            <small class="text-muted">Jun 27, 2:40 PM</small>
-                        </div>
-                        <p>Hello Sakib Ovii!</p>
-                    </div>
-                </div>
-
-                <!-- The opposite user -->
-                <div class="opposite__user">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Sakib Ovii</span>
-                            <small class="text-muted">Jun 27, 2:39 PM</small>
-                        </div>
-                        <p>Hello Wasek Samin!</p>
-                    </div>
-                </div>
-
-                <!-- Me -->
-                <div class="user__me">
-                    <div class="opposite__userImg">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </div>
-                    <div class="chat__msg">
-                        <div class="chat__timestamp">
-                            <span class="fw-bold">Me</span>
-                            <small class="text-muted">Jun 27, 2:40 PM</small>
-                        </div>
-                        <p>Hello Sakib Ovii!</p>
-                    </div>
-                </div>
+               
             </div>
 
             <!-- User typing message section starts -->
             <div class="user__typeMsg">
-                <input type="text" class="form-control" placeholder="Enter your message...">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="text" class="form-control" placeholder="Enter your message..." name="msg">
+                    <!-- <button type="submit">send</button> -->
 
-                <div class="typing__icons">
-                    <div>
-                        <div class="happy__icon">
-                            <span class="iconify" data-icon="mdi:emoticon-happy-outline" data-inline="false"></span>
+                    <div class="typing__icons">
+                        <div>
+                            <div class="happy__icon">
+                                <span class="iconify" data-icon="mdi:emoticon-happy-outline" data-inline="false"></span>
+                            </div>
+                            <div class="thunder__icon">
+                                <span class="iconify" data-icon="ant-design:thunderbolt-outlined"
+                                    data-inline="false"></span>
+                            </div>
+                            <div class="attachment__icon">
+                                <span class="iconify" data-icon="fluent:attach-16-regular" data-inline="false"></span>
+                            </div>
                         </div>
-                        <div class="thunder__icon">
-                            <span class="iconify" data-icon="ant-design:thunderbolt-outlined"
-                                data-inline="false"></span>
-                        </div>
-                        <div class="attachment__icon">
-                            <span class="iconify" data-icon="fluent:attach-16-regular" data-inline="false"></span>
-                        </div>
-                    </div>
 
-                    <div class="send__icon">
-                        <span class="iconify" data-icon="bytesize:send" data-inline="false"></span>
-                    </div>
-                </div>
+                        <div class="send__icon">
+                            <button type="submit" style="background: none; border: none;"><span class="iconify" data-icon="bytesize:send" data-inline="false">send</span></button>
+                        </div>
+                
+                 </div>
+                </form>
             </div>
             <!-- User typing message section ends -->
         </div>
@@ -717,17 +213,18 @@
             <div>
                 <h5 class="mt-4 fw-bold">About</h5>
                 <div class="right__userImg">
-                    <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    <p class="text-center fw-bold">Wasek Samin</p>
-                    <p class="new__seller text-muted text-center">New Seller</p>
+                    <img src="{{ chatroom.sellers.selleraccount.profile_picture.url }}" alt="">
+                    <p class="text-center fw-bold">{{ chatroom.sellers.username }}</p>
+                    <p class="new__seller text-muted text-center">Level {{ chatroom.sellers.selleraccount.level }}</p>
                 </div>
             </div>
 
             <div class="user__profileDetail mt-2">
                 <div>
                     <p class="text-muted">Reviews</p>
-                    <p class="text-muted"><span class="iconify" data-icon="emojione:star" data-inline="false"></span>
-                        <span class="fw-bold text-dark">5.0</span> (2)</p>
+                    <!-- <p class="text-muted"><span class="iconify" data-icon="emojione:star" data-inline="false"></span> -->
+                        <!-- <span class="fw-bold text-dark">Coming Soon!</span> (2)</p> -->
+                        <p class="text-dark text-muted">Coming Soon!</p>
                 </div>
                 <div>
                     <p class="text-muted">Avg. Response Time</p>
@@ -735,16 +232,16 @@
                 </div>
                 <div>
                     <p class="text-muted">From</p>
-                    <p class="fw-bold">Pakistan</p>
+                    <p class="fw-bold">{{ chatroom.buyer.selleraccount.country }}</p>
                 </div>
-                <div>
+                <!-- <div>
                     <p class="text-muted">English</p>
                     <p class="fw-bold">Native</p>
                 </div>
                 <div>
                     <p class="text-muted">Urdu</p>
                     <p class="fw-bold">Native</p>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- Right side main content section ends -->
