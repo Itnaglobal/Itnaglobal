@@ -107,6 +107,8 @@ urlpatterns = [
 
     # POST A REQUEST PAGE URL
     path('post_request/', views.post_a_request, name="post_a_request"),
+    # Add post request
+    path("added-post-request/", views.added_post_request, name="added-post-request"),
 
     #  Become A Seller Page
 
@@ -150,7 +152,7 @@ urlpatterns = [
     # Edit Offer Page
     path('edit_offer/<int:id>/', views.edit_offer, name="EditOffer"),
     # Buyer orders page
-    path("buyer-orders/<int:pk>/", views.buyerGigFormView, name="buyer-orders"),
+    path("buyer-orders/<int:pk>/", views.buyerOfferFormView, name="buyer-orders"),
     # Buyer dashboard page
     path("buyer-dashboard/", views.buyerDashboardFormView, name="buyer-dashboard"),
     # Seller ORder Details
@@ -158,7 +160,8 @@ urlpatterns = [
     # Search page
     path("search/", views.searchPageView, name="search"),
     # Send offer form
-    path("send-offer/", views.seondOfferView, name="send-offer"),
+    path("send-offer/<int:id>/", views.sellerSendOfferView, name="send-offer"),
+    path("buyer-posts/", views.buyerAllPostsView, name="buyer-posts"),
 
     # Test URL
     path('test/', views.level_up_seller, name="levelUp"),
@@ -171,7 +174,7 @@ urlpatterns = [
     path("my_contacts/", views.my_contacts_page, name="my_contacts_page"),
 
     # Earnings Page url
-    path("earnings/", views.earnings, name="earnings"),
+    path("earnings/<int:id>/", views.earnings, name="earnings"),
 
     # Buyer Chat url
     path("buyer_chat/", views.buyer_chat_messages, name="BuyerChat")

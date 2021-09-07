@@ -1,6 +1,6 @@
 from django.http.response import Http404
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse
 from django.db.models import Avg, Max, Min
 from django.contrib import messages
@@ -90,13 +90,10 @@ def buying_view(request):
 def offer_details(request, id):
     cats = Category.objects.all()
     offers = Offer.objects.filter(id=id).first()
+    print("OFFER:", offers)
+    print("OFFER PACKAGE:", offers.offermanager_set.all())
+
     cart_session = request.session.get("cart", None)
-
-
-
-
-    for image in offers.extra_images.all():
-        print(image)
 
     def get_ip(request):
         address = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -466,6 +463,7 @@ def checkout(request):
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
+        address = request.POST.get('address')
         due_date = request.POST.get('due_date')
         user = request.user
         # seller work
@@ -476,6 +474,7 @@ def checkout(request):
             checkout = Checkout(
                 first_name=first_name,
                 last_name=last_name,
+                address=address,
                 due_date=due_date,
                 user=user,
                 package=package,
@@ -522,22 +521,44 @@ def category_wise_offers(request, slug):
     return render(request, 'landingview/category_wise.html', args)
 
 
+def added_post_request(request):
+    print("HELLOW")
+    if request.method == 'POST':
+        user = request.user
+        postrequest_title = request.POST.get("title")
+        description = request.POST.get("description")
+        attachment  = request.FILES.get("file_upload", None)
+        category = request.POST.get("category")
+        del_time = request.POST.get("del_time")
+        price = request.POST.get("price")
+        post_status = "ACTIVE"
+
+        print("delivery time", del_time)
+        print(user, postrequest_title, description, attachment, category, del_time, price)
+        
+        try:
+            category = Category.objects.get(title=category)
+            delivery_time = DeliveryTime.objects.get(title=del_time)
+        except:
+            return redirect("post_a_request")
+        else:
+            BuyerPostRequest.objects.create(user=user, postrequest_title=postrequest_title,
+                                            description=description, attachment=attachment,
+                                            category=category, delivery_time=delivery_time,
+                                            budget=price, post_status=post_status)
+
+            return redirect("BuyeRequestView")
+    else:
+        return redirect("post_a_request")
+
 @login_required(login_url='user_login')
 def post_a_request(request):
     categories = Category.objects.all()
     delivery_time = DeliveryTime.objects.all()
 
-    post_form = PostRequestForm(request.POST, request.FILES)
-    if request.method == 'POST':
-        post_form = PostRequestForm(request.POST, request.FILES)
-        if post_form.is_valid():
-            post_form.save()
-
-            return redirect('buying_view')
     args = {
         'categories': categories,
         'delivery_time': delivery_time,
-        'post_form': post_form
     }
     return render(request, 'buyingview/post_request.html', args)
 
@@ -550,20 +571,27 @@ def get_become_a_seller_page(request):
 @login_required(login_url='user_login')
 def get_order_details_url(request, id, *args, **kwargs):
     order = Checkout.objects.get(pk=id)
-    # print(order_details)
-    print(order.user)
+    # for sslcommerz
+    ssl = request.POST.get('sslcommerz')
+    # for ammarPay
+    ammar = request.POST.get("ammarpay")
 
-    if request.method == 'POST':
+    if request.method == "POST" and ssl:
         settings = {
             'store_id': 'testbox', 'store_pass': 'qwerty', 'issandbox': True
         }
-
         user = request.user
         # order = Checkout.objects.get(pk=kwargs['id'])
         order = Checkout.objects.get(pk=id)
         print(order)
         first_name = order.first_name
         last_name = order.last_name
+        address = order.address
+        email = order.user.selleraccount.email
+        phone_number = order.user.selleraccount.contact_no
+        country = order.user.selleraccount.country
+        city = order.user.selleraccount.city
+        package_category = order.package.offer.category
         quantity = order.quantity
         total = order.grand_total
         transaction_id = order.id
@@ -582,21 +610,50 @@ def get_order_details_url(request, id, *args, **kwargs):
         post_body['cancel_url'] = "http://127.0.0.1:8000/cancel/"
         post_body['emi_option'] = 0
         post_body['cus_name'] = first_name
-        post_body['cus_email'] = "test@test.com"
-        post_body['cus_add1'] = "customer address"
-        post_body['cus_phone'] = "01700000000"
-        post_body['cus_city'] = "Dhaka"
-        post_body['cus_country'] = "Bangladesh"
+        post_body['cus_email'] = email
+        post_body['cus_add1'] = address
+        post_body['cus_phone'] = phone_number
+        post_body['cus_city'] = city
+        post_body['cus_country'] = country
         post_body['shipping_method'] = "NO"
         post_body['multi_card_name'] = ""
         post_body['num_of_item'] = quantity
         post_body['product_name'] = order.package
-        post_body['product_category'] = "Test Category"
+        post_body['product_category'] = package_category
         post_body['product_profile'] = "general"
         print(post_body)
         response = sslcommerz.createSession(post_body)
         print(response)
         return redirect(response['GatewayPageURL'])
+
+
+        # ammarPay Integration
+    
+    elif request.method == 'POST' and ammar:
+        data = {
+            "store_id": "aamarpaytest",
+            "signature_key": "dbb74894e82415a2f7ff0ec3a97e4183",
+            "cus_email": "test@gmail.com",
+            "cus_name": "test",
+            "cus_phone": "0122521445",
+            "cus_add1": "ASDASD",
+            "cus_add2": "sqweqwe",
+            "cus_city": "DHAKA",
+            "cus_country": "BD",
+            "amount": "1500",
+            "tran_id": "asd54w5qe232asdas3",
+            "currency": "$",
+            "success_url": "http://127.0.0.1:8000/success/",
+            "fail_url": "http://127.0.0.1:8000/failed/",
+            "cancel_url": "http://127.0.0.1:8000/cancel/",
+            "desc": "alksdjalskdjalskdjalskdasld",
+            "type": "json"
+        }
+        gateawayURL = "https://sandbox.aamarpay.com/jsonpost.php"
+        return JsonResponse(data, safe=False)
+        
+    
+
     args = {
         'order': order
     }
@@ -798,15 +855,22 @@ def createOfferView(request):
         service = Services.objects.get(title=service)
         category = Category.objects.get(title=category)
         # Creating offer object
-        offer = Offer(slug=slug, user=request.user, offer_title=offer_title, seo_title=seo_title, 
-                    image=main_image, offer_video=uploaded_video, document=document, 
-                    service=service, category=category, description=content)
-        offer.save()
 
-        for item in uploaded_photo[:3]:
-            image_obj = ExtraImage(image=item)
-            image_obj.save()
-            offer.extra_images.add(image_obj.id)
+        if main_image and uploaded_video and document:
+            offer = Offer(slug=slug, user=request.user, offer_title=offer_title, seo_title=seo_title, 
+                        image=main_image, offer_video=uploaded_video, document=document, 
+                        service=service, category=category, description=content)
+            offer.save()
+        else:
+            return redirect("create-offer")
+        
+        if len(uploaded_photo) > 0:
+            for item in uploaded_photo[:3]:
+                image_obj = ExtraImage(image=item)
+                image_obj.save()
+                offer.extra_images.add(image_obj.id)
+        else:
+            return redirect("create-offer")
 
         if basic_shortDesc is not None:
             dt_basic = DeliveryTime.objects.get(title=delivery_time_basic)
@@ -964,59 +1028,31 @@ def edit_offer(request, id):
             offer_video = request.FILES.get("offer_video")
             offer_document = request.FILES.get("offer_document")
 
-            # print(offer_title)
-            # print(seo_title)
-            # print(category)
-            # print(service)
-            # print(basic_shortDesc)
-            # print(standard_shortDesc)
-            # print(premium_shortDesc)
-            # print(delivery_time_basic)
-            # print(delivery_time_standard)
-            # print(delivery_time_premium)
-            # print(num_page_basic)
-            # print(num_page_standard)
-            # print(num_page_premium)
-            # print(basic_responsive)
-            # print(standard_responsive)
-            # print(premium_responsive)
-            # print(revision_basic)
-            # print(revision_standard)
-            # print(revision_premium)
-            # print(price_basic)
-            # print(price_standard)
-            # print(price_premium)
-            # print(content)
-            # print(offer_mainImage)
-            # print(offer_extraImages)
-            # print(offer_video)
-            # print(offer_document)
-
-            # print("Main image id:", main_image_id)
-            # print("OFFER VIDEO ID:", offer_video_id)
-            # print("OFFER DOC ID:", offer_document_id)
-            # print("EXTRA IMAGES:")
-            # print(extra_image_id1, extra_image_id2, extra_image_id3)
-
             # Deleting offer main image
             if main_image_id:
                 offer.image = None
+                offer.offer_status = "PAUSED"
 
             # Deleting an extra image from offer
             if extra_image_id1:
                 offer.extra_images.remove(int(offer_first_img.id))
+                offer.offer_status = "PAUSED"
             elif extra_image_id2:
                 offer.extra_images.remove(int(offer_second_img.id))
+                offer.offer_status = "PAUSED"
             elif extra_image_id3:
                 offer.extra_images.remove(int(offer_third_img.id))
+                offer.offer_status = "PAUSED"
 
             # Deleting offer video
             if offer_video_id:
                 offer.offer_video = None
+                offer.offer_status = "PAUSED"
 
             # Deleting offer document
             if offer_document_id:
                 offer.document = None
+                offer.offer_status = "PAUSED"
 
             service = Services.objects.get(title=service)
             category = Category.objects.get(title=category)
@@ -1030,6 +1066,12 @@ def edit_offer(request, id):
                 offer.offer_video = offer_video
             if offer_document:
                 offer.document = offer_document
+
+            print("OFFER EXTRA IMAGE LENGTH:", len(offer.extra_images.all()))
+
+            if offer.image != None and offer.offer_video != None and offer.document != None and len(offer.extra_images.all()) > 0:
+                offer.offer_status = "ACTIVE"
+
             offer.service = service
             offer.category = category
             offer.description = content
@@ -1146,14 +1188,19 @@ def seller_order_details(request, id):
     return render(request, 'sellingview/seller_order_details.html', args)
 
 
-def buyerGigFormView(request, pk):
+def buyerOfferFormView(request, pk):
+    seller_submit = None
     try:
         order = Checkout.objects.get(id=pk)
-        # print(f"{order=}")
-        seller = order.seller
-        # print(seller)
-        seller_submit = SellerSubmit.objects.get(checkout=order)
-        print(seller_submit.id)
+        print("BUYER ORDER", order)
+        seller_submit = SellerSubmit.objects.filter(checkout=order)
+
+        if seller_submit.exists():
+            seller_submit = seller_submit.last()
+            print("FOUND!")
+        else:
+            print("NOT FOUND!")
+        print("SELLER SUBMIT ID", seller_submit)
     except:
         messages.error(request, "Error while submitting!")
     else:
@@ -1165,8 +1212,23 @@ def buyerGigFormView(request, pk):
             cancel_amount = Checkout.objects.filter(is_cancel=True).filter(
                 seller=request.user
             ).count()
+
+            amount = order.total
             
-            if order_status == "complete" or l > 15:
+            print("AAAAAAAAAAAAAAA" + str(amount))
+            # Wallet add system web hooks
+            seller_wallet = order.seller.selleraccount.wallet
+            print(str(seller_wallet))
+            if order_status == "complete":
+                order.seller.selleraccount.wallet += amount
+                order.seller.selleraccount.save()
+                print("User Balance Now: " + str(order.seller.selleraccount.wallet))
+                
+                print("BALANCEEEEEEEEEEE" + str(order.seller.selleraccount.wallet))
+                order.save()
+                return redirect("buyer-dashboard")
+
+            elif order_status == "complete" or l > 15:
                 order.order_status = "COMPLETED"
                 order.is_complete = True
                 order.seller.selleraccount.level = 1
@@ -1231,7 +1293,7 @@ def buyerGigFormView(request, pk):
                 return redirect("buyer-dashboard")
             else:
                 messages.error(request, "Error while submitting!")
-
+    # seller_submit = SellerSubmit.objects.get(checkout=order)
     args = {
         "seller_submit": seller_submit,
         "order": order
@@ -1275,16 +1337,29 @@ def searchPageView(request):
     return render(request, "buyingview/search-box-Result.html", args)
 
 
-@login_required
+@login_required(login_url='user_login')
 def buyer_requestView(request):
+    submitted_offer, active_posts = [], None
+
     if request.user:
-        buyer_post_requests = BuyerPostRequest.objects.all().order_by("-id")
-        send_offer_requests = SendOfferModel.objects.all().order_by("-id")
+        active_post_requests = BuyerPostRequest.objects.filter(post_status="ACTIVE").order_by("-id")
+        send_offer_requests = SendOfferModel.objects.filter(seller=request.user).order_by("-id")
+
+        for x in active_post_requests:
+            for y in send_offer_requests:
+                print(x.postrequest_title, y.buyer_post_request)
+                if str(x.postrequest_title) == str(y.buyer_post_request):
+                    submitted_offer.append(x.postrequest_title)
+        
+        print("SUBMITTED OFFER:", submitted_offer)
+        if len(submitted_offer) > 0:
+            for item in submitted_offer:
+                active_post_requests = active_post_requests.exclude(postrequest_title=item)
     else:
         return redirect("user_login")
 
     args = {
-        "buyer_post_requests": buyer_post_requests,
+        "active_post_requests": active_post_requests,
         "send_offer_requests": send_offer_requests,
     }
     return render(request, "azimpart/buyer_request.html", args)
@@ -1312,12 +1387,87 @@ def account_detailsView(request, user_id):
 
 
 
+@login_required(login_url='user_login')
+def earnings(request, id):
+    seller_details = User.objects.get(pk=id)
 
-def earnings(request):
-    return render(request, 'azimpart/earnings.html')
-
-
+    orders_by_seller = Checkout.objects.filter(
+        Q(seller = request.user) & Q(is_complete=True)
+    ).order_by('-created_at')
     
+    withdraw_methods = WithDrawPaymentMethod.objects.all()
 
-def seondOfferView(request):
-    return render(request, "azimpart/send_offer.html")
+    balance = seller_details.selleraccount.wallet
+    if balance > 0 and request.method == 'POST':
+        amount = request.POST.get('amount')
+        method = request.POST.get('method')
+        user = seller_details
+
+        withdraw = WithDrawModel(
+            amount=amount,
+            user=user,
+            method=WithDrawPaymentMethod.objects.get(method_name=method)
+        )
+
+        withdraw.save()
+        return redirect("/")
+
+    # user = seller_details
+
+    args = {
+        'seller_details': seller_details,
+        'orders_by_seller': orders_by_seller,
+        'withdraw_methods': withdraw_methods,
+    }
+    return render(request, 'azimpart/earnings.html', args)
+
+
+
+def createSellerSendOfferRandomSlug(str_len):
+    rand_slug = ''.join(random.choices(string.ascii_uppercase + string.digits, k = str_len))
+    send_offer = SendOfferModel.objects.filter(send_offer_slug=rand_slug)
+    if send_offer.exists():
+        createSellerSendOfferRandomSlug(str_len)
+    return rand_slug
+    
+@login_required(login_url='user_login')
+def sellerSendOfferView(request, id):
+    delivery_time = DeliveryTime.objects.all()
+
+    try:
+        post_request = BuyerPostRequest.objects.get(id=id)
+    except BuyerPostRequest.DoesNotExist:
+        return redirect("BuyeRequestView")
+    else:
+        if request.method == "POST":
+            send_offer_slug = createSellerSendOfferRandomSlug(20)
+            buyer_post_request = post_request
+            buyer = post_request.user
+            seller = request.user
+            description = request.POST.get("description")
+            offer_price = request.POST.get("offer_price")
+            del_time = request.POST.get("delivery_time")
+
+            del_time = DeliveryTime.objects.get(title=del_time)
+
+            if description:
+                SendOfferModel.objects.create(send_offer_slug=send_offer_slug, buyer_post_request=buyer_post_request,
+                                            buyer=buyer, seller=seller, offer_letter=description,
+                                            offered_price=offer_price, delivery_time=del_time)
+            else:
+                messages.error(request, "Please submit all the field!")
+                return redirect(f"/send-offer/{id}/")
+            return redirect("BuyeRequestView")
+
+    args = {
+        "delivery_time": delivery_time,
+    }
+    return render(request, "azimpart/seller_send_offer.html", args)
+
+
+@login_required(login_url='user_login')
+def buyerAllPostsView(request):
+    return render(request, "azimpart/buyer_send_posts.html")
+
+
+

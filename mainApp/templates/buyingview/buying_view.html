@@ -4,7 +4,6 @@
 
 
 <!-- For buyer view  -->
-<script src="{% static 'js/main-buyer-view.js' %}" defer ></script>
 
 
 <section class="profile-action container">
@@ -236,6 +235,7 @@
 <div class="row">
 
 {% for offer in offers %}
+    {% if offer.offer_status != "PAUSED" %}
     <div class="col-md-6 col-lg-3 mb-4">
         <div class="card main-card-for-offer">
             
@@ -269,7 +269,8 @@
         </div>
             
             <div class="card-body">
-            <a href=""> 
+
+            <a href="{% url 'offer_details' offer.id %}"> 
                 <h5 class="card-title">{{ offer.offer_title }}</h5>  
             </a>
 
@@ -304,6 +305,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endfor %}
 
 
@@ -797,6 +799,7 @@
 
 
     {% for offer in pop_offers %}
+        {% if offer.offer_status != "PAUSED" %}
     <div class="col-md-6 col-lg-3 mb-4">
         <div class="card main-card-for-offer">
             
@@ -846,6 +849,7 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endfor %}
 
 

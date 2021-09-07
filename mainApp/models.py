@@ -49,10 +49,28 @@ class SellerAccount(models.Model):
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     level = models.IntegerField(default=0, blank=True)
+    wallet = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     # recently_viewed = models.BooleanField(default=False, null= True)
 
     def __str__(self):
         return str(self.user)
+
+class WithDrawPaymentMethod(models.Model):
+    method_name = models.CharField(max_length=220, unique=True)
+
+
+    def __str__(self):
+        return self.method_name
+
+
+class WithDrawModel(models.Model):
+    withdraw_date = models.DateTimeField(default=datetime.now)
+    method = models.ForeignKey(WithDrawPaymentMethod, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, null=True)
+
+    def __str__(self):
+        return str(self.id)
 
 
 class DummyUser(models.Model):
@@ -322,6 +340,7 @@ class Checkout(models.Model):
     updated_at = models.DateTimeField(auto_now_add=True)
     first_name = models.CharField(max_length=120)
     last_name = models.CharField(max_length=120)
+    address = models.TextField(null=True)
     package = models.ForeignKey(OfferManager, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=0)
     price = models.DecimalField(decimal_places=2, max_digits=10, default=0.00)
@@ -342,7 +361,7 @@ class Checkout(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return str(self.user)
+        return str(self.id)
 
     @staticmethod
     def get_total(total):
@@ -393,7 +412,7 @@ class BuyerPostRequest(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     postrequest_title = models.CharField(max_length=220, unique=True, null=True)
     description = models.TextField(null=True)
-    attachment = models.FileField(upload_to="images/")
+    attachment = models.FileField(upload_to="images/", blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     delivery_time = models.ForeignKey(DeliveryTime, on_delete=models.CASCADE)
     budget = models.IntegerField()

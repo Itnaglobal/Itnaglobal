@@ -42,21 +42,31 @@
                 <div class="first_column">
                     <h3 class="stay__inform">STAY INFORMED BY NEWSSLETTER</h3><br>
                     <p>*Subscribe to our newsteller to receive early discount offers. <br> updates and new products info.</p>
-                   <div class="colum-input">
+                   <!-- <div class="colum-input">
+                    <a href="#"><span class="iconify" data-icon="mdi:email-search" style="color: white;"></span></a>
                     <input type="email" name="search" placeholder="&nbsp; Your email here...." required>
-                   </div>
-                    <div class="colum-img">
-                        <a href="{% url 'buying_view' %}"><img src="{% static 'images/marketage.png' %}" alt="logo"></a>
+                   </div> -->
+                   <form>
+                    <div class="searchbar__with__icon">
+                        <a class="search___icon" href="#"><span class="iconify icon" data-icon="mdi:email-search" style="color: #000;"></span></a>
+                    <input type="text" name="search" placeholder="Search..">
                     </div>
+                  </form>
+                    
                 </div>
             </div>
      </div>
+     <div class="colum-img">
+        <a href="{% url 'buying_view' %}"><img src="{% static 'images/logo_white.png' %}" alt="logo"></a>
+    </div>
     <div class="footer-bottom">
-        <p><span>Marketage LTD</span> - All Rights Reserved</p>
+        <p><span>&copy; ITNA GlOBAL LTD</span> - 2021</p>
        <div class="payment-img">
-        <img src="{% static 'images/15.png' %}" alt="">
+        <img src="{% static 'images/footer_image_remove.png' %}" alt="">
        </div>
     </div>
+
+   
     </div>
 
 </body>

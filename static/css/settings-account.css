@@ -97,11 +97,11 @@ body{
     z-index: 10;
     background-color: #fff;
     font-weight: 600;
-    color: #1DBF73;
+    color: rgb(70, 121, 248);;
     font-size: 14px;
 }
 .input-style:focus{
-    border: 2px solid #1DBF73;
+    border: 2px solid rgb(70, 121, 248);;
 }
 
 .input-style:not(:placeholder-shown).input-style:not(:focus)+ .lable-for-top {
@@ -114,11 +114,10 @@ body{
 }
 
 
-
-
-
-
-
+.for-list-style li{
+    list-style-type: square !important;
+    margin-top: 10px;
+}
 
 
 .naming-details span{
@@ -193,6 +192,9 @@ body{
 @media scre!en and (max-width: 991px) {
     .naming-details input {
         width: 100%;
+    }
+    .input-style{
+        width: 100%
     }
 }
 @media screen and (max-width: 518px) {

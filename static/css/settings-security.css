@@ -46,7 +46,7 @@ body{
 }
 .naming-details p{
     display: inline-block;
-    width: 35%;
+    width: 40%;
     margin-bottom: 40px;
     font-size: 14px;
     font-weight: 500;
@@ -101,7 +101,8 @@ body{
     width: 35%;
 }
 .verification span{
-    width: 60%;
+    width: 22rem;
+    padding: 0px 10px;
 }
 .verification button{
   
@@ -128,8 +129,13 @@ body{
 }
 .sign{
     display: flex;
+    align-items: center;
 }
-.sign i{
+.sign-out-icon{
+    width: 10%;
+    font-size: 22px;
+}
+.sign span{
     width: 10%;
     align-self: center;
     justify-self: center;
@@ -176,7 +182,7 @@ body{
 
 @media screen and (max-width: 991px) {
     .naming-details input {
-        width: 63%;
+        width: 100%;
     }
 }
 @media screen and (max-width: 518px) {

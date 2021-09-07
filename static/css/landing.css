@@ -3,7 +3,9 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
-
+.marketage___title___firstbanner a{
+    color: #fff !important;
+}
 /* Hide mobile navbar */
 .mobile__navbar {
     display: none;

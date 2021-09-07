@@ -33,7 +33,7 @@
 <div id="header">
     <div class="container">
         <nav class="navbar">
-<!--           
+<!--          
             <div class="left-item">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row">
 
@@ -55,7 +55,7 @@
 
                 </ul>
             </div>
-  -->
+  
 
 
             <div class="right-item">
@@ -81,7 +81,10 @@
                     </li>
 
                 </ul>
-            </div>
+            </div>  -->
+
+
+
         </nav>
     </div>
 
@@ -125,17 +128,23 @@
 
 
             <!-- Slider with img (GIGs img slider) -->
+
             <div class="swiper-container gallery-top">
 
                 <div class="swiper-wrapper">
+
                     <div class="swiper-slide">
                         {% if offers.image %}
+
                         <div class="swiper-slide-container">
                             <img class="cover" src="{{ offers.image.url }}" alt="">
                         </div>
                         {% endif %}
+
                     </div>
                     {% for image in offers.extra_images.all %}
+
+
                     <div class="swiper-slide">
                         <div class="swiper-slide-container">
                             <img class="cover" src="/media/{{ image }}" alt="">
@@ -154,19 +163,24 @@
 
 
             <!-- Slider lower img (GIGs thumb img) -->
+
             <div class="swiper-container gallery-thumbs">
+
                 <div class="swiper-wrapper">
+
                     <div class="swiper-slide">
-                        <div class="swiper-slide-container">
-                            <img class="cover" src="{{ offers.image.url }}" alt="">
+                        <div class="swiper-slide-container-thumbs">
+                            <img class="" src="{{ offers.image.url }}" alt="">
                         </div>
                     </div>
                     {% for image in offers.extra_images.all %}
+
                     <div class="swiper-slide">
-                        <div class="swiper-slide-container for-thumbs-slider-size">
+                        <div class="swiper-slide-container-thumbs for-thumbs-slider-size">
                             <img class="resizeing" src="/media/{{ image }}" alt="">
                         </div>
                     </div>
+
                     {% endfor %}
                 </div>
             </div>
@@ -202,10 +216,10 @@
 
                 <div class="panels">
                     {% for manager in offers.offermanager_set.all %}
-                    {% if manager.package.id == 4 %}
+                    {% if manager.package.title == "Basic" %}
                     <div class="panel" id="one-panel">
                         <div class="panel-title">
-                            <h3>{{ manager.package }}</h3>
+                            <h3>{{ manager.package.title }}</h3>
                             <span>${{ manager.price }}</span>
                             <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum
                                 elit. Quaerat, error?</p>
@@ -249,10 +263,10 @@
 
                         <button class="pannel-service-button-lower">Compare Packages</button>
                     </div>
-                    {% elif manager.package.id == 5 %}
+                    {% elif manager.package.title == "Standard" %}
                     <div class="panel" id="two-panel">
                         <div class="panel-title">
-                            <h3>{{ manager.package }}</h3>
+                            <h3>{{ manager.package.title }}</h3>
                             <span>${{ manager.price }}</span>
                             <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum
                                 elit. Quaerat, error?</p>
@@ -313,10 +327,10 @@
 
                         <button class="pannel-service-button-lower">Compare Packages</button>
                     </div>
-                    {% elif manager.package.id == 6 %}
+                    {% elif manager.package.title == "Premium" %}
                     <div class="panel" id="three-panel">
                         <div class="panel-title">
-                            <h3>{{ manager.package }}</h3>
+                            <h3>{{ manager.package.title }}</h3>
                             <span>${{ manager.price }}</span>
                             <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum
                                 elit. Quaerat, error?</p>
@@ -443,7 +457,7 @@
                             <i class="fas fa-star"></i>
                         </div>
                         <br>
-                        <a class="btn btn-primary col-lg-6" href="{% url 'user_details' offers.user.id %}">Contact Me</a>
+                        <a class="btn btn-primary contact-btn col-lg-6" href="{% url 'user_details' offers.user.id %}">Contact Me</a>
                     </div>
                 </div>
             </div>

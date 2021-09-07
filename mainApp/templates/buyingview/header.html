@@ -32,9 +32,9 @@
   
     <link rel="shortcut icon" href="{% static 'images/market_fav.png' %}">
 
-    <!-- Iconify -->
-    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
 
+
+    <script src="{% static 'js/main-buyer-view.js' %}" defer ></script>
 
 </head>
 <body>
@@ -187,6 +187,8 @@
 </div>
     </div>
   </nav>
+
+
   <!-- Mobile navbar section ends -->
 
 
@@ -207,10 +209,13 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
 
+
             <form class="d-flex input-group collapse navbar-expand-md" id="navbarSupportedContent">
 
                     <i class="fas fa-search"></i>
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    
+                    <input class="form-control for-new-input" type="search" placeholder="Search" aria-label="Search">
+
                     <button class="btn btn-outline-success searchbar____button" type="submit">Search</button>
             </form>
 
@@ -261,3 +266,4 @@
 
 
 
+    

@@ -555,7 +555,8 @@ ol, ul {
 .for-price input{
     border: none;
     outline: none;
-    width: 95%;
+    width: 83%;
+    padding: 0px 8px;
 }
 .input-for-price{
     border: none;
@@ -843,11 +844,17 @@ ol, ul {
     white-space: nowrap;
     overflow: hidden;
 }
-
+@media screen (max-width: 1200px) {
+    
+    .package-table {
+        padding: 29px;
+    }
+}
 @media (max-width: 767px) {
     .document___name {
         width: 30vw;
     }
+
 }
 
 @media (max-width:991px){
@@ -860,10 +867,22 @@ ol, ul {
     .document__edit__icon{
         opacity: 1;
     }
+    .package-table {
+        padding: 26px;
+    }
+    .for-price input {
+        width: 78% !important;
+    }
 }
 
 @media (max-width: 767px) {
     .document___name {
         width: 50vw;
+    }
+    .package-table {
+        padding: 26px 0px;
+    }
+    .for-price input {
+        width: 73% !important;
     }
 }

@@ -6,8 +6,31 @@
     padding-left: 0.5rem !important;
 }
 
-.card{
+#div_id_post_status,
+#div_id_user {
+    display: none !important;
+}
+.button {
+    background-color: #428ad3 !important;
+    transition: .2s all ease-in-out !important;
+    color: #fff !important;
+    right: 0;
+    padding: 16px 20px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    line-height: 0;
+    outline: none !important;
+    transition: .3s;
+}
+#div_id_post_status button:hover {
+    background-color: #2e57a5 !important;
+}
+
+.hover-active{
     padding: 35px;
+    margin-top: 30px;
 }
 
 .invalid-feedback {
@@ -44,7 +67,7 @@
 }
 
 .category-input select{
-    width: 220px;
+    width: 100%;
     outline: none;
     padding: 8px;
     color: #707070;
@@ -103,7 +126,7 @@ div.like-checked:focus{
 }
 .for-hover-middle{
     overflow: hidden;
-    
+    padding: 35px;
 }
 .for-hover-middle:hover + .middle-div-on-hover {
     display: block;
@@ -142,9 +165,11 @@ div.like-checked:focus{
 .input input{
     padding: 10px;
     outline: none;
+    width: 100%;
 }
 .button-position{
-    text-align: right;
+    text-align: left;
+    width: 40%;
 }
 .button{
     background-color: #4693ff !important;
@@ -153,9 +178,9 @@ div.like-checked:focus{
     font-weight: 700;
     border-radius: 5px;
     border: none;
-    margin-top: 30px;
+    margin-top: 25px;
     transition: all .3s ;
-    width: 30%;
+    width: 100%;
     font-size: 18px;
 }
 .button:hover{
@@ -168,6 +193,19 @@ div.like-checked:focus{
 .lower-hover:hover + .lower-div-for-hover{
     display: block;
 }
+.lower-hover{
+    padding: 35px;
+}
+.textarea input{
+    width: 100%;
+    outline: none;
+    padding: 8px;
+    color: #707070;
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+
 
 /* for the distraction from sakib  */
 
@@ -270,14 +308,15 @@ div.like-checked:focus{
         display: none;
     }
     .category-input select {
-        width: 250px !important;
-        
+       
     }
 }
 @media screen and (max-width: 768px) {
     .category-input select {
         width: 200px !important;
-        
+    }
+    .button {
+        width: 100%;
     }
 }
 
@@ -288,6 +327,9 @@ div.like-checked:focus{
     .like-checked {
         width: 24%;
     }
+    .button{
+        font-size: 15px;
+    }
 }
 @media screen and (max-width: 480px) {
     .category-input select {  
@@ -295,6 +337,10 @@ div.like-checked:focus{
     }
     .like-checked {
         width: 24%;
+    }
+    .button-position {
+        text-align: left;
+        width: 100%;
     }
 }
 @media screen and (max-width: 428px) {

@@ -101,7 +101,7 @@
                   <option value="paypal">PAYPAL</option>
                   
   
-                  <!-- <option value="AAMMR PAY">AAMMRPAY</option> -->
+                  <option value="AAMMR PAY">AAMMRPAY</option>
   
   
                   <option value="sslcommerz">SSLCOMMERZ</option>
@@ -120,11 +120,15 @@
               <div class="for-button">
                  <a href=""><button class="paypal">PAYPAL</button></a>
                  <div id="paypal-button-container"></div>
-  
-                 <a href=""><button class="ammrpay">AAMAR PAY</button></a>
                 <form action="" method="POST">
                   {% csrf_token %}
-                    <button type="submit" class="sslcommerz">SSLCOMMERZ</button>
+                  <input hidden type="text" class="ammarpay" name="ammarpay" value="AMMARPAY">
+                  <button class="ammrpay" name="ammarpay">AAMAR PAY</button>
+                </form>
+                <form action="" method="POST">
+                  {% csrf_token %}
+                    <button type="submit" class="sslcommerz" name="sslcommerz">SSLCOMMERZ</button>
+                    <input hidden type="text" class="sslcommerz" name="sslcommerz" value="SSLCOMMERZ">
                 </form>
                  <a href=""><button class="paypal">PAYAPAL</button></a>
   
@@ -150,7 +154,7 @@
   <div id="paypal-button-container"></div>
 
     <!-- Include the PayPal JavaScript SDK -->
-    <script src="https://www.paypal.com/sdk/js?client-id=AaC_vcmMD3QAkUBk-hT9E1fsgLEjGrN40DXWGN5UIfxa-OnhkeoS4b8bsz6dyCfoRVWQeLZYsnD1MyLF&currency=USD"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=Ae8vrEP78u_BrmeiNY_nxLIt0QrUO6gf2Sq-yatJHbzZT8nYc7OWqpwuk3pRuoesyFlx2tALZp0ga_BH&currency=USD"></script>
 
     <script>
 

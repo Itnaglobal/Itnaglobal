@@ -8,14 +8,14 @@
 <div class="container">
     <div class="earnings___header">
         <p class="earning">Earnings</p>
-        <p>Total earnings : <span class="fw-bold">100000000 BDT</span></p>
+        <p>Total earnings : <span class="fw-bold badge bg-primary">{{ seller_details.selleraccount.wallet }} BDT</span></p>
     </div>
 
     <div class="net__income__status">
         <!-- net income part -->
         <div class="net__income">
             <p class="text-muted">Net Income</p>
-            <p class="amount">0 BDT</p>
+            <p class="amount">{{ seller_details.selleraccount.wallet }} BDT</p>
         </div>
 
         <!-- withdraw -->
@@ -51,10 +51,46 @@
 
     <div class="withdraw__option">
         <p class="mx-1">WITHDRAW</p>
-        <p class="mx-1"><a href="#">
+        <!-- <p class="mx-1"><a href="#">
             <span class="iconify" data-icon="bi:paypal" style="color: #428ad3;"></span> Paypal
-        </a></p>
-        <p class="ssl____commerz mx-1"><a href="#">SSLCOMMERZ</a></p>        
+        </a></p> -->
+        <p class="ssl____commerz mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><a href="#">Withdraw</a></p>    
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <form action="" method="POST">
+         {% csrf_token %}
+          <div class="text-center"><h4>Withdraw From Here</h4></div>
+          <div class="main__content">
+          <div class="dropdown payment___drop">
+            <label>Payment: </label>
+            <button class="btn btn-sm dropdown-toggle payment__option__button" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+               Select Here
+            </button>
+            <select class="form-select" aria-label="Default select example" name="method">
+              <option selected>Open this select menu</option>
+              {% for wm in withdraw_methods %}
+                <option value="{{ wm.method_name }}">{{ wm.method_name }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="mb-2 amount__input">
+            <label>Amount: </label>
+            <input type="number" class="form-control amount__input__style" placeholder="type amount here.." required>
+          </div>
+        </div>
+          <div class="payment__submit__button d-flex justify-content-center">
+            <button class="submit__button">Submit</button>
+          </div>
+         
+        </form>
+      </div>
+    </div>
+  </div>
+</div>    
     </div>
 
     <div class="withdraw__option">
@@ -111,17 +147,25 @@
         <table class="table table-hover bg-white">
           <thead>
             <tr>
+              <th scope="col" class="text-muted ps-3">DATE</th>
               <th scope="col" class="text-muted ps-3">BUYER NAME</th>
-              <th scope="col" class="text-muted">COMPLETED ORDERS</th>
+              <th scope="col" class="text-muted">ORDER STATUS</th>
               <th scope="col" class="text-muted">AMOUNT SPENT</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>asd</td>
-              <td>1</td>
-              <td>$15</td>
-            </tr>
+            {% if orders_by_seller %}
+              {% for order in orders_by_seller %}
+              <tr>
+                <td>{{ order.created_at }}</td>
+                <td>{{ order.user }}</td>
+                <td>{{ order.order_status }}</td>
+                <td>{{ order.total }} BDT.</td>
+              </tr>
+              {% endfor %}
+            {% else %}
+              <p>No Orders Found!</p>
+            {% endif %}
           </tbody>
         </table>
       </div>

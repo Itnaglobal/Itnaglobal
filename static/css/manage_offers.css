@@ -194,10 +194,6 @@
     font-size: 1rem;
   }
 
-  .manage__orderTable {
-    overflow-x: auto;
-  }
-
   .order__links > ul {
     grid-template-columns: 100%;
     border-bottom: none;

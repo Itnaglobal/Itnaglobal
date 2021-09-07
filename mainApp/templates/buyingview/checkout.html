@@ -15,6 +15,12 @@
     <link rel="shortcut icon" href="{% static 'images/market_fav.png' %}">
     <title>checkout</title>
   </head>
+  <!-- <style>
+
+    .address{
+      height: 100px;
+    }
+  </style> -->
   <body>
     <!-- for mobile view -->
     <div class="container mobileImg">
@@ -70,6 +76,12 @@
                             <div class="inputDetails toalinput">
                               <label for="text" class="fw-bold">Last Name</label><br><br>
                               <input required id="l_name" class="form-control  carddate" type="text" placeholder="Enter Last Name..." name="last_name">
+                            </div>
+                          </div>
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+                            <div class="inputDetails toalinput">
+                              <label for="text" class="fw-bold">Address</label><br><br>
+                              <textarea required id="address" class="form-control address" type="text" placeholder="Enter Address..." name="address"></textarea>
                             </div>
                           </div>
                           <div class="col-12 col-sm-12 col-md-12 col-lg-6">

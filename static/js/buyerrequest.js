@@ -1,7 +1,9 @@
-const viewMoreBtn = document.querySelector(".post__viewMoreBtn");
-const postDescriptionText = document.querySelector(".post__descriptionText");
+function clickedPost(post_id) {
+    document.getElementById(`view__more${post_id}`).style.display = "none";
+    document.getElementById(`post${post_id}`).style.all = "unset";
+}
 
-viewMoreBtn.addEventListener("click", () => {
-    viewMoreBtn.style.display = "none";
-    postDescriptionText.style.all = "unset";
-});
+function clickedSendOffer(post_id) {
+    document.getElementById(`view__more${post_id}`).style.display = "none";
+    document.getElementById(`post${post_id}`).style.all = "unset";
+}

@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: "poppins", sans-serif;
+  }
+
+  .manage__orderTable{
+    overflow: visible;
+  }
+
+  .table__status__dropdown{
+    border: 1px solid #777 !important;
+    outline: none !important;
+  }
+
+  @media (max-width: 767px){
+    .manage__orderTable{
+      overflow-x: auto;
+    }
+  }

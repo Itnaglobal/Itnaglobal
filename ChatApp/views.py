@@ -51,7 +51,7 @@ def user_details(request, id):
 def chatRoomView(request, id):
     chatroom = ChatRoom.objects.get(pk=id)
     values = Message.objects.filter(chatroom=id)
-    rooms = ChatRoom.objects.filter(recent_chat=True).filter(sellers=chatroom.sellers)
+    rooms = ChatRoom.objects.filter(Q(buyer=request.user) or Q(sellers=request.user))
     # print(values.sent_date)
     current_time = datetime.now(timezone.utc)
     print("Current Time: " + str(current_time))

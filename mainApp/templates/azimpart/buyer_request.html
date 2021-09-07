@@ -35,14 +35,11 @@
       <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="active-tab" data-bs-toggle="tab" data-bs-target="#active" type="button" role="tab" aria-controls="active" aria-selected="true">ACTIVE</button>
+              <button class="nav-link fw-bold" id="active-tab" data-bs-toggle="tab" data-bs-target="#active" type="button" role="tab" aria-controls="active" aria-selected="true">ACTIVE</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">SENT OFFERS</button>
+              <button class="nav-link fw-bold" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">SENT OFFERS</button>
             </li>
-            <li class="nav-item ms-auto">
-                0 offers left today
-              </li>
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="active" role="tabpanel" aria-labelledby="active-tab">
@@ -76,8 +73,8 @@
                                 </tr>                    
                             </thead>
                             <tbody>
-                                {% if buyer_post_requests|length > 0 %}
-                                    {% for post in buyer_post_requests %}
+                                {% if active_post_requests|length > 0 %}
+                                    {% for post in active_post_requests %}
                                     <tr>
                                         <td class="fw-bold text__details">
                                             {{ post.created_at }}
@@ -90,19 +87,20 @@
                                                 <h5 class="fw-bold">{{ post.postrequest_title }}</h5>
                                             </div>
                                             <div class="my-2">
-                                                <small class="text-muted post__descriptionText">
+                                                <small class="text-muted post__descriptionText" id="post{{ post.id }}">
                                                     {{ post.description }}
                                                 </small>
-                                                <div class="text-primary fw-bold mt-1 post__viewMoreBtn">View More</div>
+                                                <div class="text-primary fw-bold mt-1 post__viewMoreBtn" id="view__more{{ post.id }}" onclick="clickedPost({{post.id}})">View More</div>
                                             </div>
+                                            {% if post.attachment %}
                                             <div class="download__postRequests">
                                                 <a href="{{ post.attachment.url }}" download="{{ post.attachment.url }}">
                                                     {% for item in post.attachment.url|split:"/"|last %}
                                                         {{item}}
                                                     {% endfor %}
-                                                    {% comment %} {{ post.attachment.url }} {% endcomment %}
                                                 </a>
                                             </div>
+                                            {% endif %}
                                         </td>
                                         <td class="fw-bold text__details">
                                             {{ post.delivery_time }}
@@ -111,11 +109,11 @@
                                             BDT. {{ post.budget }}৳
                                         </td>
                                         <td class="post__last">
-                                            <form method="POST" class="d-flex justify-content-center post__requestsBtns">
-                                                {% csrf_token %}
-                                                <input type="hidden" value={{ post.id }} name="requested_post" />
-                                                <button type="submit">Send Offer</button>
-                                            </form>
+                                            <div class="post__requestsBtns">
+                                                <a href="{% url 'send-offer' post.id %}">
+                                                    <button>Send Offer</button>
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                     {% endfor %}
@@ -143,7 +141,6 @@
                                 <th scope="col" class="text-muted">POST TITLE</th>
                                 <th scope="col" class="text-muted">DURATION</th>
                                 <th scope="col" class="text-muted">BUDGET</th>
-                                <th scope="col"></th>
                             </tr>                  
                         </thead>
                         <tbody>
@@ -161,25 +158,17 @@
                                                 <h5 class="fw-bold">{{ post.buyer_post_request }}</h5>
                                             </div>
                                             <div class="my-2">
-                                                <small class="text-muted post__descriptionText">
-                                                    {{ post.seller }}
+                                                <small class="text-muted post__descriptionText" id="post{{ post.id }}">
+                                                    {{ post.offer_letter|safe }}
                                                 </small>
-                                                <div class="text-primary fw-bold mt-1 post__viewMoreBtn">View More</div>
-                                            </div>
-                                            <div class="download__postRequests">
-                                                <a href="{{ post.attachment.url }}" download="{{ post.attachment.url }}">
-                                                    {% for item in post.attachment.url|split:"/"|last %}
-                                                        {{item}}
-                                                    {% endfor %}
-                                                    {% comment %} {{ post.attachment.url }} {% endcomment %}
-                                                </a>
+                                                <div class="text-primary fw-bold mt-1 post__viewMoreBtn" id="view__more{{ post.id }}" onclick="clickedSendOffer({{post.id}})">View More</div>
                                             </div>
                                         </td>
                                         <td class="fw-bold text__details">
                                             {{ post.delivery_time }}
                                         </td>
                                         <td class="fw-bold text__details">
-                                            BDT. {{ post.budget }}৳
+                                            BDT. {{ post.offered_price }}৳
                                         </td>
                                     </tr>
                                     {% endfor %}

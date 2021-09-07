@@ -118,6 +118,42 @@
 .transaction___table table td:hover{
     background-color: #f5f5f5;
 }
+
+/* paypent modal */
+.payment__option__button{
+    border: 1px solid #ced4da !important;
+    outline: none !important;
+    margin-left: 9px;
+}
+.submit__button{
+    border: 1px solid #428ad3 !important;
+    background-color: #428ad3;
+    color: #fff;
+    padding: 6px 42px;
+    border-radius:4px;
+    outline: none;
+    transition: .2s ease-in-out;
+}
+.submit__button:hover{
+    background-color: #2e57a5;
+}
+.main__content{
+    margin-top: 22px;
+}
+.amount__input{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+}
+.payment___drop, .amount__input{
+    padding: 10px;
+}
+.amount__input__style{
+    margin-left: 19px;
+}
+
+
+
 @media (max-width: 990px){
     .net__income__status{
         display: grid;

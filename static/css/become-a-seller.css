@@ -45,13 +45,14 @@
     border: none;
     font-size: 22px;
     padding: 8px 15px;
-    background-color: #33da8c;
+    background-color: #428ad3;
     color: #fff;
     font-weight: 500;
     border-radius: 5px;
+    transition: .2s ease-in-out;
 }
 .become-a-seller-title button:hover{
-    background-color: #3FCA89;
+    background-color: #2e57a5;
 }
 .title-details{
     position: absolute;
@@ -150,16 +151,16 @@
 }
 .button-last-card button{
     border: none;
-    background-color: #33da8c;
+    background-color: #428ad3;
     padding: 8px 15px;
     font-size: 15px;
     color: #fff;
     font-weight: 500;
     border-radius: 5px;
-    transition: all .3s;
+    transition:.2s ease-in-out;
 }
 .button-last-card button:hover{
-    background-color: #3FCA89;
+    background-color: #2e57a5;
 
 }
 /* freelancer service card end*/
@@ -272,13 +273,13 @@
 }
 .lower-button button{
     border: none;
-    background-color: #33da8c;
+    background-color: #428ad3;
     padding: 8px 15px;
     font-size: 15px;
     color: #fff;
     font-weight: 500;
     border-radius: 5px;
-    transition: all .3s;
+    transition:.2s ease-in-out; 
 }
 .color {
     color: #4e45d8 !important;
