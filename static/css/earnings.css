@@ -148,10 +148,15 @@
 .payment___drop, .amount__input{
     padding: 10px;
 }
+.payment___drop{
+    display: flex;
+}
 .amount__input__style{
     margin-left: 19px;
 }
-
+.amount__input__style1{
+    margin-left: 13px;
+}
 
 
 @media (max-width: 990px){

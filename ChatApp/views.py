@@ -5,6 +5,7 @@ from django.db.models import Q
 from datetime import datetime
 from datetime import time
 from django.utils import timezone
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -33,16 +34,19 @@ def user_details(request, id):
         buyer = request.user
         sellers = user_details.username
         
-        sellers = User.objects.get(username=sellers)
+        try:
+            sellers = User.objects.get(username=sellers)
+            
+            room_name = request.POST.get('room_name')
+        except:
+            return redirect("/")
+        else:
+            room = ChatRoom(
+                buyer=buyer, sellers=sellers, room_name=room_name
+            )
+            room.save()
         
-        room_name = request.POST.get('room_name')
-        
-        room = ChatRoom(
-            buyer=buyer, sellers=sellers, room_name=room_name
-        )
-        room.save()
-        
-        return redirect(f"/chat/chatroom/{room.id}")
+            return redirect(f"/chat/chatroom/{room.id}")
         
     return render(request, 'Test/user_details.html', args)
 
@@ -65,14 +69,35 @@ def chatRoomView(request, id):
     if request.method == 'POST':
         sender = request.user
         msg = request.POST.get('msg')
+        message = None
         sent = Message(sender=sender, msg=msg, chatroom=chatroom)
 
         chatroom.recent_chat = True
         chatroom.save()
         sent.save()
 
+        print("IMAGE:", str(sender.selleraccount.profile_picture))
+        print("USER:", sender)
+        print("SENT:", sent.created_at)
+        print("MESSAGE:", msg)
+
+        if request.is_ajax():
+            profile_image = str(sender.selleraccount.profile_picture)
+
+            message = {
+                "profile_image": profile_image,
+                "message": msg,
+                "username": sender.username,
+                "send_at": str(sent.created_at)
+            }
+
+            print("MESAGE", message)
+
+            data = {
+                "message_info": message
+            }
+            return JsonResponse(data)
         return redirect(f"/chat/chatroom/{chatroom.id}")
-    
     args = {
         'chatroom': chatroom,
         'values': values,

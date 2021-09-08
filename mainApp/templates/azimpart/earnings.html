@@ -67,10 +67,7 @@
           <div class="main__content">
           <div class="dropdown payment___drop">
             <label>Payment: </label>
-            <button class="btn btn-sm dropdown-toggle payment__option__button" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-               Select Here
-            </button>
-            <select class="form-select" aria-label="Default select example" name="method">
+            <select class="form-select amount__input__style1" aria-label="Default select example" name="method">
               <option selected>Open this select menu</option>
               {% for wm in withdraw_methods %}
                 <option value="{{ wm.method_name }}">{{ wm.method_name }}</option>
@@ -79,7 +76,7 @@
           </div>
           <div class="mb-2 amount__input">
             <label>Amount: </label>
-            <input type="number" class="form-control amount__input__style" placeholder="type amount here.." required>
+            <input type="number" name="amount" class="form-control amount__input__style" placeholder="type amount here.." required>
           </div>
         </div>
           <div class="payment__submit__button d-flex justify-content-center">

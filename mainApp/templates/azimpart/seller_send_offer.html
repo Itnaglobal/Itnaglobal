@@ -1,3 +1,4 @@
+
 {% extends 'wasekPart/base.html' %} {% load static %} {% block content %}
 <!-- ckeditor -->
 <script src="https://cdn.ckeditor.com/ckeditor5/29.2.0/classic/ckeditor.js"></script>
@@ -7,20 +8,22 @@
 <div class="seller___send___offer">
   <div class="container">
     <div class="row">
-      <div class="col-lg-4"></div>
-      <div class="col-lg-4">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
         <form method="POST">
           {% csrf_token %}
           <div class="send__offer__title">
             <h4 class="text-center seller__title fw-bold">
               Seller Offer Description
             </h4>
+
             {% if messages %}
             {% for message in messages %}
             <small class="text-danger p-3 text-center d-block w-100">{{ message }}</small>
             {% endfor %}
             {% endif %}
             <div class="send__offer__form">
+              <p class="sending__offer__title"><span class="fw-bold fs-6">Sending Offer On:</span> offer title will be there.....</p>
               <div class="form-group offer___form">
                 <label for="exampleFormControlTextarea1"
                   >Offer Description:
@@ -79,12 +82,17 @@
           </div>
         </form>
       </div>
-      <div class="col-lg-4"></div>
+      <div class="col-lg-2"></div>
     </div>
   </div>
 </div>
 
 <script>
+
+const nav_header = document.querySelector(".nav__header");
+
+nav_header.classList.add("account__header");
+
   ClassicEditor.create(document.querySelector("#editor")).catch((error) => {
     console.error(error);
   });

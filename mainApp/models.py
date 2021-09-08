@@ -68,9 +68,12 @@ class WithDrawModel(models.Model):
     method = models.ForeignKey(WithDrawPaymentMethod, on_delete=models.CASCADE, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, null=True)
+    on_review = models.BooleanField(default=True, null=True)
+    is_approved = models.BooleanField(default=False, null=True)
+
 
     def __str__(self):
-        return str(self.id)
+        return str(self.user)
 
 
 class DummyUser(models.Model):
@@ -407,7 +410,6 @@ class BuyerPostRequest(models.Model):
     POST_STATUS = (
         ("ACTIVE", "ACTIVE"),
         ("RESERVED", "RESERVED"),
-        ("DELETE", "DELETE")
     )
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     postrequest_title = models.CharField(max_length=220, unique=True, null=True)
@@ -437,3 +439,14 @@ class SendOfferModel(models.Model):
 
     def __str__(self):
         return self.send_offer_slug
+
+
+class ReviewSellerModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name="review_seller")
+    star = models.IntegerField(default=0)
+    review_ield = models.TextField()
+
+
+    def __str__(self):
+        return str(self.id)

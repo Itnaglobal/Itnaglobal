@@ -53,22 +53,6 @@ body{
    height: 33px;
   }
 
-/* 
-.btn {
-   height: 33px;
-   padding: 20px 20px ;
-   background-color: #428ad3;
-   color: #fff;
-   font-weight: 700;
-   font-size: 14px;
-   border: none;
-   line-height: 0;
-   transition: .3s;
-  }
-.btn:hover{
-   background-color: #2e57a5 !important;
-   color: #fff !important;
-} */
 
 
 .form-control:focus {
@@ -221,16 +205,16 @@ body{
 }
 .card-detail p{
     font-size: 18px;
-    margin: 30px 0px;
+    margin: 27px 0px;
     color: #000;
     margin-bottom: 30px;
 }
 .profile-button{
-    width: 80%;
+    width: 75%;
     background-color: transparent;
     border: 1px solid #428ad3 !important;
     color: #428ad3 !important;
-    padding: 18px;
+    padding: 7px;
     margin-bottom: 32px;
 }
 .with-bg{
@@ -567,6 +551,7 @@ Continue browsing for every card
 
 .innr-card-box{
     display: flex;
+    align-items: center;
     flex-direction: row;
     margin: 20px 40px 0px 40px;
     padding: 25px;

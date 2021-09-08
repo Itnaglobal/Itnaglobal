@@ -12,7 +12,7 @@ urlpatterns = [
     path("all-users/", views.allUsersView, name="all-users"),
     path("all-orders/", views.allOrdersView, name="all-orders"),
     path("admin-login/", views.adminLoginView, name="admin-login"),
-
+    path("transaction/", views.transactionView, name="TransactionView"),
 
     # path(),
     

@@ -58,8 +58,8 @@
             </div>
             <hr>
             <div class="earned">
-              <p class="earnMonth">Earned in july</p>
-              <p class="dollar"><strong>$100000</strong></p>
+              <p class="earnMonth">Total Earned</p>
+              <p class="dollar badge bg-primary"><strong>{{ user.selleraccount.wallet }} BDT.</strong></p>
             </div>
           </div><br>
 
@@ -74,19 +74,19 @@
             </div>
             <hr>
             {% comment %} all users chat inbox {% endcomment %}
-            {% for user in users %}
-            <a href="">
+            {% for ct in chatrooms %}
+            <a href="{% url 'chatroom' ct.id %}">
             <div class="inbox-details">
               <div class="inbox-user-detail">
               
-                <img src="{{ user.extendeduser.profile_picture.url }}" alt="goku" class="rounded-circle">
+                <img src="{{ ct.buyer.selleraccount.profile_picture.url }}" alt="goku" class="rounded-circle">
                 <div>
-                  <p class="fw-bold" style="font-size: 13px;">{{ user }}</p>
-                  <p style="font-size: 13px;">Me: Lorem Ipsum Dolor</p>
+                  <p class="fw-bold" style="font-size: 13px;">{{ ct.user }}</p>
+                  <p style="font-size: 13px;">Me: {{ ct.room_name }}</p>
                 </div>
               </div>
               <div class="user-active-time">
-                <p style="font-size: 13px;">Just Now</p>
+                <p style="font-size: 13px;">{{ ct.user.last_login }}</p>
               </div>
             </div>
             <hr>

@@ -10,8 +10,11 @@ class ChatRoom(models.Model):
     buyer = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     sellers = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="sellers")
     recent_chat = models.BooleanField(default=False, null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+
     def __str__(self):
-        return self.room_name
+        return str(self.id)
     
 
 
@@ -20,6 +23,8 @@ class Message(models.Model):
     chatroom = models.ForeignKey(ChatRoom, on_delete=models.CASCADE, null=True)
     sender = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     msg = models.TextField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
     
     
     def __str__(self):

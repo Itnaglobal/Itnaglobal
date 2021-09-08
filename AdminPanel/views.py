@@ -80,3 +80,8 @@ def allOrdersView(request):
 
 def adminLoginView(request):
     return render(request, "admin_login.html")
+
+
+
+def transactionView(request):
+    return render(request, "transactions.html")

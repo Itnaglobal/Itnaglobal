@@ -1,13 +1,6 @@
 {% load static %}
 {% load custom_filter %}
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
@@ -18,10 +11,11 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'css/services.css' %}">
+    
 
     <title>Creative Logo Design</title>
-  </head>
+
+  <link rel="stylesheet" href="{% static 'css/services.css' %}">
   <body>
       <div class="wasek___header">
         {% include '../wasekPart/header.html' %}
@@ -29,11 +23,11 @@
 
       <!-- arko header code -->
       
-    <header id="home-page">
+      <header id="home-page">
         <nav class="navbar navbar-expand-lg navbar-light nav-bar-hide-on-mob">
             <div class="container">
 
-                <a class="navbar-brand" href="{% url 'buying_view' %}">
+                <a class="navbar-brand nav-logo" href="{% url 'buying_view' %}">
                     <span>
                         <img src="{% static 'images/marketage.png' %}" alt="" style="height: 50px; width:150px;">
                     </span>
@@ -45,37 +39,31 @@
 
             <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
 
+
             <form class="d-flex input-group collapse navbar-expand-md" id="navbarSupportedContent">
 
                     <i class="fas fa-search"></i>
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                    
+                    <input class="form-control for-new-input" type="search" placeholder="Search" aria-label="Search">
+
                     <button class="btn btn-outline-success searchbar____button" type="submit">Search</button>
             </form>
 
                 <ul class="navbar-nav ms-auto mb-lg-0">
 
                   <li class="nav-item">
-                    <a class="nav-link active me-4" aria-current="page" href="#">Fiver Pro</a>
+                    <a class="nav-link link-page active" aria-current="page" href="#">MARKETAGE Pro</a> 
                   </li>
-
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="#">Explore</a>
-                  </li>
-
+                  
                   <li class="nav-item dropdown">
-                    <a class="nav-link me-4" href="#">Messages</a>
+                    <a class="nav-link link-page" href="{% url 'BuyerChat' %}">Messages</a>
                   </li>
-
-                  <li class="nav-item">
-                    <a class="nav-link me-4" href="#">Lists</a>
-                  </li>
-
+                 
                   <li class="nav-item dropdown">
-                    <a class="nav-link me-4" href="{% url 'BuyerOrders' %}">Orders</a>
+                    <a class="nav-link link-page" href="{% url 'BuyerOrders' %}">Orders</a>
                   </li>
-
                   <li class="nav-item dropdown">
-                    <a class="nav-link " href="{% url 'seller_dashboard' %}">Switch to Selling</a>
+                    <a class="nav-link link-page" href="{% url 'seller_dashboard' %}">Switch to Selling</a>
                   </li>
 
 
@@ -105,6 +93,7 @@
         <div class="dag container-fluid"></div>
     </header>
 
+
         
     <br>
 
@@ -115,7 +104,7 @@
 
     <div class="container">
       <div class="sectionSelection">
-        <p><a href="#">Fivourr <i class="fas fa-chevron-right"></i> GRAPHICS & DESIGN  <i class="fas fa-chevron-right"></i></a></p>
+        <p><a href="#">Marketage <i class="fas fa-chevron-right"></i> GRAPHICS & DESIGN  <i class="fas fa-chevron-right"></i></a></p>
       </div>
     </div>
     
@@ -135,7 +124,7 @@
             <button class="FKiIhUG _1x76oPA H69bvrM co-white btn-play without-border bg-co-green-700">
                 <span class="_1AB8XqH play-icon">
                     <i class="fas fa-play"></i>
-                </span>"How Fiverr Works"
+                </span>"How Marketage Works"
             </button>
         </div>
     </div>
@@ -305,545 +294,150 @@
     </div>
 
 
-    <!-- gigs for mobile view -->
+    <!-- main gigs section start (arko buying view card start) -->
+    <div class='container'>
 
-    <div class="container">
-      <div class="gigsMobileView">
+    <div class="row">
+               
+        
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card main-card-for-offer">
+            
+            
+        <div class= "for-card-inner-img-slider">
+            <a href="">
+                <div class="img-on-card-body">
+                    <img src= "{% static 'images/bg-5.jpg' %}" >                    
+                </div>
+            </a>
 
-        <div class="mob-card">
-            <div class="mob-card-img">
-                <img src="images/logogigs1.png" alt="">
-            </div>
-    
-            <div class="mob-card-title">
-                <h4>The title of the gigs with some of word</h4>
-            <div class="seller-status">
-                <span><i class="fas fa-star"></i></span>
-                <span>5.0</i></span>
-                <span>(12)</i></span>
-            </div>
-            </div>
+            <a href="">
+                <div class="img-on-card-body">
+                    <img src= "{% static 'images/bg-2.jpg' %}" >                    
+                </div>
+            </a>
+
+            <a href="">
+                <div class="img-on-card-body">
+                    <img src= "{% static 'images/bg-6.jpg' %}" >                    
+                </div>
+            </a>
+               
         </div>
-    
-    
-        <div class="mob-card-footer">
-            <img src="images/logogigs1.png" alt="">
-            <span >Buyer name</span>
-    
-            <p>STARTING AT</p>
-            <strong>$120</strong>
-        </div>
-        <div class="liner"></div>
-        </div>
-        
-        <div class="gigsMobileView">
-
-          <div class="mob-card">
-              <div class="mob-card-img">
-                  <img src="images/logogigs1.png" alt="">
-              </div>
-      
-              <div class="mob-card-title">
-                  <h4>The title of the gigs with some of word</h4>
-              <div class="seller-status">
-                  <span><i class="fas fa-star"></i></span>
-                  <span>5.0</i></span>
-                  <span>(12)</i></span>
-              </div>
-      
-              </div>
-          </div>
-      
-      
-          <div class="mob-card-footer">
-              <img src="images/logogigs1.png" alt="">
-              <span >Buyer name</span>
-      
-              <p>STARTING AT</p>
-              <strong>$120</strong>
-          </div>
-      
-      
-          <div class="liner"></div>
-          </div>
-          <div class="gigsMobileView">
-
-            <div class="mob-card">
-                <div class="mob-card-img">
-                    <img src="images/logogigs1.png" alt="">
-                </div>
-        
-                <div class="mob-card-title">
-                    <h4>The title of the gigs with some of word</h4>
-                <div class="seller-status">
-                    <span><i class="fas fa-star"></i></span>
-                    <span>5.0</i></span>
-                    <span>(12)</i></span>
-                </div>
-        
-                </div>
-            </div>
-        
-        
-            <div class="mob-card-footer">
-                <img src="images/logogigs1.png" alt="">
-                <span >Buyer name</span>
-        
-                <p>STARTING AT</p>
-                <strong>$120</strong>
-            </div>
-        
-        
-            <div class="liner"></div>
-            </div>
-            <div class="gigsMobileView">
-
-              <div class="mob-card">
-                  <div class="mob-card-img">
-                      <img src="images/logogigs1.png" alt="">
-                  </div>
-          
-                  <div class="mob-card-title">
-                      <h4>The title of the gigs with some of word</h4>
-                  <div class="seller-status">
-                      <span><i class="fas fa-star"></i></span>
-                      <span>5.0</i></span>
-                      <span>(12)</i></span>
-                  </div>
-          
-                  </div>
-              </div>
-          
-          
-              <div class="mob-card-footer">
-                  <img src="images/logogigs1.png" alt="">
-                  <span >Buyer name</span>
-          
-                  <p>STARTING AT</p>
-                  <strong>$120</strong>
-              </div>
-          
-          
-              <div class="liner"></div>
-              </div>
-              <div class="gigsMobileView">
-
-                <div class="mob-card">
-                    <div class="mob-card-img">
-                        <img src="images/logogigs1.png" alt="">
-                    </div>
             
-                    <div class="mob-card-title">
-                        <h4>The title of the gigs with some of word</h4>
-                    <div class="seller-status">
-                        <span><i class="fas fa-star"></i></span>
-                        <span>5.0</i></span>
-                        <span>(12)</i></span>
-                    </div>
-            
-                    </div>
-                </div>
-            
-            
-                <div class="mob-card-footer">
-                    <img src="images/logogigs1.png" alt="">
-                    <span >Buyer name</span>
-            
-                    <p>STARTING AT</p>
-                    <strong>$120</strong>
-                </div>
-            
-            
-                <div class="liner"></div>
-                </div>
-                <div class="gigsMobileView">
+           
 
-                  <div class="mob-card">
-                      <div class="mob-card-img">
-                          <img src="images/logogigs1.png" alt="">
-                      </div>
-              
-                      <div class="mob-card-title">
-                          <h4>The title of the gigs with some of word</h4>
-                      <div class="seller-status">
-                          <span><i class="fas fa-star"></i></span>
-                          <span>5.0</i></span>
-                          <span>(12)</i></span>
-                      </div>
-              
-                      </div>
-                  </div>
-              
-              
-                  <div class="mob-card-footer">
-                      <img src="images/logogigs1.png" alt="">
-                      <span >Buyer name</span>
-              
-                      <p>STARTING AT</p>
-                      <strong>$120</strong>
-                  </div>
-              
-              
-                  <div class="liner"></div>
-                  </div>
-                  <div class="gigsMobileView">
 
-                    <div class="mob-card">
-                        <div class="mob-card-img">
-                            <img src="images/logogigs1.png" alt="">
-                        </div>
-                
-                        <div class="mob-card-title">
-                            <h4>The title of the gigs with some of word</h4>
-                        <div class="seller-status">
-                            <span><i class="fas fa-star"></i></span>
-                            <span>5.0</i></span>
-                            <span>(12)</i></span>
-                        </div>
-                
-                        </div>
-                    </div>
-                
-                
-                    <div class="mob-card-footer">
-                        <img src="images/logogigs1.png" alt="">
-                        <span >Buyer name</span>
-                
-                        <p>STARTING AT</p>
-                        <strong>$120</strong>
-                    </div>
-                
-                
-                    <div class="liner"></div>
-                    </div>
-                    <div class="gigsMobileView">
-
-                      <div class="mob-card">
-                          <div class="mob-card-img">
-                              <img src="images/logogigs1.png" alt="">
-                          </div>
-                  
-                          <div class="mob-card-title">
-                              <h4>The title of the gigs with some of word</h4>
-                          <div class="seller-status">
-                              <span><i class="fas fa-star"></i></span>
-                              <span>5.0</i></span>
-                              <span>(12)</i></span>
-                          </div>
-                  
-                          </div>
-                      </div>
-                  
-                  
-                      <div class="mob-card-footer">
-                          <img src="images/logogigs1.png" alt="">
-                          <span >Buyer name</span>
-                  
-                          <p>STARTING AT</p>
-                          <strong>$120</strong>
-                      </div>
-                  
-                  
-                      <div class="liner"></div>
-                      </div>
-                      <div class="gigsMobileView">
-
-                        <div class="mob-card">
-                            <div class="mob-card-img">
-                                <img src="images/logogigs1.png" alt="">
-                            </div>
-                    
-                            <div class="mob-card-title">
-                                <h4>The title of the gigs with some of word</h4>
-                            <div class="seller-status">
-                                <span><i class="fas fa-star"></i></span>
-                                <span>5.0</i></span>
-                                <span>(12)</i></span>
-                            </div>
-                    
-                            </div>
-                        </div>
-                    
-                    
-                        <div class="mob-card-footer">
-                            <img src="images/logogigs1.png" alt="">
-                            <span >Buyer name</span>
-                    
-                            <p>STARTING AT</p>
-                            <strong>$120</strong>
-                        </div>
-                    
-                    
-                        <div class="liner"></div>
-                        </div>
-                        <div class="gigsMobileView">
-
-                          <div class="mob-card">
-                              <div class="mob-card-img">
-                                  <img src="images/logogigs1.png" alt="">
-                              </div>
-                      
-                              <div class="mob-card-title">
-                                  <h4>The title of the gigs with some of word</h4>
-                              <div class="seller-status">
-                                  <span><i class="fas fa-star"></i></span>
-                                  <span>5.0</i></span>
-                                  <span>(12)</i></span>
-                              </div>
-                      
-                              </div>
-                          </div>
-                      
-                      
-                          <div class="mob-card-footer">
-                              <img src="images/logogigs1.png" alt="">
-                              <span >Buyer name</span>
-                      
-                              <p>STARTING AT</p>
-                              <strong>$120</strong>
-                          </div>
-                      
-                      
-                          <div class="liner"></div>
-                          </div>
-                          <div class="gigsMobileView">
-
-                            <div class="mob-card">
-                                <div class="mob-card-img">
-                                    <img src="images/logogigs1.png" alt="">
-                                </div>
-                        
-                                <div class="mob-card-title">
-                                    <h4>The title of the gigs with some of word</h4>
-                                <div class="seller-status">
-                                    <span><i class="fas fa-star"></i></span>
-                                    <span>5.0</i></span>
-                                    <span>(12)</i></span>
-                                </div>
-                        
-                                </div>
-                            </div>
-                        
-                        
-                            <div class="mob-card-footer">
-                                <img src="images/logogigs1.png" alt="">
-                                <span >Buyer name</span>
-                        
-                                <p>STARTING AT</p>
-                                <strong>$120</strong>
-                            </div>
-                        
-                        
-                            <div class="liner"></div>
-                            </div>
-
-    </div>
-
-    <!-- gigs -->
-
-    <div class="container">
-      <div class="row gigs">
-
-        <div class="col-12 col-sm-12 col-md-4 col-lg-3 resizing">    
-          <div class="card">
-                  <img src="images/logogigs1.png" class="card-img-top" alt="...">
-              <div class="card-body">
-                  <h5 class="card-title">The name of seller</h5>
-                  
-                  <p class="card-text">Some quick example text to build on the card title.</p>
-                  
-                  <div class="level">
-                      <i class="fas fa-star"></i>
-                      <strong>4.5</strong>
-    
-                      <span class="for-right">fiver level</span>
-                  </div>
-              </div>  
-              <div class="card-footer">
-                  <i class="fas fa-heart"></i>
-                  <span class="for-right">Starting Start</span>
-              </div>
-          </div>
-      </div> 
-
-      <div class="col-12 col-sm-12 col-md-4 col-lg-3 resizing">    
-        <div class="card">
-                <img src="images/logogigs1.png" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">The name of seller</h5>
-                
-                <p class="card-text">Some quick example text to build on the card title.</p>
-                
-                <div class="level">
-                    <i class="fas fa-star"></i>
-                    <strong>4.5</strong>
-  
-                    <span class="for-right">fiver level</span>
+            <a href=""> 
+                <h5 class="card-title">I will convert psd to html responsive website</h5>  
+            </a>
+
+            <div class="category-tag">
+
+                <p>Web Design</p>
+
+                <div class="category-for-right">                  
+                    <div class= "click-on-offer">
+                        <p class="badge bg-dark">2,584</p>
+                        <span class="badge bg-dark">Clicks</span>                           
+                    </div>
+
                 </div>
-            </div>  
-            <div class="card-footer">
-                <i class="fas fa-heart"></i>
-                <span class="for-right">Starting Start</span>
             </div>
-        </div>
-    </div> 
 
-    <div class="col-12 col-sm-12 col-md-4 col-lg-3 resizing">    
-      <div class="card">
-              <img src="images/logogigs1.png" class="card-img-top" alt="...">
-          <div class="card-body">
-              <h5 class="card-title">The name of seller</h5>
-              
-              <p class="card-text">Some quick example text to build on the card title.</p>
-              
-              <div class="level">
-                  <i class="fas fa-star"></i>
-                  <strong>4.5</strong>
-
-                  <span class="for-right">fiver level</span>
-              </div>
-          </div>  
-          <div class="card-footer">
-              <i class="fas fa-heart"></i>
-              <span class="for-right">Starting Start</span>
-          </div>
-      </div>
-  </div> 
-
-  <div class="col-12 col-sm-12 col-md-4 col-lg-3 resizing">    
-    <div class="card">
-            <img src="images/logogigs1.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">The name of seller</h5>
-            
-            <p class="card-text">Some quick example text to build on the card title.</p>
-            
-            <div class="level">
-                <i class="fas fa-star"></i>
-                <strong>4.5</strong>
-
-                <span class="for-right">fiver level</span>
+            <div class= "for-seller-level-star">
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star black-star"></i>
             </div>
-        </div>  
-        <div class="card-footer">
-            <i class="fas fa-heart"></i>
-            <span class="for-right">Starting Start</span>
+            <hr>
+
+            <div class="offer-price">
+                <p>Starting At</p>
+                <p>$ <span>15748</span> </p>
+            </div>
+            
+            </div>
         </div>
     </div>
-</div> 
 
-<div class="col-12 col-sm-12 col-md-4 col-lg-3 resizing">    
-  <div class="card">
-          <img src="images/logogigs1.png" class="card-img-top" alt="...">
-      <div class="card-body">
-          <h5 class="card-title">The name of seller</h5>
-          
-          <p class="card-text">Some quick example text to build on the card title.</p>
-          
-          <div class="level">
-              <i class="fas fa-star"></i>
-              <strong>4.5</strong>
+        
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card main-card-for-offer">
+            
+            
+        <div class= "for-card-inner-img-slider">
+            <a href="">
+                <div class="img-on-card-body">
+                    <img src= "{% static 'images/bg-5.jpg' %}" >                    
+                </div>
+            </a>
 
-              <span class="for-right">fiver level</span>
-          </div>
-      </div>  
-      <div class="card-footer">
-          <i class="fas fa-heart"></i>
-          <span class="for-right">Starting Start</span>
-      </div>
-  </div>
-</div> 
+            <a href="">
+                <div class="img-on-card-body">
+                    <img src= "{% static 'images/bg-2.jpg' %}" >                    
+                </div>
+            </a>
 
-<div class="col-12 col-sm-12 col-md-4 col-lg-3 resizing">    
-  <div class="card">
-          <img src="images/logogigs1.png" class="card-img-top" alt="...">
-      <div class="card-body">
-          <h5 class="card-title">The name of seller</h5>
-          
-          <p class="card-text">Some quick example text to build on the card title.</p>
-          
-          <div class="level">
-              <i class="fas fa-star"></i>
-              <strong>4.5</strong>
+            <a href="">
+                <div class="img-on-card-body">
+                    <img src= "{% static 'images/bg-6.jpg' %}" >                    
+                </div>
+            </a>
+               
+        </div>
+            
+           
 
-              <span class="for-right">fiver level</span>
-          </div>
-      </div>  
-      <div class="card-footer">
-          <i class="fas fa-heart"></i>
-          <span class="for-right">Starting Start</span>
-      </div>
-  </div>
-</div> 
 
-<div class="col-12 col-sm-12 col-md-4 col-lg-3 resizing">    
-  <div class="card">
-          <img src="images/logogigs1.png" class="card-img-top" alt="...">
-      <div class="card-body">
-          <h5 class="card-title">The name of seller</h5>
-          
-          <p class="card-text">Some quick example text to build on the card title.</p>
-          
-          <div class="level">
-              <i class="fas fa-star"></i>
-              <strong>4.5</strong>
+            <div class="card-body">
+            <a href=""> 
+                <h5 class="card-title">I will convert psd to html responsive website</h5>  
+            </a>
 
-              <span class="for-right">fiver level</span>
-          </div>
-      </div>  
-      <div class="card-footer">
-          <i class="fas fa-heart"></i>
-          <span class="for-right">Starting Start</span>
-      </div>
-  </div>
-</div> 
+            <div class="category-tag">
 
-<div class="col-12 col-sm-12 col-md-4 col-lg-3 resizing">    
-  <div class="card">
-          <img src="images/logogigs1.png" class="card-img-top" alt="...">
-      <div class="card-body">
-          <h5 class="card-title">The name of seller</h5>
-          
-          <p class="card-text">Some quick example text to build on the card title.</p>
-          
-          <div class="level">
-              <i class="fas fa-star"></i>
-              <strong>4.5</strong>
+                <p>Web Design</p>
 
-              <span class="for-right">fiver level</span>
-          </div>
-      </div>  
-      <div class="card-footer">
-          <i class="fas fa-heart"></i>
-          <span class="for-right">Starting Start</span>
-      </div>
-  </div>
-</div> 
+                <div class="category-for-right">                  
+                    <div class= "click-on-offer">
+                        <p class="badge bg-dark">2,584</p>
+                        <span class="badge bg-dark">Clicks</span>                           
+                    </div>
 
-<div class="col-12 col-sm-12 col-md-4 col-lg-3 resizing">    
-  <div class="card">
-          <img src="images/logogigs1.png" class="card-img-top" alt="...">
-      <div class="card-body">
-          <h5 class="card-title">The name of seller</h5>
-          
-          <p class="card-text">Some quick example text to build on the card title.</p>
-          
-          <div class="level">
-              <i class="fas fa-star"></i>
-              <strong>4.5</strong>
+                </div>
+            </div>
 
-              <span class="for-right">fiver level</span>
-          </div>
-      </div>  
-      <div class="card-footer">
-          <i class="fas fa-heart"></i>
-          <span class="for-right">Starting Start</span>
-      </div>
-  </div>
-</div> 
+            <div class= "for-seller-level-star">
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star black-star"></i>
+            </div>
+            <hr>
 
-  </div> 
- </div>
+            <div class="offer-price">
+                <p>Starting At</p>
+                <p>$ <span>15748</span> </p>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+ 
+
+    </div>
+        
+    </div>
+
+   <!-- main gigs section start (arko buying view card end) -->
+
+
+
 
 
 

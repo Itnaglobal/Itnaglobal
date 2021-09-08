@@ -50,7 +50,7 @@ urlpatterns = [
     path('seller_profile/', views.seller_profile, name="seller_profile"),
 
     ## Service wise offers url
-    path('offers/<int:id>/', views.service_wise_offers, name="service_wise_offers"),
+    path('serivceWiseoffers/<str:slug>/', views.service_wise_offers, name="service_wise_offers"),
     # Category wise page
     path("category-wise/<slug:slug>/", views.category_wise_offers, name="category-wise"),
     # Manage order page url
@@ -76,7 +76,7 @@ urlpatterns = [
 
     # category wise Subcategory
 
-    path('category_wise_subcategory/p=2021/<int:category_id>/', views.category_wise_offers, name="categoryWiseView"),
+    path('category_wise_offers/p=2021/<int:category_id>/', views.category_wise_offers, name="categoryWiseView"),
 
     # Settings URL
 
@@ -161,12 +161,17 @@ urlpatterns = [
     path("search/", views.searchPageView, name="search"),
     # Send offer form
     path("send-offer/<int:id>/", views.sellerSendOfferView, name="send-offer"),
+    # Buyer requested post
     path("buyer-posts/", views.buyerAllPostsView, name="buyer-posts"),
+    # Delete a requested post
+    path("delete-buyer-post/<int:id>/", views.deleteBuyerPost, name="delete-buyer-post"),
+    # Reserved a requested post
+    path("reserved-buyer-post/<int:id>/", views.reservedBuyerPost, name="reserved-buyer-post"),
+    # Refund request page
+    path("refund-request/", views.refundRequestView, name="refund-request"),
 
     # Test URL
-    path('test/', views.level_up_seller, name="levelUp"),
-    
-    path('test_details/<int:id>/', views.level_up_function, name="levelFunction"),
+ 
     
     # Buyer Request URL
     path("buyer_requests/", views.buyer_requestView, name="BuyeRequestView"),
@@ -177,8 +182,13 @@ urlpatterns = [
     path("earnings/<int:id>/", views.earnings, name="earnings"),
 
     # Buyer Chat url
-    path("buyer_chat/", views.buyer_chat_messages, name="BuyerChat")
-]
+    path("buyer_chat/", views.buyer_chat_messages, name="BuyerChat"),
+
+    # Buyer Review Seller page URL
+    path("review_seller/<str:username>/", views.reviewSellerForm, name="ReviewSeller"),
+    # Test Purpose
+    path("all_test_orders/", views.all_test_orders, name="allTestOrders")
+]   
 
 
 if settings.DEBUG:

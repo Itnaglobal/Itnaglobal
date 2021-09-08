@@ -35,7 +35,7 @@
       <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-              <button class="nav-link fw-bold" id="active-tab" data-bs-toggle="tab" data-bs-target="#active" type="button" role="tab" aria-controls="active" aria-selected="true">ACTIVE</button>
+              <button class="nav-link fw-bold active" id="active-tab" data-bs-toggle="tab" data-bs-target="#active" type="button" role="tab" aria-controls="active" aria-selected="true">ACTIVE</button>
             </li>
             <li class="nav-item" role="presentation">
               <button class="nav-link fw-bold" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">SENT OFFERS</button>
@@ -119,7 +119,7 @@
                                     {% endfor %}
                                 {% else %}
                                     <tr>
-                                        <td>You must have active gigs in order to see new buyer requests!</td>
+                                        <td class="fw-bold text-danger">No active posts from buyer to show!</td>
                                     </tr>
                                 {% endif %}
                             </tbody>
@@ -174,7 +174,7 @@
                                     {% endfor %}
                                 {% else %}
                                     <tr>
-                                        <td>You must have active gigs in order to see new buyer requests!</td>
+                                        <td class="text-danger fw-bold">No sent offers to show!</td>
                                     </tr>
                                 {% endif %}
                         </tbody>

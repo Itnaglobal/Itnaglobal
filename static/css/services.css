@@ -7,6 +7,125 @@
 body{
     width: 100%;
 }
+
+/* arko part */
+
+/*
+========================================
+        for new card on popular offer section
+======================================== */
+.card-title{
+    color: #000;
+}
+.category-tag{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.category-for-right{
+    display: flex;
+}
+.for-seller-level-star i{
+    font-size: 15px;
+    margin-top: 10px;
+}
+.click-on-offer{
+    display: flex;
+    align-items: center;
+}
+.click-on-offer p{
+    margin-left: 3px;
+    margin-bottom: 0px ;
+}
+.click-on-offer span{
+    height: 20px !important;
+    margin-left: 5px;
+}
+.yellow-star{
+    color: #FFD700 !important;
+}
+.black-star{
+    color: #000;
+}
+.offer-price{
+    display: flex;
+    justify-content: space-between;
+}
+.offer-price p{
+    margin-bottom: 0px !important;
+}
+.card-body a h5{
+    font-size: 17px !important;
+}
+.category-tag p, .click-on-offer p{
+    font-size: 12px;
+    margin-bottom: 0px;
+}
+.card-body{
+    background-color: #fff !important;
+}
+.popular-gig-title h2{
+    font-size: 35px;
+    color: #000;
+    margin-bottom: 10px;
+}
+.popular-gig-title p{
+    margin-bottom: 20px;
+}
+.for-card-inner-img-slider{
+    padding: 0 !important;
+}
+
+/* slick */
+.main-card-for-offer:hover .slick-prev, 
+.main-card-for-offer:hover .slick-next {
+    display: block !important;
+}
+.main-card-for-offer:hover  .main-card-for-offer.slick-next{
+    display: block !important;
+}
+.main-card-for-offer .slick-prev, .main-card-for-offer .slick-next {
+    display: none !important;
+    z-index: 1;
+    width: 32px;
+    height: 32px;
+    /* background: rgba(255, 255, 255, 0.726);
+    box-shadow: 0 0.3rem 0.5rem rgb(0 0 0 / 20%); */
+    border-radius: 50%;
+}
+.main-card-for-offer .slick-prev:before, .main-card-for-offer .slick-next:before {
+    content: '\276F';
+    color: black !important;
+    font-family: 'slick';
+    font-size: 16px;
+    line-height: 1;
+    opacity: 1;
+    padding: 6px 8px;
+    border-radius: 50%;
+    background-color: #fff;
+    line-height: .5;
+}
+.main-card-for-offer .slick-prev:before {
+    content: '\276E';
+}
+.main-card-for-offer .slick-next:before {
+    content: '\276F';
+}
+.main-card-for-offer .slick-next:focus, .main-card-for-offer .slick-next:hover, .main-card-for-offer .slick-prev:focus, .slick-prev:hover {
+    color: #fff !important;
+    outline: 0;
+    background: #fff !important;
+}
+.main-card-for-offer .slick-next {
+    right: 0px;
+    box-shadow: none;
+}
+.main-card-for-offer .slick-prev {
+    left: 0px;
+    box-shadow: none;
+}
+
+
 /* Header  */
 #home-page{
     margin-top: 10px;
@@ -21,7 +140,7 @@ body{
     width: 10%;
 }
 .input-group{
-    width: 36%;
+    width: 30%;
     position: relative;
 }
 .form-control{
@@ -46,21 +165,7 @@ body{
 .form-control {
    height: 33px;
   }
-/* .btn {
-   height: 33px;
-   padding: 0px 20px ;
-   background-color: #1DBF73;
-   color: #fff;
-   font-weight: 700;
-   font-size: 14px;
-   border: none;
-   line-height: 0;
-   transition: .3s;
-  }
-.btn:hover{
-   background-color: #19A463;
-   color: #fff;
-} */
+
 .form-control:focus {
     box-shadow: none;
     z-index: -1;
@@ -90,11 +195,11 @@ body{
     font-weight: 500;
 }
 .for-ul li a:hover{
-    color: #19A463;
+    color: #2e57a5;
 }
 
 .for-ul li a span{
-    color: #19A463;
+    color: #2e57a5;
     font-weight: 600;
 }
 .profile-img{
@@ -105,30 +210,15 @@ body{
     height: 33px;
     border-radius: 50%;
 }
-.nav-link{
+.link-page{
     font-size: 16px;
     font-weight: 700;
 }
-.nav-link:hover{
-    color: #19A463 !important;
-}
-.active{
-    color: #19A463 !important;
-    font-weight: 900;
+.link-page:hover{
+    color: #2e57a5 !important;
 }
 
-.navbar-toggler:focus,
-.navbar-toggler:active,
-.navbar-toggler-icon:focus {
-    box-shadow: none;
-}
-.navbar-expand-lg .navbar-nav .nav-link {
-    padding-right: 0rem;
-    padding-left: 0rem;
-}
-.navbar-brand {
-    margin-right: 2rem;
-}
+/* nav bar sub category code */
 .dag{
     background-color: #d3d3d6;
     height: 1px;
@@ -136,7 +226,6 @@ body{
 .catagory-selection{
     width: 100%;
 }
-
 .catagory-name{
     width: 100%;
     display: flex;
@@ -154,15 +243,33 @@ body{
     font-weight: 500;
     font-size: 17px;
 }
-.catagory-name li:hover::before{
+.catagory-name li a:hover::before{
     content: "";
-    background-color: #19A463;
+    background-color: #2e57a5;
     width: 100%;
     height: 2px;
     bottom: 0;
     left: 0;
     position: absolute;
 }
+
+
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    box-shadow: none;
+}
+
+.nav-logo {
+    margin-right: 4rem;
+}
+.nav-link{
+    margin-right: 0px !important;
+}
+
+
+
 /*
 /* top nav bar */
 
@@ -398,7 +505,6 @@ body{
 /* DROP DOWN AND SWITCHES */
 .drop-button-with-checkbox{
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
 }
@@ -516,6 +622,49 @@ body{
 .gigsMobileView{
     display: none;
 }
+/* search bar */
+.for-new-input{
+    position: relative !important;
+    border-radius: 5px !important;
+    outline: none;
+    border-color: rgb(206, 206, 206);
+}
+.for-new-input:focus {
+    z-index: -100 !important;
+    position: relative !important;
+    border-radius: 5px !important;
+    padding-right: 91px !important;
+    border-color: rgb(206, 206, 206) !important;
+}
+.input-group{
+    position: absolute;
+}
+.searchbar____button{
+    position: absolute !important;
+    background-color: #428ad3 !important;
+    transition: .2s all ease-in-out !important;
+    color: #fff !important;
+    right: 0;
+    padding: 16px 20px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    border: none;
+    line-height: 0;
+    outline: none !important;
+    transition: .3s;
+}
+
+
+
+.searchbar____button:focus{
+    box-shadow: none !important;
+    z-index: -1;
+}
+.searchbar____button:hover{
+    background-color: #2e57a5 !important;
+}
+
 
 /* responsive view */
 @media (max-width:991px){
@@ -552,6 +701,14 @@ body{
     }
     .mob-card-footer span{
         font-size: 15px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .card img {
+        width: 100%;
+        padding: 0px;
+        height: 100%;
+        max-height: 240px;
     }
 }
 @media (max-width: 464px){

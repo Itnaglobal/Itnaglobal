@@ -42,9 +42,11 @@ def get_landing_page(request):
         return redirect("buying_view")
 
 
-def service_wise_offers(request, id):
+# landing Service Wise Offer Page 
+# @login_required(login_url='user_login')
+def service_wise_offers(request, slug):
     service = Services.objects.all()
-    offers = Offer.objects.filter(service_id=id)
+    offers = Offer.objects.filter(slug=slug)
     cats = Category.objects.all()[:6]
     args = {
         'service': service,
@@ -195,8 +197,14 @@ def seller_profile(request):
 
 
 @login_required(login_url='user_login')
-def categoryWisePage(requrest):
-    return render(requrest, "buyingview/category_wise.html")
+def buyingViewcategoryWisePage(requrest, offer_id):
+    category = Category.objects.all()
+    cat_wise_offer = Offer.objects,filter(category_id=offer_id)
+    args = {
+        "category": category,
+        "cat_wise_offer": cat_wise_offer
+    }
+    return render(requrest, "ladingview/service_wise_offers.html", args)
 
 
 # Order page
@@ -318,6 +326,8 @@ def seller_dashboard(request):
     count_active = Checkout.objects.filter(order_status="ACTIVE").filter(user=request.user).count()
     orders = Checkout.objects.filter(seller=request.user).filter(paid=True).order_by("-id")
 
+    chatrooms = ChatRoom.objects.all()
+
     for order in orders:
         if order.is_complete:
             completed_orders.append(order)
@@ -331,7 +341,8 @@ def seller_dashboard(request):
         "active_orders": active_orders,
         "completed_orders": completed_orders,
         "cancelled_orders": cancelled_orders,
-        "count_active": count_active
+        "count_active": count_active,
+        "chatrooms": chatrooms
     }
 
     return render(request, 'sellingview/seller_dashboard.html', args)
@@ -506,8 +517,8 @@ def get_buyer_orders_url(request):
 
 
 
-# category wise Page
-# @login_required(login_url='user_login')
+# category wise Page Buying View
+@login_required(login_url='user_login')
 def category_wise_offers(request, slug):
     cats = Category.objects.all()
     category = Category.objects.all()
@@ -518,11 +529,10 @@ def category_wise_offers(request, slug):
     args = {'catwise_offers': catwise_offers, 'category': category,
             "all_offers": all_offers, 'cats': cats}
 
-    return render(request, 'landingview/category_wise.html', args)
+    return render(request, 'landingview/service_wise_offers.html', args)
 
 
 def added_post_request(request):
-    print("HELLOW")
     if request.method == 'POST':
         user = request.user
         postrequest_title = request.POST.get("title")
@@ -547,7 +557,7 @@ def added_post_request(request):
                                             category=category, delivery_time=delivery_time,
                                             budget=price, post_status=post_status)
 
-            return redirect("BuyeRequestView")
+            return redirect("buyer-posts")
     else:
         return redirect("post_a_request")
 
@@ -738,41 +748,34 @@ def sellerSubmitView(request, pk):
     return render(request, "wasekPart/sellerSubmit.html", args)
 
 
-# Level up sellers (FOR TESTING)
 
-def level_up_seller(request):
+# Testing Purpose
 
-    offs = Offer.objects.all()
-
-    args = {
-        'offs': offs
-    }
-
-    return render(request, 'testpart/test.html', args)
-
-
-def level_up_function(request, id):
-    count_clicks = Offer.objects.filter(id=id).first()
-    info = count_clicks.user.extendeduser.level
-
-    lvl = Checkout.objects.filter(seller=request.user).first()
-
-    # if count_clicks > 10:
-    #     level  = "Hello"
-    #     lvl.save()
-
-    # else:
-    #     level = "New Freelancer"
-
-    print(count_clicks)
+def all_test_orders(request):
+    orders = Checkout.objects.filter(is_complete=True)
 
     args = {
-        # 'level': level,
-        'info': info,
-        # 'lvl': lvl
+        "orders": orders
     }
 
-    return render(request, 'testpart/test_details.html', args)
+    return render(request, "testpart/order_test.html", args)
+
+
+# Review Sellers
+
+def reviewSellerForm(request, username):
+    seller = User.objects.get(username=username)
+
+    if request.method == 'POST':
+        pass
+
+    args = {
+        "seller": seller
+    }
+    return render(request, "testpart/test2.html", args)
+
+
+
 
 
 # Rating Sellers
@@ -1389,28 +1392,31 @@ def account_detailsView(request, user_id):
 
 @login_required(login_url='user_login')
 def earnings(request, id):
-    seller_details = User.objects.get(pk=id)
+    user = request.user
+    if user is not None:
+        seller_details = User.objects.get(pk=id)
 
-    orders_by_seller = Checkout.objects.filter(
-        Q(seller = request.user) & Q(is_complete=True)
-    ).order_by('-created_at')
-    
-    withdraw_methods = WithDrawPaymentMethod.objects.all()
+        orders_by_seller = Checkout.objects.filter(
+            Q(seller = request.user) & Q(is_complete=True)
+        ).order_by('-created_at')
+        
+        withdraw_methods = WithDrawPaymentMethod.objects.all()
 
-    balance = seller_details.selleraccount.wallet
-    if balance > 0 and request.method == 'POST':
-        amount = request.POST.get('amount')
-        method = request.POST.get('method')
-        user = seller_details
+        balance = seller_details.selleraccount.wallet
+        if balance > 0 and request.method == 'POST':
+            amount = request.POST.get('amount')
+            method = request.POST.get('method')
+            user = seller_details
 
-        withdraw = WithDrawModel(
-            amount=amount,
-            user=user,
-            method=WithDrawPaymentMethod.objects.get(method_name=method)
-        )
+            withdraw = WithDrawModel(
+                amount=amount,
+                user=user,
+                method=WithDrawPaymentMethod.objects.get(method_name=method)
+            )
 
-        withdraw.save()
-        return redirect("/")
+            withdraw.save()
+            print(withdraw)
+            return redirect(f"/earnings/{seller_details.id}")
 
     # user = seller_details
 
@@ -1467,7 +1473,45 @@ def sellerSendOfferView(request, id):
 
 @login_required(login_url='user_login')
 def buyerAllPostsView(request):
-    return render(request, "azimpart/buyer_send_posts.html")
+    buyer_requested_posts = BuyerPostRequest.objects.filter(user=request.user).order_by("-id")
+    send_offers = SendOfferModel.objects.filter(buyer=request.user).order_by("-id")
+
+    args = {
+        "buyer_requested_posts": buyer_requested_posts,
+        "send_offers": send_offers,
+    }
+    return render(request, "azimpart/buyer_send_posts.html", args)
+
+
+@login_required(login_url='user_login')
+def deleteBuyerPost(request, id):
+    pass
+
+@login_required(login_url='user_login')
+def reservedBuyerPost(request, id):
+    if request.method == 'POST':
+        try:
+            buyer_post = BuyerPostRequest.objects.get(id=id)
+        except BuyerPostRequest.DoesNotExist:
+            return redirect("buyer-posts")
+        else:
+            buyer_post.post_status = "RESERVED"
+            buyer_post.save()
+            return redirect("buyer-posts")
+
+def refundRequestView(request):
+    return render(request, "buyingview/refund-req.html")
 
 
 
+
+
+
+
+# Test #
+
+def read_txt(request):
+    pass
+
+
+# END TEST PART #
