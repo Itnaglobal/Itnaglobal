@@ -638,27 +638,29 @@
                     
                     {% for rg in related_offers %}
                     <div class="col-7">
-                        <div class="card">
-                            <img src="{{ rg.image.url }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ rg.user }}</h5>
+                        <a href="{% url 'offer_details' offers.id %}">
+                            <div class="card">
+                                <img src="{{ rg.image.url }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ rg.user }}</h5>
 
-                                <p class="card-text">{{ rg.gig_title }}</p>
+                                    <p class="card-text">{{ rg.gig_title }}</p>
 
-                                <div class="level">
-                                    <i class="fas fa-star"></i>
-                                    <strong>4.5</strong>
+                                    <div class="level">
+                                        <i class="fas fa-star"></i>
+                                        <strong>4.5</strong>
 
-                                    <span class="for-right">Marketage level {{ rg.user.selleraccount.level }}</span>
+                                        <span class="for-right">Marketage level {{ rg.user.selleraccount.level }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-footer">
-                                <i class="fas fa-bars p-1"></i>
-                                <i class="fas fa-heart"></i>
-                                <span class="for-right">Starting At</span>
-                            </div>
+                                <div class="card-footer">
+                                    <i class="fas fa-bars p-1"></i>
+                                    <i class="fas fa-heart"></i>
+                                    <span class="for-right">Starting At</span>
+                                </div>
 
-                        </div>
+                            </div>
+                        </a>
                     </div>
                     {% endfor %}
 

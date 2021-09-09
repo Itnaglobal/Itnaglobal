@@ -24,6 +24,8 @@ from ChatApp.models import *
 
 
 def get_landing_page(request):
+    main_logo = MainLogo.objects.all()
+    print(main_logo)
     user_session = request.session.get("user", None)
     print(f"{user_session}")
 
@@ -35,7 +37,8 @@ def get_landing_page(request):
         args = {
             'landing_slider': landing_slider,
             'services': services,
-            'cats': cats
+            'cats': cats,
+            'main_logo': main_logo
         }
         return render(request, 'landingview/landingPage.html', args)
     else:
@@ -45,13 +48,15 @@ def get_landing_page(request):
 # landing Service Wise Offer Page 
 # @login_required(login_url='user_login')
 def service_wise_offers(request, slug):
+    main_logo = MainLogo.objects.all().last()
     service = Services.objects.all()
     offers = Offer.objects.filter(slug=slug)
     cats = Category.objects.all()[:6]
     args = {
         'service': service,
         'offers': offers,
-        'cats': cats
+        'cats': cats,
+        'main_logo': main_logo
     }
 
     return render(request, 'landingview/service_wise_offers.html', args)
@@ -59,10 +64,12 @@ def service_wise_offers(request, slug):
 
 @login_required(login_url='user_login')
 def view_all_category(request):
+    main_logo = MainLogo.objects.all().last()
     cats = Category.objects.all()
 
     args = {
-        'cats': cats
+        'cats': cats,
+        'main_logo': main_logo
     }
 
     return render(request, 'landingview/categories.html', args)
@@ -70,6 +77,7 @@ def view_all_category(request):
 
 @login_required(login_url='user_login')
 def buying_view(request):
+    main_logo = MainLogo.objects.all().last()
     offers = Offer.objects.all().order_by('-click')
     cats = Category.objects.all()
 
@@ -82,7 +90,8 @@ def buying_view(request):
         'pop_offers': pop_offers,
         'cats': cats,
         'pop_web_offers': pop_web_offers,
-        "pro_offers": pro_offers
+        "pro_offers": pro_offers,
+        'main_logo': main_logo
     }
     return render(request, 'buyingview/buying_view.html', args)
 
@@ -90,6 +99,7 @@ def buying_view(request):
 
 
 def offer_details(request, id):
+    main_logo = MainLogo.objects.all().last()
     cats = Category.objects.all()
     offers = Offer.objects.filter(id=id).first()
     print("OFFER:", offers)
@@ -131,6 +141,7 @@ def offer_details(request, id):
         'related_offers': related_offers,
         'cats': cats,
         "cart_session": cart_session,
+        'main_logo': main_logo
     }
     return render(request, 'buyingview/offers_details.html', args)
 
@@ -139,9 +150,9 @@ def user_registration(request):
     user_session = request.session.get("user", None)
 
     if (user_session is None):
-        form = UserCreationForm()
+        form = UserRegistration()
         if request.method == 'POST':
-            form = UserCreationForm(request.POST)
+            form = UserRegistration(request.POST)
             if form.is_valid():
                 request.session["new_user"] = True
                 form.save()
@@ -522,14 +533,38 @@ def get_buyer_orders_url(request):
 def category_wise_offers(request, slug):
     cats = Category.objects.all()
     category = Category.objects.all()
-    catwise_offers = Offer.objects.filter(category__slug=slug)
+    catwise_offers = Offer.objects.filter(category__slug = slug)
+    
+    # Category Wise Subcategory
+    subcategory = Subcategory.objects.filter(parent_market__slug = slug)
+    print(subcategory)
     all_offers = Offer.objects.all()
     # sub_cats = Subcategory.objects.all()
 
-    args = {'catwise_offers': catwise_offers, 'category': category,
-            "all_offers": all_offers, 'cats': cats}
+    args = {
+        'catwise_offers': catwise_offers,
+        'category': category,
+        "all_offers": all_offers,
+        'cats': cats,
+        'subcategory': subcategory,
+        }
 
     return render(request, 'landingview/service_wise_offers.html', args)
+
+
+@login_required(login_url='user_login')
+def subcategory_wise_offers(request, slug):
+    cats = Category.objects.all()
+    subcategory = Subcategory.objects.all()
+
+    sub_offers = Offer.objects.filter(sub_category__slug = slug)
+
+    args = {
+        "subcategory": subcategory,
+        "sub_offers": sub_offers,
+        "cats": cats
+    }
+    return render(request, "landingview/subcategory_offer.html", args)
 
 
 def added_post_request(request):
@@ -1515,3 +1550,9 @@ def read_txt(request):
 
 
 # END TEST PART #
+
+
+# Rafsun Testing Part
+
+def rafsun_header(request):
+    return render(request, "rafsunpart/test_header.html")

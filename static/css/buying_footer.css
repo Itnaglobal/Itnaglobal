@@ -247,10 +247,14 @@ body{
         align-items: center;
     }
 }
+
 @media (max-width:505px ){
 
     .stay__inform{
         font-size:22px;
+    }
+    .stay__inform{
+        border-bottom:1px solid #fff ;
     }
 }
 @media (max-width:390px ){

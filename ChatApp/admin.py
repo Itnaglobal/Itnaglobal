@@ -4,5 +4,7 @@ from ChatApp.models import *
 
 
 admin.site.register(ChatRoom)
-admin.site.register(Message)
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ("id", "sent_date", "chatroom", "sender", "msg")
 

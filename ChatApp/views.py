@@ -3,9 +3,10 @@ from ChatApp.models import ChatRoom, Message
 from django.contrib.auth.models import User
 from django.db.models import Q
 from datetime import datetime
-from datetime import time
 from django.utils import timezone
 from django.http import JsonResponse
+import json
+from django.template import loader
 # Create your views here.
 
 
@@ -51,7 +52,6 @@ def user_details(request, id):
     return render(request, 'Test/user_details.html', args)
 
 
-
 def chatRoomView(request, id):
     chatroom = ChatRoom.objects.get(pk=id)
     values = Message.objects.filter(chatroom=id)
@@ -66,6 +66,8 @@ def chatRoomView(request, id):
 
     print(ago + "AGOOOOOOOO")
 
+    print("BEFORE:", len(Message.objects.all()))
+
     if request.method == 'POST':
         sender = request.user
         msg = request.POST.get('msg')
@@ -78,26 +80,53 @@ def chatRoomView(request, id):
 
         print("IMAGE:", str(sender.selleraccount.profile_picture))
         print("USER:", sender)
-        print("SENT:", sent.created_at)
         print("MESSAGE:", msg)
 
         if request.is_ajax():
+            month_dct = {
+                1: "Jan.", 2: "Feb.", 3: "March", 4: "April", 5: "May",
+                6: "June", 7: "July", 8: "Aug.", 9: "Sept.", 10: "Oct.",
+                11: "Nov.", 12: "Dec."
+            }
+
+            send_at = sent.sent_date
+            month = int(send_at.strftime("%m"))
+            month = str(month_dct[month])
+            # print(month)
+            day = str(int(send_at.strftime("%d")))
+            # print(day)
+            year = str(send_at.strftime("%Y"))
+            hour = str(send_at.strftime("%I"))
+            minute = str(send_at.strftime("%M"))
+            am_pm = str(send_at.strftime("%p").lower())
+            
+
+            # send_at = send_at.strftime("%b %d, %Y, %I:%M %p")
+            send_at = f"{month} {day}, {year}, {hour}:{minute} {am_pm}"
             profile_image = str(sender.selleraccount.profile_picture)
 
             message = {
+                "id": str(sent.id),
                 "profile_image": profile_image,
                 "message": msg,
                 "username": sender.username,
-                "send_at": str(sent.created_at)
+                "send_at": send_at
             }
 
             print("MESAGE", message)
+            print("AFTER:", len(Message.objects.all()))
+
+            # x =  str(Message.objects.all())
+            # print(Message.objects.values())
 
             data = {
                 "message_info": message
             }
             return JsonResponse(data)
+    else:
         return redirect(f"/chat/chatroom/{chatroom.id}")
+
+
     args = {
         'chatroom': chatroom,
         'values': values,

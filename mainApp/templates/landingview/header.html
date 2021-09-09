@@ -81,8 +81,9 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-dark desktop__navbar">
     <div class="container">
-      <a class="navbar-brand" href="#"><span><img src="{% static 'images/marketage.png' %}" alt=""
-            style="height: 50px;width:200px;"></span></a>
+      {% for logo in main_logo %}
+      <a class="navbar-brand navbarNewIcon" href="{% url 'get_landing_page' %}"><img src="{{ logo.logo_img.url }}" alt=""></a>
+      {% endfor %}
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -95,13 +96,6 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Hire Us</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-globe"></i> English</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-dollar-sign"></i> USD</a>
-          </li>
-
           {% comment %} statement {% endcomment %}
 
         {% if not request.session.user %}

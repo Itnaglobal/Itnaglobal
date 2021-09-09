@@ -1,0 +1,241 @@
+/* Add a black background color to the top navigation */
+:root {
+    /* Colors */
+    --bg-light: #f0f2f5;
+    --bg-dark: #18191a;
+    --highlight-gray: #e4e6e8;
+    --white-primary: #fff;
+    --dark-primary: #333;
+    --dark-gray: #65676b;
+    --less-dark-gray: #606770;
+    --gray-border: #CED0D4;
+    --primary-color: #426bb1;
+    --less-primary-color: #D7E4F2;
+    --blue-primary: #0d6efd;
+    --green-primary: #198754;
+    --danger-primary: #dc3545;
+  }
+
+*{
+    font-family: "poppins", sans-serif;
+}
+.topnavbar{
+    background-color: #222f5b;
+
+}
+.topnav {
+   
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content:space-between ;
+    height: 5rem;
+    /* flex-wrap: wrap; */
+  }
+
+
+  
+  /* Style the links inside the navigation bar */
+ .topnav a {
+    /* float: left; */
+    color: #f2f2f2;
+    /* text-align: center; */
+    padding: 14px 10px;
+    text-decoration: none;
+    font-size: 17px;
+    
+  }
+
+  /* .container :only-child{
+          vertical-align:center;
+  } */
+
+  /* Change the color of links on hover */
+  /* .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  } */
+  
+  /* Add a color to the active/current link */
+  /* .topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+  } */
+
+
+
+  /* search bar  */
+  * {
+    box-sizing: border-box;
+  }
+  
+.Searchbar{
+    width: 40%;
+}
+
+  /* Style the search field */
+  form.example input[type=text] {
+    padding: 10px;
+    font-size: 17px;
+    /* border: 1px solid grey; */
+    float: left;
+    width: 80%;
+    background: #f1f1f1;
+
+
+    height: 40px;
+    border: none;
+    border-radius: 3px 0px 0px 3px;
+    outline: none;
+  }
+  
+  /* Style the submit button */
+  form.example button {
+    float: left;
+    width: 20%;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    font-size: 17px;
+    /* border: 1px solid grey; */
+    border-left: none; /* Prevent double borders */
+    cursor: pointer;
+
+
+    height: 40px;
+    border: none;
+    border-radius: 0px 3px 3px 0px;
+  }
+  
+  form.example button:hover {
+    background: #0b7dda;
+  }
+  
+  /* Clear floats */
+  form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  .Search-icon{
+      width:30px;
+      height:30px;
+      margin-top: -.4rem;
+  }
+
+
+
+  /* catagory  */
+  .Catagorybar{
+    margin: 6px 0px -6px 0px;
+  }
+  ul{
+    padding: 0;
+    list-style: none;
+    background: white;
+}
+ul li{
+    display: inline-block;
+    position: relative;
+    line-height: 21px;
+    text-align: left;
+}
+ul li a{
+    display: block;
+    padding: 8px 18px;
+    color: #333;
+    text-decoration: none;
+    font-size: 17px;
+}
+ul li a:hover{
+    color:#333 ;
+    background:var(--bg-light) ;
+}
+/* Set width of the dropdown */
+/* ul li ul.dropdown{
+    min-width: 100%; 
+    background: #f2f2f2;
+    display: none;
+    position: absolute;
+    z-index: 999;
+    left: 0;
+} */
+ul li:hover ul.dropdown{
+    display: block;	/* Display the dropdown */
+}
+ul li ul.dropdown li{
+    display: block;
+}
+
+
+/* drop  */
+.Catagorybar>ul>li>div{
+    display: none;
+  position: absolute;
+  top: 100%;
+  /* border: 1px solid #aa2ebf; */
+  background-color: white;
+  width: 450px;
+
+  z-index: 999;
+  left: 0;
+}
+.Catagorybar>ul>li:hover>div {
+    display: block;
+  }
+
+
+
+ 
+
+  @media screen and (max-width: 1399px) {
+    .topnav {
+   
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content:space-between ;
+        height: 5rem;
+       
+      }
+
+      .topnav a {
+        /* float: left; */
+        color: #f2f2f2;
+        /* text-align: center; */
+        padding: 0px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        
+      }
+
+      ul li a {
+        display: block;
+        padding: 8px 18px;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+    }
+  }
+  @media screen and (max-width: 1199px) {
+    .Searchbar {
+        width: 33%;
+    }
+
+    ul li a {
+        display: block;
+        padding: 8px 7px;
+        color: #333;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    .topnav a {
+        /* float: left; */
+        color: #f2f2f2;
+        /* text-align: center; */
+        padding: 14px 10px;
+        text-decoration: none;
+        font-size: 14px;
+        
+      }
+  }

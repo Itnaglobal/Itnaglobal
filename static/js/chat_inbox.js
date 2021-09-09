@@ -1,54 +1,61 @@
-$(document).ready(function() {
+$(document).ready(function () {
+  userAllChats = document.querySelector(".user__allChats");
+  userAllChats.scrollTop = userAllChats.scrollHeight;
+
   const chatForm = $("#chat__form");
 
-  chatForm.submit(function(event) {
+  chatForm.submit(function (event) {
     event.preventDefault();
 
     const actionEndPoint = chatForm.attr("action");
     const method = chatForm.attr("method");
     let data = chatForm.serialize();
 
-    console.log(actionEndPoint)
-    console.log(method)
-    console.log(data)
+    console.log(actionEndPoint);
+    console.log(method);
+    console.log(data);
 
     $.ajax({
       url: actionEndPoint,
       method: method,
       data: data,
-      success: function(data) {
+      success: function (data) {
+        console.log(data.all_messages);
         if (data.message_info) {
-          // alert(data.success);
-          alert(data.message_info);
+          // alert(data.message_info);
 
           appendToMessage(data.message_info);
+          $("#chat__form")[0].reset();
         }
       },
-      error: function(errorData) {
+      error: function (errorData) {
         alert("Message not sent!");
-      }
+      },
     });
-  })
+  });
 });
 
 function appendToMessage(message) {
   $(".user__allChats").append(`
-  <div class="user__me">
+  <div class="user__me" id="message_${message.id}">
   <div class="opposite__userImg">
     <img
-      src="${ message.profile_image.url }"
+      src="/media/${message.profile_image}"
       alt=""
     />
   </div>
   <div class="chat__msg">
     <div class="chat__timestamp">
-      <span class="fw-bold">${ message.username }</span>
+      <span class="fw-bold">${message.username}</span>
       <small class="text-muted">${message.send_at}</small>
     </div>
-    <p>${ message.message }</p>
+    <p>${message.message}</p>
   </div>
 </div>
-  `)
+  `);
+
+  userAllChats = document.querySelector(".user__allChats");
+  userAllChats.scrollTop = userAllChats.scrollHeight;
 }
 
 // Window width

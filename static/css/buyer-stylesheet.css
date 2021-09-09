@@ -216,6 +216,11 @@ body{
     color: #428ad3 !important;
     padding: 7px;
     margin-bottom: 32px;
+    transition: .2s ease-in-out;
+}
+.profile-button:hover{
+    background-color: #2e57a5;
+    color: #fff !important;
 }
 .with-bg{
     display: flex;

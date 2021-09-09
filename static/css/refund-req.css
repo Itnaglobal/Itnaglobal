@@ -55,9 +55,13 @@
 .submit:hover{
     background-color: #2e57a5;
 }
-
-
 @media (max-width: 580px){
+    .order-id h6 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 450px){
     .order-id h6 {
         font-size: 18px;
     }

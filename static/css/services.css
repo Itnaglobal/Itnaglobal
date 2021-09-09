@@ -321,6 +321,11 @@ body{
 
 /* select logo style */
 
+.logoStyle .slick-prev, .logoStyle .slick-next{
+    box-shadow: 0 0.3rem 0.5rem rgb(0 0 0 / 20%) !important;
+    background-color: #fff !important;
+}
+
 .title h6{
     line-height: 140%;
 }
@@ -335,6 +340,10 @@ body{
 .logoImages img{
     width: 80px;
     height: 80px;
+    object-fit: contain;
+}
+.best__selling{
+    color: #428ad3;
 }
 .logoColumn{
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -420,6 +429,7 @@ body{
     background-color: #fff;
     border-color: #fff;
     margin-top: -2px;
+    border: 1px solid #777;
 }
 .serviceslist{
     padding: 20px;

@@ -117,15 +117,15 @@
    <!-- Title -->
     <div class="container">
         <div class="title-wrapper">
-            <h1>Logo Design</h1>
+            <h1></h1>
         </div>
         <div class="explanation-video">
-            <p class="sc-subtitle">Stand out from the crowd with a logo that fits your brand personality.</p>
-            <button class="FKiIhUG _1x76oPA H69bvrM co-white btn-play without-border bg-co-green-700">
+            <!-- <p class="sc-subtitle">Stand out from the crowd with a logo that fits your brand personality.</p> -->
+            <!-- <button class="FKiIhUG _1x76oPA H69bvrM co-white btn-play without-border bg-co-green-700">
                 <span class="_1AB8XqH play-icon">
                     <i class="fas fa-play"></i>
                 </span>"How Marketage Works"
-            </button>
+            </button> -->
         </div>
     </div>
 
@@ -133,74 +133,26 @@
     <section class="SelectLogoStyle">
         <div class="container">
             <div class="title">
-                <h6>Select logo style</h6>
+                <h6>Select Subcategories</h6>
             </div><br>
+            {% if subcategory %}
             <div class="row justify-content-center logoStyle">
+            
+            {% for sb in subcategory %}
                 <div class="logo-wrapper col-12 col-sm-6 col-md-3 col-lg-2 m-1 logoColumn">
                    <div class="imgPara">
                     <div class="logoImages">
-                        <img src="images/flat_minimalist.svg" alt="flat">
-                        <p class="text-body-2 text-center"><a href="#">Minimalist</a></p>
+                        <img src="{{ sb.sub_img.url }}" alt="flat">
+                        <p class="text-body-2 text-center"><a href="{% url 'SubcategoryWiseOffer' sb.slug %}">{{ sb.sub_title }}</a></p>
                     </div>
                    </div>
                 </div>
-                <div class="logo-wrapper col-12 col-sm-6 col-md-3 col-lg-2 m-1 logoColumn">
-                    <div class="imgPara">
-                        <div class="logoImages">
-                            <img src="images/hand_drawn.svg" alt="hand">
-                            <p class="text-body-2 text-center"><a href="#">3D</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="logo-wrapper col-12 col-sm-6 col-md-3 col-lg-2 m-1 logoColumn">
-                    <div class="imgPara">
-                        <div class="logoImages">
-                            <img src="images/mascot_cartoon.svg" alt="masscot">
-                            <p class="text-body-2"><a href="#">Mascot</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="logo-wrapper col-12 col-sm-6 col-md-3 col-lg-2 m-1 logoColumn">
-                    <div class="imgPara">
-                        <div class="logoImages">
-                            <img src="images/retro.svg" alt="retro">
-                            <p class="text-body-2"><a href="#">Signature</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="logo-wrapper col-12 col-sm-6 col-md-3 col-lg-2 m-1 logoColumn">
-                    <div class="imgPara">
-                        <div class="logoImages">
-                            <img src="images/signaturesvg.svg" alt="sing">
-                            <p class="text-body-2"><a href="#">Hand-Drawn</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="logo-wrapper col-12 col-sm-6 col-md-3 col-lg-2 m-1 logoColumn">
-                   <div class="imgPara">
-                    <div class="logoImages">
-                        <img src="images/three_dimentional.svg" alt="three">
-                        <p class="text-body-2"><a href="#">Vintage</a></p>
-                    </div>
-                   </div>
-                </div>
-                <div class="logo-wrapper col-12 col-sm-6 col-md-3 col-lg-2 m-1 logoColumn">
-                    <div class="imgPara">
-                        <div class="logoImages">
-                            <img src="images/watercolor_feminine.svg" alt="water">
-                            <p class="text-body-2"><a href="#">Watercolor</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="logo-wrapper col-12 col-sm-6 col-md-3 col-lg-2 m-1 logoColumn">
-                    <div class="imgPara">
-                        <div class="logoImages">
-                            <img src="images/view_all.svg" alt="flat">
-                            <p class="text-body-2"><a href="#"><a href="#">View All</a></a></p>
-                        </div>
-                    </div>
-                </div>
+            {% endfor %}
+            
             </div>
+            {% else %}
+                <p class="alert alert-primary alert__update">NO SUBCATEGORIES FOUND</p>
+            {% endif %}
         </div>
     </section><br><br>
 
@@ -215,9 +167,9 @@
                 Logo Options
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><button class="dropdown-item" href="#">Action</button></li>
+                <li><button class="dropdown-item" href="#">Another action</button></li>
+                <li><button class="dropdown-item" href="#">Something else here</button></li>
               </ul>
             </div>
 
@@ -256,16 +208,16 @@
         <div class="all-checkbox">
 
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-            <label class="form-check-label" for="flexSwitchCheckChecked">Pro services</label>
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheck">
+            <label class="form-check-label" for="flexSwitchCheck">Pro services</label>
           </div>
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-            <label class="form-check-label" for="flexSwitchCheckChecked">Subscription services</label>
+            <input class="form-check-input" type="checkbox" id="subsServices">
+            <label class="form-check-label" for="subsServices">Subscription services</label>
           </div>
           <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked">
-            <label class="form-check-label" for="flexSwitchCheckChecked">Online sellers</label>
+            <input class="form-check-input" type="checkbox" id="onlineSeller">
+            <label class="form-check-label" for="onlineSeller">Online sellers</label>
           </div>
         </div>
 
@@ -281,13 +233,13 @@
                 13,655 services available
             </div>
             <div class="servicesDropDown">
-                Sort by  <button class="btn btn-secondary dropdown-toggle servicesDropDownButton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <strong>Best Selling</strong>
+                Sort by  <button class="btn dropdown-toggle servicesDropDownButton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <strong class="best__selling">Best Selling</strong>
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="#">Action</a></li>
-                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><button class="dropdown-item" href="#">Action</button></li>
+                    <li><button class="dropdown-item" href="#">Another action</button></li>
+                    <li><button class="dropdown-item" href="#">Something else here</button></li>
                   </ul>
             </div>
         </div>
@@ -299,8 +251,69 @@
 
     <div class="row">
                
-        
+    {% if catwise_offers %}
+    {% for co in catwise_offers %}
     <div class="col-md-6 col-lg-3 mb-4">
+        <div class="card main-card-for-offer">
+            
+            
+        <div class= "for-card-inner-img-slider">
+            {% for img in co.extra_images.all %}
+            <a href="{% url 'offer_details' co.id %}">
+                <div class="img-on-card-body">
+                    <img src= "{{ img.image.url }}" >                    
+                </div>
+            </a>
+            {% endfor %}
+           
+               
+        </div>
+            
+           
+
+
+            <div class="card-body">
+            <a href=""> 
+                <h5 class="card-title">I will convert psd to html responsive website</h5>  
+            </a>
+
+            <div class="category-tag">
+
+                <p>Web Design</p>
+
+                <div class="category-for-right">                  
+                    <div class= "click-on-offer">
+                        <p class="badge bg-dark">2,584</p>
+                        <span class="badge bg-dark">Clicks</span>                           
+                    </div>
+
+                </div>
+            </div>
+
+            <div class= "for-seller-level-star">
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star yellow-star"></i>
+                <i class="fas fa-star black-star"></i>
+            </div>
+            <hr>
+
+            <div class="offer-price">
+                <p>Starting At</p>
+                <p>$ <span>15748</span> </p>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+        <p class="alert alert-warning">NO OFFER FOUND!</p>
+    {% endif %}
+
+        
+    <!-- <div class="col-md-6 col-lg-3 mb-4">
         <div class="card main-card-for-offer">
             
             
@@ -362,72 +375,7 @@
             
             </div>
         </div>
-    </div>
-
-        
-    <div class="col-md-6 col-lg-3 mb-4">
-        <div class="card main-card-for-offer">
-            
-            
-        <div class= "for-card-inner-img-slider">
-            <a href="">
-                <div class="img-on-card-body">
-                    <img src= "{% static 'images/bg-5.jpg' %}" >                    
-                </div>
-            </a>
-
-            <a href="">
-                <div class="img-on-card-body">
-                    <img src= "{% static 'images/bg-2.jpg' %}" >                    
-                </div>
-            </a>
-
-            <a href="">
-                <div class="img-on-card-body">
-                    <img src= "{% static 'images/bg-6.jpg' %}" >                    
-                </div>
-            </a>
-               
-        </div>
-            
-           
-
-
-            <div class="card-body">
-            <a href=""> 
-                <h5 class="card-title">I will convert psd to html responsive website</h5>  
-            </a>
-
-            <div class="category-tag">
-
-                <p>Web Design</p>
-
-                <div class="category-for-right">                  
-                    <div class= "click-on-offer">
-                        <p class="badge bg-dark">2,584</p>
-                        <span class="badge bg-dark">Clicks</span>                           
-                    </div>
-
-                </div>
-            </div>
-
-            <div class= "for-seller-level-star">
-                <i class="fas fa-star yellow-star"></i>
-                <i class="fas fa-star yellow-star"></i>
-                <i class="fas fa-star yellow-star"></i>
-                <i class="fas fa-star yellow-star"></i>
-                <i class="fas fa-star black-star"></i>
-            </div>
-            <hr>
-
-            <div class="offer-price">
-                <p>Starting At</p>
-                <p>$ <span>15748</span> </p>
-            </div>
-            
-            </div>
-        </div>
-    </div>
+    </div> -->
  
 
     </div>
@@ -447,7 +395,7 @@
 
     <!-- explore more logo design services -->
 
-    <section class="exploreMore">
+    <!-- <section class="exploreMore">
         <div class="container">
             <div class="exploreText text-center">
                 <h2>Explore More Logo Design Services</h2>
@@ -486,11 +434,11 @@
 
     <div class="container">
         <hr>
-    </div>
+    </div> -->
 
     <!-- logo design FAQs -->
 
-    <section class="faq">
+    <!-- <section class="faq">
         <div class="container">
             <div class="fqatitle text-center">
                 <h2>Logo Design FAQs</h2>
@@ -539,11 +487,11 @@
 
     <div class="container">
         <hr>
-    </div><br>
+    </div><br> -->
 
     <!-- logo designn related guide -->
 
-    <section class="logoRelatedGuide">
+    <!-- <section class="logoRelatedGuide">
         <div class="container">
             <div class="guidetext">
                 <h2>Logo Design Related Guides</h2>
@@ -572,7 +520,7 @@
                 </div>
             </div>
         </div>
-    </section><br>
+    </section><br> -->
 
     
 

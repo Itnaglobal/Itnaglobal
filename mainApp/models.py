@@ -3,6 +3,14 @@ from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
 from datetime import datetime
 
+class MainLogo(models.Model):
+    logo_img = models.ImageField(upload_to="logos/")
+
+    def __str__(self):
+        return str(self.id)
+    
+
+
 
 class RoleModel(models.Model):
     role_title = models.CharField(max_length=120)
@@ -112,7 +120,7 @@ class Subcategory(models.Model):
     # is_iterested = models.BooleanField(default=False, null=True)
 
     def __str__(self):
-        return self.title
+        return self.sub_title
 
 class CategoryInterestedModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -261,6 +269,7 @@ class Offer(models.Model):
     document = models.FileField(upload_to="files/", null=True)
     service = models.ForeignKey(Services, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    sub_category = models.ForeignKey(Subcategory, on_delete=models.CASCADE, null=True, blank=True)
     packages = models.ManyToManyField(Package, through='OfferManager')
     description = models.TextField()
     # offer_rating = models.FloatField(default=0)

@@ -3,8 +3,15 @@
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
+.desktop__navbar{
+    height: 88px;
+}
 .marketage___title___firstbanner a{
     color: #fff !important;
+}
+.navbarNewIcon img{
+    width: 180px;
+    height: 97px;
 }
 /* Hide mobile navbar */
 .mobile__navbar {
@@ -73,7 +80,7 @@
 }
 .join___button{
     border: 1px solid #fff !important;
-    margin-top: 4px;
+    margin-top: 2px;
 }
 .join___button:hover{
     color: #000 !important; 
@@ -594,21 +601,54 @@
         color: #95979d;
     }
 }
+@media (max-width: 960px){
+    .firstImage img{
+        height: 50vh;
+    }
+}
+
+
+/* some extra edit */
+
+
 
 
 @media (max-width: 825px){
     .firstImage img{
-        height: 78vh;
+        height: 50vh;
+    }
+}
+@media (max-width: 700px){
+    .firstImage img{
+        height: 39vh;
     }
 }
 @media (max-width: 500px){
     .firstImage img{
-        height: 56vh;
+        height: 29vh;
+    }
+    .words h2{
+        font-size:24px;
+    }
+    .upperText h2{
+        font-size: 26px;
     }
 }
 @media (max-width: 400px){
     .firstImage img{
-        height: 50vh;
+        height: 26vh;
+    }
+    .words h2{
+        font-size:20px;
+    }
+    .videoColumn h2{
+        font-size:22px;
+    }
+    .markettext h2{
+        font-size: 22px;
+    }
+    .upperText h2{
+        font-size: 23px;
     }
 }
 

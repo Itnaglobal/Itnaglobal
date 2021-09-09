@@ -96,7 +96,7 @@
             {% for s in cats %}
           <div class="col-6 col-sm-6 col-md-4 col-lg-2">
             <div class="marketCategory">
-              <a href="{% url 'categoryWiseView' s.id %}"><img src="{{ s.icon.url }}" alt="">
+              <a href="{% url 'categoryWiseView' s.id %}"><img src="{{ s.icon.url }}" alt="" class="rounded-circle">
               <br>
               <br>
                 <h6>{{ s.title }}</h6></a>

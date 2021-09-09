@@ -9,6 +9,11 @@
   display: none;
 }
 
+.manage__order {
+  position: relative;
+  margin-bottom: 4rem;
+}
+
 /* Gigs radio input section starts */
 .gigs__acceptCustomer {
   margin-top: -0.2rem;
@@ -108,13 +113,16 @@
 
 .gig__statusMean {
   font-size: 1.2rem;
-  color: #198754;
-  float: right;
+  color: #428ad3;
+  margin-top: 0.5rem;
+  position: absolute;
+  top: 100%;
+  right: 1%;
   transition: color 0.3s;
 }
 
 .gig__statusMean:hover {
-  color: #116d42;
+  color: #2e57a5;
 }
 
 .gigs__tableDropdown .dropdown button {

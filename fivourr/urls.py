@@ -18,10 +18,18 @@ from django.urls import path, include
 from mainApp import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('adminpanel/', include('AdminPanel.urls')),
+
+    # Password Reset URL
+
+    path("reset_password/", auth_views.PasswordResetView.as_view(template_name="accountview/password_reset.html"), name="reset_password",),
+    path("reset_password_sent/", auth_views.PasswordResetDoneView.as_view(template_name="accountview/email_sent.html"), name="password_reset_done"),
+    path("reset/<uidb64>/<token>/", auth_views.PasswordResetConfirmView.as_view(template_name="accountview/password_reset_confirm.html"), name="password_reset_confirm"),
+    path("reset_password_complete/", auth_views.PasswordResetCompleteView.as_view(template_name="accountview/reset_password_complete.html"), name="password_reset_complete"),
 
     # Chat App URLS
     
@@ -78,6 +86,9 @@ urlpatterns = [
 
     path('category_wise_offers/p=2021/<int:category_id>/', views.category_wise_offers, name="categoryWiseView"),
 
+    # Subcategory Wise Offer URL
+
+    path("<slug:slug>", views.subcategory_wise_offers, name="SubcategoryWiseOffer"),
     # Settings URL
 
     path('settings/', views.settings_page, name="settings"),
@@ -187,7 +198,10 @@ urlpatterns = [
     # Buyer Review Seller page URL
     path("review_seller/<str:username>/", views.reviewSellerForm, name="ReviewSeller"),
     # Test Purpose
-    path("all_test_orders/", views.all_test_orders, name="allTestOrders")
+    path("all_test_orders/", views.all_test_orders, name="allTestOrders"),
+
+    # Test Reafun Part
+    path("rafsun/", views.rafsun_header, name="rafsun"),
 ]   
 
 

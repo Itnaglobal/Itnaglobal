@@ -168,7 +168,7 @@
       <div class="user__allChats">
         <!-- Me -->
         {% for m in values %}
-        <div class="user__me">
+        <div class="user__me" id="message_{{ m.id }}">
           <div class="opposite__userImg">
             <img
               src="{{ m.sender.selleraccount.profile_picture.url }}"
@@ -178,7 +178,7 @@
           <div class="chat__msg">
             <div class="chat__timestamp">
               <span class="fw-bold">{{ m.sender }}</span>
-              <small class="text-muted">Jun 27, 2:40 PM</small>
+              <small class="text-muted">{{ m.sent_date }}</small>
             </div>
             <p>{{ m.msg }}</p>
           </div>
@@ -357,5 +357,7 @@
     <!-- Right side main content section ends -->
   </div>
 </div>
+
+{% include 'buyingview/buying_footer.html' %}
 
 {% endblock %}

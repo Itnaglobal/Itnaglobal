@@ -32,16 +32,16 @@
         <div class="row">
 
             <div class="left-service col-md-3">
-                <h1 class="h6" >Digital Marketing</h1>
+                <h1 class="h6" >ALL CATEGORIES</h1>
                 <hr>
                 <ul class="catagory-list">
                 {% for c in cats %}
                     <li>
-                        <a href="">{{ c.title }}</a>
+                        <a href="{% url 'category-wise' c.slug %}">{{ c.title }}</a>
                         <i class="fas fa-chevron-right"></i>
                         <div class="line"></div>
                     </li>
-
+                    
                 {% endfor %}
 
                 </ul>
