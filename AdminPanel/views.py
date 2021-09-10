@@ -84,4 +84,11 @@ def adminLoginView(request):
 
 
 def transactionView(request):
-    return render(request, "transactions.html")
+    transactions = Checkout.objects.filter(paid=True)
+    completed_orders = Checkout.objects.filter(is_complete=True).count()
+    increase = (completed_orders / 100)
+    args = {
+        'transactions': transactions,
+        'increase': increase
+    }
+    return render(request, "transactions.html", args)

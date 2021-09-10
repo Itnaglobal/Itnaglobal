@@ -2,6 +2,29 @@ $(document).ready(function () {
   userAllChats = document.querySelector(".user__allChats");
   userAllChats.scrollTop = userAllChats.scrollHeight;
 
+  reload_chat = () => {
+    $.ajax({
+      url: "/chat/chatroom/94/",
+      success: function() {
+        document.querySelector(".alert__chatReload").classList.add("active__reloadChat");
+
+        document.querySelector("#tap__reload").addEventListener('click', () => {
+          window.location.reload();
+        });
+      }
+    });
+  }
+
+  setTimeout(function() {
+    reload_chat();
+  }, 25000);
+
+  goBack = document.querySelector(".go__back");
+
+  goBack.addEventListener('click', () => {
+    window.location.href = "/inbox";
+  });
+
   const chatForm = $("#chat__form");
 
   chatForm.submit(function (event) {
@@ -11,16 +34,11 @@ $(document).ready(function () {
     const method = chatForm.attr("method");
     let data = chatForm.serialize();
 
-    console.log(actionEndPoint);
-    console.log(method);
-    console.log(data);
-
     $.ajax({
       url: actionEndPoint,
       method: method,
       data: data,
       success: function (data) {
-        console.log(data.all_messages);
         if (data.message_info) {
           // alert(data.message_info);
 
@@ -61,17 +79,17 @@ function appendToMessage(message) {
 // Window width
 // const windowWidth = window.innerWidth;
 
-// const searchIcon = document.querySelector(".searchbar");
-// const seachBoxInput = document.querySelector(".seach__boxInput");
-// const userDropDown = document.querySelector(".user__dropdown");
-// const leftSearchBar = document.querySelector(".left__searchBar");
-// const closeSearchBar = document.querySelector(".close__searchBar");
-// const userChatGroup = document.querySelector(".user__chatGroup");
+const searchIcon = document.querySelector(".searchbar");
+const seachBoxInput = document.querySelector(".seach__boxInput");
+const userDropDown = document.querySelector(".user__dropdown");
+const leftSearchBar = document.querySelector(".left__searchBar");
+const closeSearchBar = document.querySelector(".close__searchBar");
+const userChatGroup = document.querySelector(".user__chatGroup");
 // const userList = document.querySelector(".user__chatList");
 
-// const rightTopDots = document.querySelector(".right__topDots");
-// const rightAlternateOptions = document.querySelector(".right__alternateOptions");
-// const closeAlternateOptions = document.querySelector(".close__alternateOption");
+const rightTopDots = document.querySelector(".right__topDots");
+const rightAlternateOptions = document.querySelector(".right__alternateOptions");
+const closeAlternateOptions = document.querySelector(".close__alternateOption");
 // const rightMainContent = document.querySelector(".right__mainContent");
 
 // const leftSide = document.querySelector(".left__side");
@@ -81,24 +99,24 @@ function appendToMessage(message) {
 // const goBack = document.querySelector(".go__back");
 
 // // Search bar input show/hide section starts
-// searchIcon.addEventListener("click", () => {
-//   userChatGroup.style.marginTop = "0.6rem";
-//   userList.style.display = "none";
-//   userDropDown.style.display = "none";
-//   leftSearchBar.style.display = "none";
-//   seachBoxInput.style.display = "flex";
-//   seachBoxInput.style.justifyContent = "space-between";
-//   seachBoxInput.style.alignItems = "center";
-// });
+searchIcon.addEventListener("click", () => {
+  userChatGroup.style.marginTop = "0.6rem";
+  // userList.style.display = "none";
+  userDropDown.style.display = "none";
+  leftSearchBar.style.display = "none";
+  seachBoxInput.style.display = "flex";
+  seachBoxInput.style.justifyContent = "space-between";
+  seachBoxInput.style.alignItems = "center";
+});
 
-// closeSearchBar.addEventListener("click", () => {
-//   userList.style.display = "inherit";
-//   userDropDown.style.display = "inherit";
-//   leftSearchBar.style.display = "inherit";
-//   userChatGroup.style.display = "inherit";
-//   seachBoxInput.style.display = "none";
-//   userChatGroup.style.marginTop = "1.45rem";
-// });
+closeSearchBar.addEventListener("click", () => {
+  // userList.style.display = "inherit";
+  userChatGroup.style.display = "inherit";
+  userDropDown.style.display = "inherit";
+  leftSearchBar.style.display = "inherit";
+  seachBoxInput.style.display = "none";
+  userChatGroup.style.marginTop = "1.45rem";
+});
 // // Search bar input show/hide section ends
 
 // // Right side top section alternate options show/hide section starts
@@ -106,13 +124,12 @@ function appendToMessage(message) {
 //   rightTopDots.style.display = "none";
 //   rightAlternateOptions.style.display = "flex";
 //   rightAlternateOptions.style.justifyContent = "space-between";
-//   rightMainContent.style.marginTop = "1rem";
 // });
 
 // closeAlternateOptions.addEventListener("click", () => {
+//   rightMainContent.style.marginTop = "1.5rem";
 //   rightTopDots.style.display = "flex";
 //   rightAlternateOptions.style.display = "none";
-//   rightMainContent.style.marginTop = "1.5rem";
 // });
 // // Right side top section alternate options show/hide section ends
 

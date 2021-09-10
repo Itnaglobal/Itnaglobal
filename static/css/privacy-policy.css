@@ -5,12 +5,20 @@
 }
 body{
     width: 100%;
-    background-color: #fff !important;
+    background-color: #f5f5f5 !important;
 }
 
 /* policy description */
+.helllllo{
+    text-align: justify;
+}
+
 
 /* more description */
+.description{
+    background-color: #fff !important;
+    padding: 15px !important;
+}
 .more-description{
     background-color: #f0f4ff;
     padding: 25px;

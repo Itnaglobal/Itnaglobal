@@ -12,7 +12,7 @@
 
             <div class="container-fluid px-4">
                 <div class="row g-3 my-2 new__admin__middle">
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded ">
                             <div>
                                 <h3 class="fs-2">{{ count_offers }}</h3>
@@ -31,13 +31,13 @@
                             <i
                                 class="fas fa-hand-holding-usd fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-md-3">
                         <div class="p-3 bg-white shadow-sm d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <h3 class="fs-2">12</h3>
-                                <p class="fs-5"><a href="#">Notifications</a></p>
+                                <h3 class="fs-2">12 BDT.</h3>
+                                <p class="fs-5"><a href="#">WALLET BALANCE</a></p>
                             </div>
                             <i class="fas fa-truck fs-1 primary-text border rounded-full secondary-bg p-3"></i>
                         </div>
@@ -108,19 +108,23 @@
                                 </tr>
                             </thead>
                             <tbody>
-                              {% for order in orders_obj %}
-                                <tr>
-                                    <th>{{ order.id }}</th>
-                                    <td>{{ order.user }}</td>
-                                    <td>{{ order.seller }}</td>
-                                    <td>{{ order.creater_at }}</td>
-                                    <th>{{ order.package }}</th>
-                                    <td>{{ order.order_status }}</td>
-                                    
-                          <td><a href="{% url 'order_details' order.id %}">View</a></td>
-                                    <td>$ {{ order.grand_total }}</td>
-                                </tr>
-                                {% endfor %}
+                                {% if transactions %}
+                                    {% for order in transactions %}
+                                        <tr>
+                                            <th>{{ order.id }}</th>
+                                            <td>{{ order.user }}</td>
+                                            <td>{{ order.seller }}</td>
+                                            <td>{{ order.creater_at }}</td>
+                                            <th>{{ order.package }}</th>
+                                            <td>{{ order.order_status }}</td>
+                                            
+                                        <td><a href="{% url 'order_details' order.id %}">View</a></td>
+                                            <td>$ {{ order.grand_total }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% else %}
+                                <p class="alert alert-warning">No Orders Found!</p>
+                                {% endif %}
                                 
                             </tbody>
 

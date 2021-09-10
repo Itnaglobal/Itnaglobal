@@ -100,10 +100,10 @@
               </div>
               <div class="user__username">
                 <!-- This should be truncate chars. Use django truncatechars -->
-                <p class="fw-bold text-dark">{{ rm.room_name }}</p>
+                <p class="fw-bold text-dark">{{ rm.room_name|truncatechars:20 }}</p>
                 <!-- This should be truncate chars. Use django truncatechars -->
                 <small class="text-muted"
-                  >Message: <span>{{ rm.room_name }}</span></small
+                  >Message: <span>{{ rm.room_name|truncatechars:20 }}</span></small
                 >
               </div>
             </div>

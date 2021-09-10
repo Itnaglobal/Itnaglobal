@@ -70,13 +70,13 @@
 
 
                     <!-- seo title     -->
-                        <div class="seo-title mb-4">
+                        <div class="seo-title">
                             <p>SEO TITLE</p>
                             <textarea name="seo_title" required> </textarea>
                         </div>
 
                     <!-- category -->
-                        <div class="category mb-4">
+                        <div class="category">
                             
                             <div class="category-title">
                                 <p>Category</p>
@@ -94,10 +94,29 @@
                             </div>
                         </div>
 
+                    <!-- category -->
+                        <div class="category">
+                            
+                            <div class="category-title">
+                                <p>Child Category</p>
+                            </div>
+
+                            <div class="select-area">
+                                <div>
+                            <select class="for-size" name="category" id="">
+                                {% for category in categories %}
+                                <option value="{{ category.title }}">{{ category.title }}</option>
+                                {% endfor %}
+                            </select>
+                                </div>                            
+                            
+                            </div>
+                        </div>
+
 
                     <!-- service type-->
                        
-                        <div class="service-type mb-4">
+                        <div class="service-type">
                             
                         <div class="service-title">
                             <p>SERVICE TYPE</p>

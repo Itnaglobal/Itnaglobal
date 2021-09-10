@@ -20,6 +20,10 @@ from datetime import datetime
 import string    
 import random
 from ChatApp.models import *
+from django.core.mail import send_mail
+from decimal import Decimal
+
+
 
 
 
@@ -481,7 +485,8 @@ def checkout(request):
         request.session['cart'] = {}
     ids = list(request.session.get('cart').keys())
     cart_products = OfferManager.get_offer(ids)
-
+    user = request.user
+    print("EMAIL: " + user.email)
     if request.method == 'POST':
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -508,6 +513,34 @@ def checkout(request):
             # checkout.order_status = ""
             
             checkout.save()
+   
+            send_mail(
+                'Subject here',
+                'USERNAME: ' + checkout.user.username + '\n'\
+                'Thank you for ordering from Marketage. ' + '\n'\
+                'Your order' + 'is now active. ' + '\n' \
+                'You can review your order status at any time by visiting Your Account https://marketage.io/test. \n'\
+
+                'Your Order Id: ' + 'Marketage#' + str(checkout.id) + '\n' +
+                 'Package Name: ' + str(checkout.package) + '\n' \
+                 'Price: ' + str(checkout.price) + '\n' \
+                 'Quantity: ' + str(checkout.quantity) + '\n' \
+                 'Grand Total: ' + str(checkout.grand_total) + '\n'\
+                 '\n'\
+                 'We hope you enjoyed your shopping experience with us and that you will visit us again soon.' \
+                 '\n'\
+                 '\n'\
+                 'Copyright © 2021 Itna Global Ltd. All rights reserved.'\
+                 'IGL located at 2 Frederick Street, Kings Cross, London, United Kingdom, WC1X 0ND'\
+                 '\n'
+                 'Bangladesh Office Itna Global Limited, House 24, Road,1, Nikunja2, Dhaka 1229, Khilkhet, Phone  +8809613662222 Email itnaglobal@gmail.com',
+                 
+                
+                'noreply@marketagemail.com',
+                [checkout.user.email],
+                # ['itna.sakib@gmail.com'],
+                fail_silently=False,
+            )
             request.session['cart'] = {}
             return redirect('BuyerOrders')
 
@@ -520,9 +553,21 @@ def checkout(request):
 # buyer order page views
 @login_required(login_url='user_login')
 def get_buyer_orders_url(request):
+    order_id = []
+    seller_submit = []
+
     orders = Checkout.objects.filter(user=request.user).order_by('-id')
+    
+    for order in orders:
+        order_id.append(order.id)
+
+    for item in SellerSubmit.objects.all().order_by("-id"):
+        if item.checkout.id in order_id:
+            seller_submit.append(item)
+
     args = {
-        'orders': orders
+        'orders': orders,
+        "seller_submit": seller_submit,
     }
     return render(request, 'buyingview/buying_orders.html', args)
 
@@ -617,22 +662,18 @@ def get_become_a_seller_page(request):
 def get_order_details_url(request, id, *args, **kwargs):
     order = Checkout.objects.get(pk=id)
     # for sslcommerz
-    ssl = request.POST.get('sslcommerz')
-    # for ammarPay
-    ammar = request.POST.get("ammarpay")
 
-    if request.method == "POST" and ssl:
+    if request.method == "POST":
         settings = {
             'store_id': 'testbox', 'store_pass': 'qwerty', 'issandbox': True
         }
         user = request.user
-        # order = Checkout.objects.get(pk=kwargs['id'])
         order = Checkout.objects.get(pk=id)
         print(order)
         first_name = order.first_name
         last_name = order.last_name
         address = order.address
-        email = order.user.selleraccount.email
+        email = order.user.email
         phone_number = order.user.selleraccount.contact_no
         country = order.user.selleraccount.country
         city = order.user.selleraccount.city
@@ -671,34 +712,6 @@ def get_order_details_url(request, id, *args, **kwargs):
         print(response)
         return redirect(response['GatewayPageURL'])
 
-
-        # ammarPay Integration
-    
-    elif request.method == 'POST' and ammar:
-        data = {
-            "store_id": "aamarpaytest",
-            "signature_key": "dbb74894e82415a2f7ff0ec3a97e4183",
-            "cus_email": "test@gmail.com",
-            "cus_name": "test",
-            "cus_phone": "0122521445",
-            "cus_add1": "ASDASD",
-            "cus_add2": "sqweqwe",
-            "cus_city": "DHAKA",
-            "cus_country": "BD",
-            "amount": "1500",
-            "tran_id": "asd54w5qe232asdas3",
-            "currency": "$",
-            "success_url": "http://127.0.0.1:8000/success/",
-            "fail_url": "http://127.0.0.1:8000/failed/",
-            "cancel_url": "http://127.0.0.1:8000/cancel/",
-            "desc": "alksdjalskdjalskdjalskdasld",
-            "type": "json"
-        }
-        gateawayURL = "https://sandbox.aamarpay.com/jsonpost.php"
-        return JsonResponse(data, safe=False)
-        
-    
-
     args = {
         'order': order
     }
@@ -710,9 +723,11 @@ def get_order_details_url(request, id, *args, **kwargs):
 def successView(request):
     if request.POST.get('status') == "VALID":
         tran_id = request.POST['tran_id']
-        order = Checkout.objects.filter(id=tran_id)
-        if order.exists():
-            order.update(paid = True)
+        # print("TRAIN ID:", tran_id)
+        order = Checkout.objects.get(id=tran_id)
+        # print("ORDER:", order)
+        order.paid = True
+        order.save()
         
     return render(request, "responseview/success.html")
 
@@ -1230,6 +1245,7 @@ def buyerOfferFormView(request, pk):
     seller_submit = None
     try:
         order = Checkout.objects.get(id=pk)
+        print(order)
         print("BUYER ORDER", order)
         seller_submit = SellerSubmit.objects.filter(checkout=order)
 
@@ -1538,6 +1554,9 @@ def refundRequestView(request):
     return render(request, "buyingview/refund-req.html")
 
 
+# Sending Email while placing Order Functions 
+
+
 
 
 
@@ -1556,3 +1575,8 @@ def read_txt(request):
 
 def rafsun_header(request):
     return render(request, "rafsunpart/test_header.html")
+
+
+# azim password reset page
+def password_reset_confirm(request):
+    return render(request, "accountview/password_reset_confirm.html")

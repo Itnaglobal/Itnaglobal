@@ -166,7 +166,12 @@ body{
     .socialIcon button{
         font-size:16px;
     }
-    
+    .sign___up___link{
+        font-size: 13px;
+    }
+    .forget___link{
+        font-size: 12px;
+    }
 }
 @media (max-width:382px){
     .socialIcon button{

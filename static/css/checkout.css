@@ -9,8 +9,9 @@ body{
 }
 
 .headerLogo img{
-    width: 140px;
+    width: 129px;
     height: 27px;
+    object-fit: cover;
 }
 .headerLogo{
     padding: 25px;

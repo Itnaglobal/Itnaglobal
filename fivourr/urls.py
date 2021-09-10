@@ -1,18 +1,3 @@
-"""fivourr URL Configuration
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path, include
 from mainApp import views
@@ -25,11 +10,15 @@ urlpatterns = [
     path('adminpanel/', include('AdminPanel.urls')),
 
     # Password Reset URL
-
     path("reset_password/", auth_views.PasswordResetView.as_view(template_name="accountview/password_reset.html"), name="reset_password",),
     path("reset_password_sent/", auth_views.PasswordResetDoneView.as_view(template_name="accountview/email_sent.html"), name="password_reset_done"),
     path("reset/<uidb64>/<token>/", auth_views.PasswordResetConfirmView.as_view(template_name="accountview/password_reset_confirm.html"), name="password_reset_confirm"),
     path("reset_password_complete/", auth_views.PasswordResetCompleteView.as_view(template_name="accountview/reset_password_complete.html"), name="password_reset_complete"),
+
+
+    # azim url of reset
+    path ("password_reset_confirm/", views.password_reset_confirm, name="password-reset-confirm"),
+
 
     # Chat App URLS
     
@@ -58,7 +47,7 @@ urlpatterns = [
     path('seller_profile/', views.seller_profile, name="seller_profile"),
 
     ## Service wise offers url
-    path('serivceWiseoffers/<str:slug>/', views.service_wise_offers, name="service_wise_offers"),
+    path('service-wise/<str:slug>/', views.service_wise_offers, name="service_wise_offers"),
     # Category wise page
     path("category-wise/<slug:slug>/", views.category_wise_offers, name="category-wise"),
     # Manage order page url
@@ -79,25 +68,21 @@ urlpatterns = [
     path('add_to_cart/', views.add_to_cart, name="add_to_cart"),
 
     # Checkout Page Url
-
     path('checkout/', views.checkout, name="checkout"),
 
     # category wise Subcategory
-
     path('category_wise_offers/p=2021/<int:category_id>/', views.category_wise_offers, name="categoryWiseView"),
 
     # Subcategory Wise Offer URL
+    path("subcategory/<str:slug>/", views.subcategory_wise_offers, name="SubcategoryWiseOffer"),
 
-    path("<slug:slug>", views.subcategory_wise_offers, name="SubcategoryWiseOffer"),
     # Settings URL
-
     path('settings/', views.settings_page, name="settings"),
 
     # Account url
     path('account/<int:user_id>/', views.account_detailsView, name="account"),
 
     # security url
-
     path('security/', views.security_page, name="security_page"),
 
     # notifications_page url
@@ -150,13 +135,13 @@ urlpatterns = [
     # About us page
     path("about-us/", views.aboutusView, name="about-us"),
     
-    path("privacypolicy/", views.privacypolicyView, name="privacypolicy"),
+    path("privacy-policy/", views.privacypolicyView, name="privacypolicy"),
     
-    path("helpSupport/", views.helpSupportView, name="helpSupport"),
+    path("help-support/", views.helpSupportView, name="helpSupport"),
     
-    path("trustSafety/", views.trustSafetyView, name="trustSafety"),
+    path("trust-safety/", views.trustSafetyView, name="trustSafety"),
     
-    path("termOfservices/", views.termOfservicesView, name="termOfservices"),
+    path("term-of-services/", views.termOfservicesView, name="termOfservices"),
 
     # Create offer page
     path("create-offer/", views.createOfferView, name="create-offer"),

@@ -70,18 +70,18 @@
       
         {% for order in orders %}
         <tr>
-            <td scope="" colspan="2" class="ps-3">{{order.seller}}</td>
-            <td scope="" class=" for-width">{{ order.package }} </td>
-            <td scope="" class="text-center">$ {{order.title}}</td>
-            <td scope="" class="status text-center align-middle">
-                <p>ACTIVE</p>
-            </td>
-            <td scope="" class="text-muted text-center view align-middle">
-                <a href="{% url 'buyer-orders' order.id %}">
-                  <p>VIEW</p>
-                </a>
-            </td>
-          </tr>
+          <td scope="" colspan="2" class="ps-3">{{order.seller}}</td>
+          <td scope="" class=" for-width">{{ order.package }} </td>
+          <td scope="" class="text-center">$ {{order.title}}</td>
+          <td scope="" class="status text-center align-middle">
+              <p>ACTIVE</p>
+          </td>
+          <td scope="" class="text-muted text-center view align-middle">
+              <a href="{% url 'buyer-orders' order.id %}">
+                <p>VIEW</p>
+              </a>
+          </td>
+        </tr>
         {% endfor %}
     </tbody>
   </table>

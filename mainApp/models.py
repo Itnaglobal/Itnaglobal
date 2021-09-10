@@ -51,7 +51,7 @@ class City(models.Model):
 class SellerAccount(models.Model):
     joined_at = models.DateField(default=datetime.now, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email = models.EmailField(null=True, unique=True)
+    # email = models.EmailField(null=True, unique=True)
     contact_no = models.CharField(max_length=15, null=True)
     profile_picture = models.ImageField(upload_to="images/", null=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
@@ -100,7 +100,7 @@ class Services(models.Model):
     def __str__(self):
         return self.title
 
-
+# Category model
 class Category(models.Model):
     slug = models.SlugField(unique=True)
     title = models.CharField(max_length=120, unique=True)
@@ -110,7 +110,7 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
-
+# Subcategory Model 
 class Subcategory(models.Model):
     slug = models.SlugField(unique=True)
     sub_title = models.CharField(max_length=120, unique=True)
@@ -121,6 +121,18 @@ class Subcategory(models.Model):
 
     def __str__(self):
         return self.sub_title
+
+# Child Subcategory Model
+class ChildSubcategory(models.Model):
+    child_slug = models.SlugField()
+    child_title = models.CharField(max_length=220)
+    child_image = models.ImageField(upload_to="images/", null=True, blank=True)
+    parent_subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.child_title
+
+
 
 class CategoryInterestedModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -229,7 +241,7 @@ class Package(models.Model):
     
     video_length = models.PositiveBigIntegerField(default=0, null=True, blank=True)
     will_embedded_sub = models.BooleanField(default=False, null=True, blank=True)
-    is_transcription = models.BooleanField(default=False, null=True, blank=True)
+    is_transactioable = models.BooleanField(default=False, null=True, blank=True)
     is_translated = models.BooleanField(default=False, null=True, blank=True)
     will_srt_logo = models.BooleanField(default=False, null=True, blank=True)
     will_add_logo = models.BooleanField(default=False, null=True, blank=True)

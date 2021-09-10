@@ -3,6 +3,8 @@
 {% load static %}
 
 {% block content %}
+
+
     <div class="total-login">
         <div class="forBackground">
           <!--<div class="top_pop">-->
@@ -96,8 +98,8 @@
                     <div class="logInFooter">
                       <p class="log____footer">
                         Don't have an account?
-                        <a href="{% url 'user_registration' %}">Sign Up</a><br>
-                        <a href="{% url 'reset_password' %}">Forget password?</a>
+                        <a class="sign___up___link" href="{% url 'user_registration' %}">Sign Up</a><br>
+                        <a class="forget___link" href="{% url 'reset_password' %}">Forget password?</a>
                       </p>
                     </div>
                   </form>

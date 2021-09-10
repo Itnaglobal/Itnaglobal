@@ -512,7 +512,7 @@
                                 {% for manager in offers.offermanager_set.all %}
                                 <th scope="col" class="table-size">
                                     <span class="align-middle text-center">$ {{ manager.price }}</span>
-                                    <strong class="d-block col text-left">{{ manager.package }}</strong>
+                                    <strong class="d-block col text-left">{{ manager.package.title }}</strong>
                                     <!--<strong class="d-block text-left">Single Page</strong>-->
                                     <p class="text-left">{{ manager.offer.short_desc|truncatechars:100 }}</p>
                                 </th>

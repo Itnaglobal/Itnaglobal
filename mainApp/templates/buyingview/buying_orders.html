@@ -8,55 +8,130 @@
 
     <link rel="stylesheet" href=  "{% static 'css/make-payment-for-buyer.css' %}" />
 
+    <script src="{% static 'js/buying-order-arko.js' %}" defer></script>
+
+    
+
+    
+  <div class="tab-view container d-flex mt-5">
+
+      <p class="place-order">PLACED ORDER</p>
+
+      <p class="ongoing-project">ONGOING PROJECTS</p>
+
+  </div>
 
 
 
-<div class="quiz-window mt-5 mb-5">        
-    <div class="quiz-window-body container">
-      <div class="gui-window-awards">
+<!-- for placed order -->
+  <div class="order-details-for-payment container for-placed-order mb-5">
 
-        <div class="align-center">
-        <ul class="guiz-awards-row guiz-awards-row-even ">
-          <li class="guiz-awards-star title">GIG TITLE</li>
-          <li class="guiz-awards-title title">BUYER NAME</li>
-          <li class="guiz-awards-track title">SELLER NAME</li>
-          <li class="guiz-awards-time title">GRAND TOTAL</li>
-          <li class="guiz-awards-time text-center title">ACTION</li>
-        </ul>
-      </div>
+    <div class="order-list table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="align-middle for-name">OFFER TITLE</th>
+            <th scope="col" class="align-middle for-name">BUYER NAME</th>
+            <th scope="col" class="align-middle for-name">SELLER NAME</th>
+            <th scope="col" class="align-middle">GRAND TOTAL</th>
+            <th scope="col" class="align-middle text-center">ACTION</th>
+            <th scope="col" class="align-middle"></th>
+          </tr>
+        </thead>
 
-    <hr>
-{% if orders %}
-  {% for order in orders %}
-        <ul class="guiz-awards-row">
 
-          <li class="guiz-awards-star font-size">{{ order.package }}</li>
-          <li class="guiz-awards-title font-size">{{ order.first_name }}</li>
-          <li class="guiz-awards-track font-size">{{ order.package.gig.user }}</li>
-          <li class="guiz-awards-time font-size">{{ order.seller }}</li>
-          <li class="guiz-awards-time font-size">${{ order.grand_total }}</li>
-          
-          <li class="guiz-awards-time font-size">
-          {% if not order.paid == True %}
-            <div class="button container">
-            
-                <a href="{% url 'OrderDetails' order.id %}"><button>    Make Payment   </button></a>
-           
-            </div>
-             {% else %}
-              <p class="badge bg-primary">{{ order.order_status }}</p>
+        <tbody>
+        {% for order in orders %}
+        {% if order.order_status != "DELIVERED" %}
+            <tr>
+              <td scope="row" class="align-middle for-width for-name">
+                {{ order.package.offer.offer_title }}
+              </td>
+              <td class="align-middle for-name">{{ order.user }}</td>
+              <td class="align-middle for-name">{{ order.seller }}</td>
+              <td class="align-middle">{{ order.total }}<span class="taka-sign">৳</span> </td>
+              {% if order.paid == False %}
+                <td class="align-middle text-center">
+                  <a href="{% url 'OrderDetails' order.id %}" class="button make-payment align-middle text-center">
+                    <button class="make-payment">
+                      Make payment
+                    </button>
+                  </a>
+                </td>
+              {% else %}
+              <td class="align-middle">
+                <div class="button text-center align-middle">
+                  <span class="review-button align-middle text-center review__btnPrimary">
+                    Paid
+                  </span>
+                </div>
+              </td>
+              {% endif %}
+              <td class="align-middle">
+                <div class="button text-center align-middle">
+                  <span class="review-button align-middle text-center ">
+                    {{ order.order_status }}
+                  </span>
+                </div>
+              </td>
+            </tr>
             {% endif %}
-          </li>
-        </ul>
-
-    <hr>
-  {% endfor %}
-{% else %}{% endif %}
-             
-        
-      </div>
-      
+          {% endfor %}  
+        </tbody>  
+<!-- last total amount -->
+      </table>
     </div>
+
+  </div>
+
+
+
+<!-- for ongoing project -->
+
+
+
+<div class="order-details-for-payment container for-ongoing mb-5">
+
+  <div class="order-list table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col" class="align-middle for-name">OFFER TITLE</th>
+          <th scope="col" class="align-middle for-name">SELLER NAME</th>
+          <th scope="col" class="align-middle ">GRAND TOTAL</th>
+          <th scope="col" class="align-middle text-center"></th>
+          <th scope="col" class="align-middle text-center">ACTION</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+
+        {% for item in seller_submit %}
+          <tr>
+            <td scope="row" class="align-middle for-name">{{ item.checkout.package.offer.offer_title }}</td>
+            <td class="align-middle for-name">{{ item.checkout.seller }}</td>
+            <td class="align-middle">{{ item.checkout.total }} <span class="taka-sign">৳</span></td>
+            <td class="align-middle">
+              <div class="button text-center align-middle">
+                <span class="review-button align-middle text-center ">
+                  {{ item.checkout.order_status }}
+                </span>
+              </div>
+            </td>
+            <td class="align-middle text-center">
+              <a href="{% url 'buyer-orders' item.checkout.id %}" class="button align-middle text-center ">
+                <button class="view">
+                  View
+                </button>
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>  
+    </table>
+  </div>
+
 </div>
 
 

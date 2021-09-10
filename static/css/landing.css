@@ -1,8 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 *{
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
 }
+.new__color{
+    font-family: 'Poppins', sans-serif;
+    background-color: #f09a1a !important;
+}
+.new_________nav______logo{
+    font-weight: 700 !important;
+    font-family: 'Lobster', cursive;
+    letter-spacing: 2px;
+    font-size: 29px;
+}
+
 .desktop__navbar{
     height: 88px;
 }

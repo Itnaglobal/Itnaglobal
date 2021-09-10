@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css"/>
 
+
     <!-- swiper slider -->
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" />
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
@@ -27,14 +28,18 @@
     <!--main css for buyer-view -->
      <link rel="stylesheet" href=  "{% static 'css/buyer-stylesheet.css' %}" />
      <link rel="stylesheet" href=  "{% static 'css/buyer-style-responsive.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/rafsun.css' %}">
 
 
+  
   
     <link rel="shortcut icon" href="{% static 'images/market_fav.png' %}">
 
 
 
     <script src="{% static 'js/main-buyer-view.js' %}" defer ></script>
+
+
 
 </head>
 <body>
@@ -193,7 +198,7 @@
 
 
 
-    <header id="home-page">
+    {% comment %} <header id="home-page">
         <nav class="navbar navbar-expand-lg navbar-light nav-bar-hide-on-mob">
             <div class="container">
 
@@ -251,19 +256,110 @@
             {% endfor %}
 
             <li><a href="{% url 'Categories' %}">View More</a></li>
-            
-                {% comment %} <li><a href="">Disital Marketing</a></li>
-                <li><a href="">Writing & Translation</a></li>
-                <li><a href="">Video & Animation</a></li>
-                <li><a href="">Music & Audio</a></li>
-                <li><a href="">Programming & Tech</a></li>
-                <li><a href="">Data</a></li>
-                <li><a href="">Business</a></li>
-                <li><a href="">Lifestyle</a></li> {% endcomment %}
             </ul>
         </div>
         <div class="dag container-fluid"></div>
-    </header>
+    </header> {% endcomment %}
+
+    <header id="home-page" style="margin-top: 0 !important">
+       
+       
+        <div class="Headernav">
+
+            <!-- up nav bar  -->
+            <div class="topnavbar">
+                <div class="container"> 
+                 <div class="topnav">
+
+                     <div class =" Maketlogo">
+                         <a href="{% url 'buying_view' %}" > <img src="{% static 'images/marketage.png' %}" alt=""
+                            style="height: 50px;width:200px;"> </a> 
+                     </div>
+                    
+         
+         
+                      <div class="HeaderMenu">
+                         <a class="active" href="#home">MARKETAGE Pro</a>
+                         <a href="{% url 'BuyerChat' %}">Message</a>
+                         <a href="{% url 'BuyerOrders' %}">Orders</a>
+                         <a href="{% url 'seller_dashboard' %}">Switch to Selling</a>
+                      </div>
+     
+                      
+                     <div class="Searchbar"> 
+                         <form class="example" action="action_page.php">
+                             <input type="text" placeholder="Search.." name="search">
+                             <button type="submit"><span class="iconify Search-icon" data-icon="mdi:magnify"></span></i></button>
+                           </form>
+                     </div>
+                 </div>
+     
+                </div> 
+             </div> <hr style="margin-top: 0px; border: 0.2px solid black;margin-bottom: 0px;">
+     
+
+
+    <!-- catagory  -->
+   
+          <div>
+            <div class="container">
+               <div class="Catagorybar">
+                   <ul>
+                       <li><a href="#">Logo Design</a></li>
+                       <li><a href="#">Web Programming</a></li>
+                       <li><a href="#">Voice</a></li>
+                       <li>
+                           <a href="#">Writing & Translation &#9662;</a>
+                        <!-- <div class="left">
+                            <ul class="dropdown">
+                               <li><a href="#">Banglades</a></li>
+                               <li><a href="#">USA</a></li>
+                               <li><a href="#">Canada</a></li>
+                               <li><a href="#">Banglades</a></li>
+                               <li><a href="#">USA</a></li>
+                               <li><a href="#">Canada</a></li>
+                               <li><a href="#">Banglades</a></li>
+                               <li><a href="#">USA</a></li>
+                               <li><a href="#">Canada</a></li>
+                           </ul>
+                        </div> -->
+                        <div class="middle">
+                            <ul class="dropdown2">
+                               <li><a href="#">Banglades</a></li>
+                               <li><a href="#">USA</a></li>
+                               <li><a href="#">Canada</a></li>
+                               <li><a href="#">Germany</a></li>
+                               <li><a href="#">italy</a></li>
+                               <li><a href="#">Spain</a></li>
+                               <li><a href="#">Russia</a></li>
+                               <li><a href="#">Norway</a></li>
+                               <li><a href="#">India</a></li>
+                               <li><a href="#">Maldivs</a></li>
+                               <li><a href="#">Singapore</a></li>
+                               <li><a href="#">london</a></li>
+                           </ul>
+                        </div>
+                       </li>
+                       <li><a href="#">Programming & Tech</a></li>
+                       <li><a href="#">Life Style</a></li>
+                       <li><a href="#">Business</a></li>
+                       <li><a href="#">View More</a></li>
+                   </ul>
+               </div>
+          </div>
+         </div><hr style="margin-top: 0px; border: 0.2px solid black; margin-bottom: 0px;">
+
+        </div>   
+       
+   
+    
+
+
+   </header>
+ 
+
+
+   <script src="https://code.iconify.design/2/2.0.3/iconify.min.js"></script>
 
 
 

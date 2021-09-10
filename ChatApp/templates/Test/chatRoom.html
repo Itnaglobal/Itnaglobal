@@ -10,6 +10,24 @@
 ></script>
 <script src="{% static 'js/chat_inbox.js' %}" defer></script>
 
+<div class="alert__chatReload w-25 p-3 bg-white">
+  <div
+    class="bg-white mx-auto d-flex align-items-center justify-content-center"
+  >
+    <p class="fw-bold">
+      To see new messages,
+      <span class="text-primary fw-normal" id="tap__reload"
+        >tap to reload
+        <span
+          class="iconify"
+          data-icon="bi:arrow-left"
+          data-rotate="180deg"
+        ></span
+      ></span>
+    </p>
+  </div>
+</div>
+
 <div class="chat__inbox container">
   <!-- Left side section starts -->
   <div class="left__side">
@@ -80,7 +98,7 @@
     <!-- Left side top section ends -->
 
     <!-- Left main content section starts -->
-    <div class="user__chatGroup">
+    <div class="user__chatGroup mobile__userChatGroup">
       <ul class="list-group user__chatList">
         {% for rm in rooms %}
         <li class="list-group-item list-group-item-action">
@@ -100,10 +118,11 @@
               </div>
               <div class="user__username">
                 <!-- This should be truncate chars. Use django truncatechars -->
-                <p class="fw-bold text-dark">{{ rm.buyer }}</p>
+                <p class="fw-bold text-dark">{{ rm.buyer|truncatechars:5 }}</p>
                 <!-- This should be truncate chars. Use django truncatechars -->
                 <small class="text-muted"
-                  >Message: <span>{{ rm.room_name }}</span></small
+                  >Message:
+                  <span>{{ rm.room_name|truncatechars:10 }}</span></small
                 >
               </div>
             </div>
@@ -139,7 +158,7 @@
   <!-- Left side section ends -->
 
   <!-- Middle side section starts -->
-  <div class="middle__side">
+  <div class="middle__side mobile__middleContent">
     <!-- Middle side top section starts -->
     <div class="middle__topSection">
       <span class="go__back">
@@ -248,7 +267,7 @@
   <!-- Middle side section ends -->
 
   <!-- Right side section starts -->
-  <div class="right__side">
+  <div class="right__side mobile__rightSide">
     <!-- Right side top section starts -->
     <div class="right__topSection">
       <div class="right__topDots">
@@ -358,6 +377,4 @@
   </div>
 </div>
 
-{% include 'buyingview/buying_footer.html' %}
-
-{% endblock %}
+{% include 'buyingview/buying_footer.html' %} {% endblock %}

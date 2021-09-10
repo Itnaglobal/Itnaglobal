@@ -1,3 +1,26 @@
+.alert__chatReload {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100vh);
+  z-index: 1000;
+  box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.2);
+  transition: all 0.5s ease-in-out;
+}
+
+.alert__chatReload p {
+  margin-block-start: 0 !important;
+  margin-block-end: 0 !important;
+}
+
+.alert__chatReload.active__reloadChat {
+  transform: translate(-50%, 20%);
+}
+
+#tap__reload {
+  cursor: pointer;
+}
+
 .chat__inbox {
   display: grid;
   grid-template-columns: 30% 45% 25%;
@@ -164,6 +187,13 @@
   background-color: #198754;
   border-radius: 50%;
   border: 2px solid #fff;
+}
+
+.user__username p,
+.user__username small {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .user__username p {
@@ -432,10 +462,34 @@
     padding-right: 0.5rem;
   }
   
+  .mobile__userChatGroup,
   .user__chooseIcons,
   .middle__side,
   .right__side {
     display: none;
+  }
+
+  .mobile__middleContent,
+  .mobile__rightSide {
+    display: inherit;
+    margin-top: 2rem;
+    border-top: 1px solid rgb(209, 199, 199);
+  }
+
+  .alert__chatReload {
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .alert__chatReload {
+    width: 70% !important;
+  }
+}
+
+@media (max-width: 450px) {
+  .alert__chatReload {
+    width: 80% !important;
   }
 }
 
@@ -469,4 +523,3 @@
     bottom: 5%;
   }
 }
-

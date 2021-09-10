@@ -33,6 +33,9 @@ ol, ul {
     font-weight: 500;
     font-size: 18px;
 }
+.category{
+    margin: 50px 0px;
+}
 .gig-title textarea, .seo-title textarea{
     width: 80%;
     height: 100px;
@@ -210,7 +213,7 @@ ol, ul {
     padding: 15px;
     border-radius: 5px;
     position: relative;
-    top: 0%;
+    top: 8%;
     display: none;
 }
 .seo-title-hover::after{
@@ -230,7 +233,7 @@ ol, ul {
     padding: 15px;
     border-radius: 5px;
     position: relative;
-    top: 52%;
+    top: 44%;
     display: none;
 }
 .category-hover::after{
@@ -250,7 +253,7 @@ ol, ul {
     padding: 15px;
     border-radius: 5px;
     position: relative;
-    top: 50%;
+    top: 60%;
     display: none;
 }
 .service-type-hover::after{
@@ -262,7 +265,7 @@ ol, ul {
     border-bottom: 15px solid transparent; 
     border-right:15px solid rgb(204, 212, 236);
     left: -5%;
-    top: 20%;
+    top: 72%;
 }
 /* search tag */
 .search-tag-hover{

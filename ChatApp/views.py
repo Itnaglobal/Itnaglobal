@@ -123,7 +123,6 @@ def chatRoomView(request, id):
                 "message_info": message
             }
             return JsonResponse(data)
-    else:
         return redirect(f"/chat/chatroom/{chatroom.id}")
 
 

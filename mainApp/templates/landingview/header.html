@@ -81,9 +81,10 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light fixed-top navbar-dark desktop__navbar">
     <div class="container">
-      {% for logo in main_logo %}
+      <a class="navbar-brand new_________nav______logo" href="{% url 'get_landing_page' %}">Marketage.</a>
+      <!-- {% for logo in main_logo %}
       <a class="navbar-brand navbarNewIcon" href="{% url 'get_landing_page' %}"><img src="{{ logo.logo_img.url }}" alt=""></a>
-      {% endfor %}
+      {% endfor %} -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

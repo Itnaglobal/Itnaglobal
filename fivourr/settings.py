@@ -146,14 +146,16 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Stripe Credentials
 
-STRIPE_SECRET_KEY = ''
-STRIPE_PUBLISHABLE_KEY = ''
+STRIPE_SECRET_KEY = 'sk_test_51JQ4uaFZa2c48QIFX0WiBvefRanJXwRtpNEVftcFS9qRWe9lJYzNNX0aoHItroORU3ZkFZxviTuUxN85YWvVygkV00GbEz27rG'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51JQ4uaFZa2c48QIFKlw5aHZDFyyKxIbgbuY0BpDiDC3vZqEMbTei1eit7Z74oS9hiI2qOVp9oGgBmuATnidOnBTq00BNM14e59'
 
 # SMTP COnfiguration
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST = 'mail.privateemail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'itna.sakib@gmail.com'
-EMAIL_HOST_PASSWORD = 'idontthinkso123'
+DEFAULT_FROM_EMAIL = 'noreply@marketagemail.com'
+EMAIL_HOST_USER = 'noreply@marketagemail.com'
+EMAIL_HOST_PASSWORD = 'Fivour123@'
+
