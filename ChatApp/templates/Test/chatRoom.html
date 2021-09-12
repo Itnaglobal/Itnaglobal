@@ -122,15 +122,13 @@
                 <!-- This should be truncate chars. Use django truncatechars -->
                 <small class="text-muted"
                   >Message:
-                  <span>{{ rm.room_name|truncatechars:10 }}</span></small
-                >
+                  <span>{{ rm.room_name|truncatechars:10 }}</span></small>
               </div>
             </div>
 
             <div class="msg__timestamp">
               <small class="text-muted fw-bold"
-                >{{ rm.chatroom.sent_date }}</small
-              >
+                >{{ rm.chatroom.sent_date }}</small>
               <div class="user__chooseIcons">
                 <div class="make__fav">
                   <span

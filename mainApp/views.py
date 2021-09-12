@@ -84,6 +84,7 @@ def buying_view(request):
     main_logo = MainLogo.objects.all().last()
     offers = Offer.objects.all().order_by('-click')
     cats = Category.objects.all()
+    subcats = Subcategory.objects.all()
 
     pop_offers = Offer.objects.filter(is_popular=True)
     pop_web_offers = Offer.objects.filter(pop_web=True)
@@ -93,6 +94,7 @@ def buying_view(request):
         'offers': offers,
         'pop_offers': pop_offers,
         'cats': cats,
+        "subcats": subcats,
         'pop_web_offers': pop_web_offers,
         "pro_offers": pro_offers,
         'main_logo': main_logo
@@ -394,7 +396,7 @@ def notifications_page(request):
 
 @login_required(login_url='user_login')
 def support_page(request):
-    return render(request, 'sellingview/support.html')
+    return render(request, 'azimpart/help-support.html')
 
 # Azim Contact Page
 
@@ -554,7 +556,7 @@ def checkout(request):
 @login_required(login_url='user_login')
 def get_buyer_orders_url(request):
     order_id = []
-    seller_submit = []
+    seller_submit = set()
 
     orders = Checkout.objects.filter(user=request.user).order_by('-id')
     
@@ -562,8 +564,17 @@ def get_buyer_orders_url(request):
         order_id.append(order.id)
 
     for item in SellerSubmit.objects.all().order_by("-id"):
+        print(item.checkout.id)
         if item.checkout.id in order_id:
-            seller_submit.append(item)
+            try:
+                x = SellerSubmit.objects.filter(checkout=item.checkout.id).last()
+            except:
+                return redirect("BuyerOrders")
+            else:
+                seller_submit.add(x)
+
+    print(order_id)
+    print(seller_submit)
 
     args = {
         'orders': orders,
@@ -1245,9 +1256,9 @@ def buyerOfferFormView(request, pk):
     seller_submit = None
     try:
         order = Checkout.objects.get(id=pk)
-        print(order)
         print("BUYER ORDER", order)
         seller_submit = SellerSubmit.objects.filter(checkout=order)
+        print("SELLER SUBMIT:", seller_submit)
 
         if seller_submit.exists():
             seller_submit = seller_submit.last()
@@ -1260,6 +1271,7 @@ def buyerOfferFormView(request, pk):
     else:
         if request.method == "POST":
             order_status = request.POST.get("order_status")
+
             l = Checkout.objects.filter(is_complete=True).filter(
                  seller=request.user).count()
             print(l)
@@ -1274,77 +1286,97 @@ def buyerOfferFormView(request, pk):
             seller_wallet = order.seller.selleraccount.wallet
             print(str(seller_wallet))
             if order_status == "complete":
+                order.order_status = "COMPLETED"
+                order.is_complete = True
+                order.is_cancel = False
+                order.on_review = False
                 order.seller.selleraccount.wallet += amount
                 order.seller.selleraccount.save()
                 print("User Balance Now: " + str(order.seller.selleraccount.wallet))
                 
                 print("BALANCEEEEEEEEEEE" + str(order.seller.selleraccount.wallet))
                 order.save()
-                return redirect("buyer-dashboard")
+                return redirect("BuyerOrders")
 
             elif order_status == "complete" or l > 15:
                 order.order_status = "COMPLETED"
                 order.is_complete = True
+                order.is_cancel = False
+                order.on_review = False
                 order.seller.selleraccount.level = 1
                 order.seller.selleraccount.save()
                 order.save()
-                return redirect("buyer-dashboard")
+                return redirect("BuyerOrders")
             
             elif order_status == "complete" or l > 25:
                 order.order_status = "COMPLETED"
                 order.is_complete = True
+                order.is_cancel = False
+                order.on_review = False
                 order.seller.selleraccount.level += 1
                 order.seller.selleraccount.save()
                 order.save()
-                return redirect("buyer-dashboard")
+                return redirect("BuyerOrders")
             
             elif order_status == "complete" or l > 35:
                 order.order_status = "COMPLETED"
                 order.order_status = True
+                order.is_cancel = False
+                order.on_review = False
                 order.seller.selleraccount.level += 1
                 order.seller.selleraccount.save()
                 order.save()
-                return redirect("buyer-dashboard")
+                return redirect("BuyerOrders")
             
             elif order_status == "complete" or l > 50:
                 order.order_status = "COMPLETED"
                 order.order_status = True
+                order.is_cancel = False
+                order.on_review = False
                 order.seller.selleraccount.level += 1
                 order.seller.selleraccount.save()
                 order.save()
-                return redirect("buyer-dashboard")
-                
+                return redirect("BuyerOrders")
+
             # Leveling Down ALgorithm
             
             elif order_status == "cancel" or cancel_amount > 5:
                 order.order_status = "CANCELLED"
                 order.is_cancel = True
+                order.is_complete = False
+                order.is_review = False
                 order.seller.selleraccount.level -= 1
                 order.seller.selleraccount.save()
                 order.save()
-                return redirect("buyer-dashboard")
+                return redirect("BuyerOrders")
             
             elif order_status == "cancel" or cancel_amount > 8:
                 order.order_status == "CANCELLED"
                 order.is_cancel = True
+                order.is_complete = False
+                order.is_review = False
                 order.seller.selleraccount.level -= 1
                 order.seller.selleraccount.save()
                 order.save()
-                return redirect("buyer-dashbaord")
+                return redirect("BuyerOrders")
             
             elif order_status == "cancel" or cancel_amount > 15:
                 order.order_status == "CANCELLED"
                 order.is_cancel = True
+                order.is_complete = False
+                order.is_review = False
                 order.seller.selleraccount.level -= 1
                 order.seller.selleraccount.save()
                 order.save()
-                return redirect("buyer-dashboard")
+                return redirect("BuyerOrders")
             
             elif order_status == "review":
                 order.order_status = "ON REVIEW"
                 order.on_review = True
+                order.is_complete = False
+                order.is_cancel = False
                 order.save()
-                return redirect("buyer-dashboard")
+                return redirect("BuyerOrders")
             else:
                 messages.error(request, "Error while submitting!")
     # seller_submit = SellerSubmit.objects.get(checkout=order)

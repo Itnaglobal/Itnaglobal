@@ -154,6 +154,7 @@
 
 .left__userChat {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .user__chatImg .star__icon {

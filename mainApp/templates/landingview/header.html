@@ -91,20 +91,20 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
+          <li class="nav-item new_____nav____link">
             <a class="nav-link" href="#">Reimble</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item new_____nav____link">
             <a class="nav-link" href="#">Hire Us</a>
           </li>
           {% comment %} statement {% endcomment %}
 
         {% if not request.session.user %}
         
-          <li class="nav-item">
+          <li class="nav-item new_____nav____link">
             <a class="nav-link" href="{% url 'BecomeSeller' %}">Become a seller</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item new_____nav____link">
             <a class="nav-link" href="{% url 'user_login' %}">Sign In</a>
           </li>
           <a type="button" class="btn fw-bold btn-outline-light text-white join___button" href="{% url 'user_registration' %}">Join</a>
