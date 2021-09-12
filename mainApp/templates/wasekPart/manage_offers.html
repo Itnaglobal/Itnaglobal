@@ -57,9 +57,11 @@
                         <span>{{ pauseds|length }}</span>
                     </span></li>
             </button>
+            {% if offers|length < 8 %}
             <li class="create__newGig">
                 <a href="{% url 'create-offer' %}">Create a new offer</a>
             </li>
+            {% endif %}
         </ul>
     </div>
 
@@ -87,9 +89,11 @@
         </ul> -->
     </div>
     <div class="border__line"></div>
+    {% if offers|length < 8 %}
     <div class="mobile__createGig mt-3">
         <a href="{% url 'create-offer' %}">Create a new offer</a>
     </div>
+    {% endif %}
     <!-- Order links section ends  -->
 
     <!-- Order priority section starts -->

@@ -21,123 +21,12 @@
   </head>
   <body>
 
-    <!-- Mobile navbar section starts -->
-<nav class="mobile__navbar">
-    <div class="hamburger__menu">
-        <span class="iconify" data-icon="radix-icons:hamburger-menu" data-inline="false"></span>
-    </div>
-    <div class="logo__img">
-        <p class="text-center">Upgrade your Order</p>
-    </div>
-
-    <!-- For fixed black background -->
-    <div class="bg__fixed"></div>
-
-    <div class="mobile__navLinks">
-
-        <div class="top__section">
-            <div class="nav__close">
-                <span class="iconify" data-icon="carbon:close-outline" data-inline="false"></span>
-            </div>
-            <div class="user__profile">
-                <div class="mobile__userImg">
-                    <a href="#">
-                        <img src="{% static 'images/user_img.jpg' %}" alt="">
-                    </a>
-                </div>
-                <p>Wasek Samin</p>
-            </div>
-        </div>
-        <div class="all__options">
-            <ul>
-                <li>
-                    <a href="#">Home</a>
-                </li>
-                <li>
-                    <a href="#">Inbox</a>
-                </li>
-                <li>
-                    <a href="#">Dashboard</a>
-                </li>
-                <li>
-                    <a href="#">Lists</a>
-                </li>
-                <li class="browse__cat">
-                    <div>Browse Categories</div>
-                    <div><span class="iconify" data-icon="dashicons:arrow-down-alt2" data-inline="false"></span></div>
-                </li>
-                <li class="browse__cat">
-                    <div>Explore</div>
-                    <div><span class="iconify" data-icon="dashicons:arrow-down-alt2" data-inline="false"></span></div>
-                </li>
-                <li class="fivourr__pro">
-                    <a href="#">Fivourr Pro</a>
-                </li>
-                <li class="fivourr__business">
-                    <a href="#">Fiverr Busines</a>
-                </li>
-            </ul>
-
-            <ul>
-                <li>
-                    <p class="fw-bold text-dark">Buying</p>
-                    <hr>
-                </li>
-                <li>
-                    <a href="#">Manage Requests</a>
-                </li>
-                <li>
-                    <a href="#">Post a Request</a>
-                </li>
-            </ul>
-
-            <ul>
-                <li>
-                    <p class="fw-bold text-dark">Selling</p>
-                    <hr>
-                </li>
-                <li>
-                    <a href="#">Manage Sales</a>
-                </li>
-                <li>
-                    <a href="#">Revenues</a>
-                </li>
-                <li>
-                    <a href="#">Learn Online Courses</a>
-                </li>
-            </ul>
-
-            <ul>
-                <li>
-                    <p class="fw-bold text-dark">General</p>
-                    <hr>
-                </li>
-                <li>
-                    <a href="#">Settings</a>
-                </li>
-                <li>
-                    <a href="#">Logout</a>
-                </li>
-                <li class="browse__cat cat__alt">
-                    <div>English <span class="iconify" data-icon="bi:globe" data-inline="false"></span></div>
-                    <div><span class="iconify" data-icon="dashicons:arrow-down-alt2" data-inline="false"></span></div>
-                </li>
-                <li class="browse__cat cat__alt">
-                    <div>USD - $</div>
-                    <div><span class="iconify" data-icon="dashicons:arrow-down-alt2" data-inline="false"></span></div>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<!-- Mobile navbar section ends -->
-
 
     <!-- header part -->
     <header class="container">
         <div class="headerLogo">
-        <a href="{% url 'seller_dashboard' %}">
-            <img src="{% static 'images/marketage.png' %}">
+        <a class="nav___new___logo1" href="{% url 'seller_dashboard' %}">
+            Marketage.
         </a>
             <span class="orderText1"><a href="{% url 'cartView' %}"><strong>Order Details</strong></a> <i class="fas fa-chevron-right"></i></span>
             <span class="orderText"> <a href="{% url 'checkout' %}"><strong>Confirm  & pay</strong></a> <i class="fas fa-chevron-right"></i></span>

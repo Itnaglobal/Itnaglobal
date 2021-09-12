@@ -83,8 +83,12 @@ def view_all_category(request):
 def buying_view(request):
     main_logo = MainLogo.objects.all().last()
     offers = Offer.objects.all().order_by('-click')
-    cats = Category.objects.all()
+    cats = Category.objects.all().order_by("-id")[:7]
     subcats = Subcategory.objects.all()
+
+    for item in cats:
+        print(item)
+        print(len(item.subcategory.all()))
 
     pop_offers = Offer.objects.filter(is_popular=True)
     pop_web_offers = Offer.objects.filter(pop_web=True)
@@ -137,9 +141,6 @@ def offer_details(request, id):
     # ISSUE ##
 
     # print(packages)
-
-    if request.method == 'POST':
-        pass
 
     args = {
         'offers': offers,
@@ -262,7 +263,7 @@ def manageOrder(request):
 # offers page
 @login_required(login_url='user_login')
 def manageOffers(request):
-    offers = Offer.objects.all().order_by("-id")
+    offers = Offer.objects.filter(user=request.user).order_by("-id")
     active_offers, pending_approvals, required_modifications, denieds, pauseds = [], [], [], [], []
 
     for offer in offers:
@@ -298,6 +299,7 @@ def manageOffers(request):
             return redirect("manage-offers")
 
     args = {
+        "offers": offers,
         "active_offers": active_offers,
         "pending_approvals": pending_approvals,
         "required_modifications": required_modifications,
@@ -1568,7 +1570,15 @@ def buyerAllPostsView(request):
 
 @login_required(login_url='user_login')
 def deleteBuyerPost(request, id):
-    pass
+    # print(id)
+    try:
+        requested_post = BuyerPostRequest.objects.get(id=id)
+    except BuyerPostRequest.DoesNotExist:
+        return redirect("buyer-posts")
+    else:
+        requested_post.delete()
+        return redirect("buyer-posts")
+
 
 @login_required(login_url='user_login')
 def reservedBuyerPost(request, id):

@@ -9,6 +9,9 @@
 body{
     width: 100%;
 }
+.iconi___new____icon{
+    font-size: 22px !important;
+}
 .footer{
     background-color: #000;
 }
@@ -172,6 +175,38 @@ body{
     height: 15vh;
 }
 
+
+
+.new___link___style{
+    display: inline-block;
+    position: relative;
+}
+.new___link___style:after {    
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #fff;
+    transition: width 0.3s ease 0s, left 0.3s ease 0s;
+    width: 0;
+  }
+.new___link___style:hover:after { 
+    width: 100%; 
+    left: 0; 
+  }
+
+
+
+
+
+
+
+
+
+
 @media (max-width: 990px){
     .main-footer{
         display: flex;
@@ -187,7 +222,6 @@ body{
     .first_column{
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
         align-items: center;
         flex-direction: column;
     }
@@ -245,6 +279,9 @@ body{
         flex-wrap: wrap;
         justify-content: center;
         align-items: center;
+    }
+    .stay__inform{
+        border-bottom:1px solid #fff ;
     }
 }
 

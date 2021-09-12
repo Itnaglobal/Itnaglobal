@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 /* Add a black background color to the top navigation */
 :root {
     /* Colors */
@@ -96,6 +97,9 @@
 .HeaderMenu > ul > li > a:hover:after { 
   width: 100%; 
   left: 0; 
+}
+.Maketlogo{
+  margin-top: -10px;
 }
 /* @media screen and (max-height: 300px) {
 	ul {
@@ -198,12 +202,7 @@
    
 }
 
-.Catagorybar > ul li {
-    display: inline-block;
-    position: relative;
-    line-height: 21px;
-    text-align: left;
-}
+
 
 .Catagorybar > ul li a {
     display: block;
@@ -247,34 +246,63 @@ left: 0;
     left: 0;
 }
 
-.Catagorybar>ul>li:hover>div {
-    display: inline-block;
-}
+
 
  
 /* arko style */
 
-.under-dropdown{
-  display: flex;
-  position: fixed;
-
-}
 .dropdown{
   padding-left: 0px !important;
 }
 .for-sizing{
   padding-left: 0px !important;
-   padding: 15px;
+   padding: 10px;
    background: none;
 }
 
 .under-dropdown{
+  flex-wrap: wrap;
+  display: flex;
   background-color: var(--white-primary);
-  padding: 1rem 3rem;
+  padding: 0rem .5rem;
   border-radius: 2px;
-    box-shadow: 0px 0px 5px 2px darkgrey;
-  /* top:8.5rem; */
+  box-shadow: 0px 0px 5px 2px darkgrey;
+  position: absolute;
+  width: 600px;
+
 }
+
+.Catagorybar ul li{
+  position: relative;
+}
+.nav___new___logo{
+  font-weight: 700 !important;
+  font-family: 'Lobster', cursive !important;
+  letter-spacing: 2px;
+  font-size: 25px;
+  color: #000;
+}
+.nav___new___logo:hover{
+  color: #428ad3!important;
+}
+.first li{
+  display: inline-block;
+  position: absolute
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   @media screen and (max-width: 1399px) {
@@ -308,6 +336,7 @@ left: 0;
       width: 33%;
   }
   }
+
   @media screen and (max-width: 1199px) {
     .Searchbar {
         width: 26%;

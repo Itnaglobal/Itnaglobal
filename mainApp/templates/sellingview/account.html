@@ -73,8 +73,10 @@
 
                         <!-- Loop Start Here -->
                         {% for offer in offers %}
+                        <a href="{% url 'offer_details' offer.id %}">
                         <div class="mx-1 tab___card__new">
                           <img src="{{ offer.image.url }}" class="card-img-top" alt="...">
+                        </a>  
                           <div class="tab___card___body">
                             <p class="text-center"><a href="#">{{ offer.offer_title|truncatechars:20 }}</a></p>
                             <p class="text-center offer__tag">STARTING AT <span class="fw-bold fs-6">BDT. {{ offer.offermanager_set.all|offer_price_start }}<span></p>

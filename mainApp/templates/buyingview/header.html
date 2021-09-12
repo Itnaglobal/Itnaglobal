@@ -55,9 +55,11 @@
 
 
 
-              <div class="logo__img">
-                <a href="#">
-                  <img src="{% static 'images/marketage.png' %}" alt="">
+               
+              <div class="logo__img">    
+                <!-- marketage font logo -->
+                <a class="nav___new___logo" href="{% url 'buying_view' %}">Marketage.
+                  <!-- <img src="{% static 'images/marketage.png' %}" alt="" /> -->
                 </a>
               </div>
 
@@ -249,24 +251,22 @@
                         {% for category in cats %}
                         
                         <li>
-                            <a href="#">{{ category.title }} &#9662;</a>
-            
+
+                            <a href="#">{{ category.title }} {% if category.subcategory.all|length > 0 %}&#9662; {% endif %}</a>
                             <div class="middle">
                                 <ul class="dropdown">
-                                  {% comment %} {% if subcats.objects.filter(parent_market=category) %} {% endcomment %}
+                                  {% if category.subcategory.all|length > 0 %}
                                     <div class="under-dropdown">
                                       <div class="first-line">
                                           
                                         <ul class="for-sizing">
-                                          {% for subcat in subcats %}
-                                            {% if subcat.parent_market == category %}
+                                          {% for subcat in category.subcategory.all %}
                                               <li><a href="#">{{ subcat.sub_title }}</a></li>
-                                            {% endif %}
                                           {% endfor %}
                                         </ul>
                                       </div>
                                     </div>
-                                  {% comment %} {% endif %} {% endcomment %}
+                                  {% endif %}
                                 </ul>
                             </div>
                         </li>

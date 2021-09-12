@@ -6,15 +6,14 @@ from datetime import datetime
 from django.utils import timezone
 from django.http import JsonResponse
 import json
-from django.template import loader
 # Create your views here.
 
 
 def home_page(request):
     all_users = User.objects.exclude(username=request.user)
     # all_users = User.objects.all()
-    ct_room = ChatRoom.objects.filter(sellers=request.user)
-    for_buyer = ChatRoom.objects.filter(buyer=request.user)
+    ct_room = ChatRoom.objects.filter(sellers=request.user).order_by("-id")
+    for_buyer = ChatRoom.objects.filter(buyer=request.user).order_by("-id")
     # print(ct_room)
     args = {
         'all_users': all_users,
@@ -55,7 +54,7 @@ def user_details(request, id):
 def chatRoomView(request, id):
     chatroom = ChatRoom.objects.get(pk=id)
     values = Message.objects.filter(chatroom=id)
-    rooms = ChatRoom.objects.filter(Q(buyer=request.user) or Q(sellers=request.user))
+    rooms = ChatRoom.objects.filter(Q(buyer=request.user) or Q(sellers=request.user)).order_by("-id")
     # print(values.sent_date)
     current_time = datetime.now(timezone.utc)
     print("Current Time: " + str(current_time))
@@ -133,5 +132,5 @@ def chatRoomView(request, id):
         'ago': ago
     }
     
-    print(chatroom)
+    # print(chatroom)
     return render(request, "Test/chatRoom.html", args)

@@ -100,27 +100,26 @@ class Services(models.Model):
     def __str__(self):
         return self.title
 
+# Subcategory Model 
+class Subcategory(models.Model):
+    slug = models.SlugField(unique=True)
+    sub_title = models.CharField(max_length=120, unique=True)
+    sub_img = models.ImageField(upload_to="images/", null=True, blank=True)
+    # is_iterested = models.BooleanField(default=False, null=True)
+
+    def __str__(self):
+        return self.sub_title
+
 # Category model
 class Category(models.Model):
     slug = models.SlugField(unique=True)
     title = models.CharField(max_length=120, unique=True)
     icon = models.FileField(upload_to="images/", validators=[
                             FileExtensionValidator(['svg', 'png', 'jpg'])], null=True)
+    subcategory = models.ManyToManyField(Subcategory, blank=True)
 
     def __str__(self):
         return self.title
-
-# Subcategory Model 
-class Subcategory(models.Model):
-    slug = models.SlugField(unique=True)
-    sub_title = models.CharField(max_length=120, unique=True)
-    sub_img = models.ImageField(upload_to="images/", null=True, blank=True)
-    parent_market = models.ForeignKey(
-        Category, on_delete=models.CASCADE, null=True)
-    # is_iterested = models.BooleanField(default=False, null=True)
-
-    def __str__(self):
-        return self.sub_title
 
 # Child Subcategory Model
 class ChildSubcategory(models.Model):

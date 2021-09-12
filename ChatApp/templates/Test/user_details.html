@@ -1,44 +1,23 @@
+
 {% extends 'wasekPart/base.html' %}
+
 {% load static %}
 
-<!-- 
-<div class="container bg-light p-5">
-    <h2>{{ user_details.username }}</h2>
-</div>
-<br>
-<div class="container bg-warning">
-    Buyer = {{ request.user }}
-    Seller = {{ user_details.username }}
-
-</div>
 
 
 
+<script src="{% static 'js/user_details.js' %}" defer></script>
 
-<div class="container p-5 bg-light">
-    <form method="POST" action="">
-        {% csrf_token %}
-        {% comment %} Receiver: {{ user_details.username }}<br> {% endcomment %}
-        {% comment %} <input type="text" name="user" value="{{ user_details.username }}"><br> {% endcomment %}
-        {% comment %} Sender: {{ request.user }}<br> {% endcomment %}
-        {% comment %} <input type="text" name="seller" value="{{ request.user }}"><br> {% endcomment %}
-        <br>
-        <label>Enter a welcome message (ROOM NAME)</label><br>
-        <textarea name="room_name" class="form-control"></textarea><br>
-        <button class="btn btn-dark" type="submit">Send Message</button>
-
-    </form>
-</div> -->
+{% include 'buyingview/header.html' %}
 
 {% block content%}
 <link rel="stylesheet" href="{% static 'css/user_details.css' %}">
+
 
 <div class="user_____details">
 <div class="container">
     <div class="row">
         <div class="col-lg-2"></div>
-
-
             <div class="col-lg-8">
                 <div class="security___quote">
                 <p class="text-center fs-3 new__qoute"><div class="or-dev">
@@ -63,7 +42,7 @@
             </div>
 
 
-                <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
     </div>
 </div>
 </div>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 .nav__header {
   display: flex;
   align-items: center;
@@ -10,6 +11,30 @@
   background-color: #fff;
   box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.1);
 }
+
+/* azim font logo start */
+/* for mobile version */
+.nav___new___logo{
+    font-weight: 700 !important;
+    font-family: 'Lobster', cursive !important;
+    letter-spacing: 2px;
+    font-size: 23px;
+}
+.nav___new___logo:hover{
+  color: #428ad3!important;
+}
+/* for desktop version */
+.nav___new___logo1{
+  font-weight: 700 !important;
+  font-family: 'Lobster', cursive !important;
+  letter-spacing: 2px;
+  font-size: 29px !important;
+  margin-top: -5px;
+}
+/* azim font logo end */
+
+
+
 
 .mobile__navbar {
   display: none;
