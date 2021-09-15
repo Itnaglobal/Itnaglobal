@@ -230,6 +230,7 @@
                   data-inline="false"
                 ></span>
               </div>
+              
               <div class="thunder__icon">
                 <span
                   class="iconify"
@@ -244,6 +245,21 @@
                   data-inline="false"
                 ></span>
               </div>
+              
+              <div class="create-offer">
+                  <a href="{% url 'account' request.user.id %}">
+                      <span class="createOffer">Create Offer</span>
+                  </a>
+                  
+                  
+              </div>
+                <!-- <div class="for-hover-actived">
+                  <p>
+                      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
+                  </p>
+                </div> -->
+              
+              
             </div>
 
             <div class="send__icon">
@@ -375,5 +391,26 @@
     <!-- Right side main content section ends -->
   </div>
 </div>
+
+<input type="hidden" value="{{ chatroom.id }}" id="my_id" />
+<input type="hidden" class="chat__length" value="" />
+<input type="hidden" value="{{ request.user }}" id="my_user" />
+
+
+<script>
+    const link = document.querySelector(".createOffer");
+    const showForHover = document.querySelector(".for-hover-actived");
+    
+    link.addEventListener('mouseenter', function(){
+        showForHover.style.display = 'block'; 
+    })
+    link.addEventListener('mouseleave', function(){
+        showForHover.style.display = 'none'; 
+    })
+</script>
+
+
+
+
 
 {% include 'buyingview/buying_footer.html' %} {% endblock %}

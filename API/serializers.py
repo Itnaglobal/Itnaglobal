@@ -2,6 +2,7 @@ from rest_framework import serializers
 from mainApp.models import BuyerPostRequest, Category, Services, Offer
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
+from ChatApp.models import Message
 
 
 
@@ -40,3 +41,11 @@ class BuyerPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuyerPostRequest
         fields = '__all__'
+        
+## MEssage Serializer ##
+
+class MessageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Message
+        fields = '__all__'
+        depth = 2

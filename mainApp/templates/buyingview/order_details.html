@@ -158,8 +158,44 @@
 
     <script>
 
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        const csrftoken = getCookie('csrftoken');
+
+
+
+        var orderId = "{{ order.id }}"
         var total = "{{ order.grand_total }}"
         var user = "{{ order.user }}"
+
+        var url = "{% url 'paypal_success' order.id %}"
+        
+        function paypalSuccess() {
+          console.log("SUCCESS");
+              fetch(url, {
+                method: 'POST',
+                headers: {
+                  'Content-type': 'application/json',
+                  'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({'orderId': orderId })
+              })
+        }
+
+        
 
         // Render the PayPal button into #paypal-button-container
         paypal.Buttons({
@@ -178,9 +214,7 @@
             // Finalize the transaction
             onApprove: function(data, actions) {
                 return actions.order.capture().then(function(orderData) {
-                    // Successful capture! For demo purposes:
-                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    paypalSuccess()
                     alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
 
                     // Replace the above to show a success message within this page, e.g.

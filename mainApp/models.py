@@ -51,13 +51,13 @@ class City(models.Model):
 class SellerAccount(models.Model):
     joined_at = models.DateField(default=datetime.now, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # email = models.EmailField(null=True, unique=True)
     contact_no = models.CharField(max_length=15, null=True)
     profile_picture = models.ImageField(upload_to="images/", null=True)
     country = models.ForeignKey(Country, on_delete=models.CASCADE, null=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, null=True)
     level = models.IntegerField(default=0, blank=True)
     wallet = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    points = models.IntegerField(default=0, null=True, blank=True)
     # recently_viewed = models.BooleanField(default=False, null= True)
 
     def __str__(self):

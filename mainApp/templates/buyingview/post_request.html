@@ -2,12 +2,15 @@
 {% load crispy_forms_tags %}
 
 {% include 'buyingview/header.html' %}
+
+<script src={% static 'js/post_request.js' %}></script>
+
 <!--main css for post a req page -->
 
     <link rel="stylesheet" href="{% static 'css/post_a_req.css' %}" >
-    <script src="{% static 'js/main-buyer-view.js' %}" defer ></script>
 
 <!-- 
+
 
 <div class="container mt-4 mb-4"> 
     <div class="card main-div-for-form">
@@ -57,8 +60,13 @@
                             <i class="fas fa-paperclip"></i>
                             Attach Files
                         </label>
-                        
-                        <input id="file-upload" name="file_upload" style="visibility: hidden;" type="file"/>                
+                        <span id="file_val"></span>
+
+                        <input id="file-upload"
+                        class="file__uploaded" 
+                        onchange="onFileUpload()"
+                        name="file_upload" 
+                        style="visibility: hidden;" type="file"/>                
             </div>
             <div class="col-4 for-hover">
                 <div class="inner-hover-part">

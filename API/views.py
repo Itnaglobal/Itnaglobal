@@ -9,6 +9,8 @@ from mainApp.models import *
 from .serializers import *
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import TokenAuthentication
+from rest_framework import status
+from ChatApp.models import *
 
 
 class ServiceApiView(APIView):
@@ -148,3 +150,26 @@ class BuyerPostRequestView(APIView):
         serializer = BuyerPostSerializer(buyer_post, many=True)
         
         return Response(serializer.data)
+        
+# Message API View
+class MessageView(APIView):
+
+    def get(self, request):
+        data = []
+        # messages = Message.objects.filter(sender=request.user)
+        messages = Message.objects.all()
+
+        message_serializer = MessageSerializer(messages, many=True)
+        return Response(message_serializer.data)
+        
+        
+    def post(self, request, format=None):
+        post_serializer = MessageSerializer(data=request.data)
+        if post_serializer.is_valid():
+            post_serializer.save()
+            return Response(post_serializer.data, status=status.HTTP_201_CREATED)
+        return Response(post_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        
+        
+        

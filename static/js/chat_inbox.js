@@ -1,28 +1,85 @@
 $(document).ready(function () {
-  userAllChats = document.querySelector(".user__allChats");
+  const userAllChats = document.querySelector(".user__allChats");
   userAllChats.scrollTop = userAllChats.scrollHeight;
+  const myId = document.getElementById("my_id").value;
+  const chatLength = document.querySelector(".chat__length");
+  const myUser = document.getElementById("my_user");
+  let sender = "";
+
+//   reload_chat = () => {
+//     $.ajax({
+//       url: `/betaversion/chat/chatroom/${myId}/`,
+//       success: function() {
+//         document.querySelector(".alert__chatReload").classList.add("active__reloadChat");
+
+//         document.querySelector("#tap__reload").addEventListener('click', () => {
+//           window.location.reload();
+//         });
+//       }
+//     });
+//   }
+
+//   setTimeout(function() {
+//     reload_chat();
+//   }, 25000);
 
   reload_chat = () => {
     $.ajax({
-      url: "/chat/chatroom/94/",
-      success: function() {
-        document.querySelector(".alert__chatReload").classList.add("active__reloadChat");
-
-        document.querySelector("#tap__reload").addEventListener('click', () => {
-          window.location.reload();
-        });
+      url: `/betaversion/api/messages/`,
+      success: function(data) {
+        let chatList = [];
+        let chat_id = null;
+        let mysender = "";
+        
+        console.log(sender);
+        
+        for (let i=0; i<data.length; i++) {
+            // console.log(data[i]);
+            // console.log(data[i].chatroom.id);
+            if (data[i].chatroom.id === parseInt(myId)) {
+                chatList.push(data[i]);
+                // sender = data[i].sender.username;
+                chat_id = myId;
+            }
+        }
+        
+        // if (chatList.length > 0) {
+        //     // console.log(chatList);
+        //     mysender = chatList[chatList.length - 1].sender.username;
+        // }
+        console.log("sender:", mysender);
+        
+        if (chatLength.value === undefined || chatLength.value === null || chatLength.value === "") {
+            chatLength.value = chatList.length;
+        }
+        
+        // console.log(chatLength.value, chatList.length);
+        
+        if (mysender !== undefined || mysender !== "" || chatLength.value !== undefined || chatLength.value !== null) {
+            console.log("I AM HERE!");
+            if (chatLength.value > 0 && chatLength.value !== chatList.length && myId === chat_id) {
+                if (mysender !== "" && myUser !== mysender) {
+                    mysender = "";
+                    document.querySelector(".alert__chatReload").classList.add("active__reloadChat");
+                    document.querySelector("#tap__reload").addEventListener('click', () => {
+                      window.location.reload();
+                    });
+                }
+            }
+        }
+        console.log(chatList.length);
       }
     });
   }
 
-  setTimeout(function() {
+  setInterval(function() {
     reload_chat();
-  }, 25000);
+  }, 5000);
 
   goBack = document.querySelector(".go__back");
 
   goBack.addEventListener('click', () => {
-    window.location.href = "/inbox";
+    window.location.href = "/betaversion/inbox";
   });
 
   const chatForm = $("#chat__form");
@@ -54,6 +111,8 @@ $(document).ready(function () {
 });
 
 function appendToMessage(message) {
+    // console.log(message.username);
+    sender = message.username;
   $(".user__allChats").append(`
   <div class="user__me" id="message_${message.id}">
   <div class="opposite__userImg">

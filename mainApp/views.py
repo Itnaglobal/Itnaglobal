@@ -22,7 +22,7 @@ import random
 from ChatApp.models import *
 from django.core.mail import send_mail
 from decimal import Decimal
-
+import json
 
 
 
@@ -84,11 +84,10 @@ def buying_view(request):
     main_logo = MainLogo.objects.all().last()
     offers = Offer.objects.all().order_by('-click')
     cats = Category.objects.all().order_by("-id")[:7]
-    subcats = Subcategory.objects.all()
 
-    for item in cats:
-        print(item)
-        print(len(item.subcategory.all()))
+    # for item in cats:
+    #     print(item.subcategory.all())
+    #     print(len(item.subcategory.all()))
 
     pop_offers = Offer.objects.filter(is_popular=True)
     pop_web_offers = Offer.objects.filter(pop_web=True)
@@ -98,7 +97,6 @@ def buying_view(request):
         'offers': offers,
         'pop_offers': pop_offers,
         'cats': cats,
-        "subcats": subcats,
         'pop_web_offers': pop_web_offers,
         "pro_offers": pro_offers,
         'main_logo': main_logo
@@ -761,7 +759,7 @@ def extendedUserView(request):
 
     if user_session is not None:
         if request.method == "POST":
-            email = request.POST.get("email")
+            # email = request.POST.get("email")
             contact_no = request.POST.get("contact_no")
             profile_picture = request.FILES.get("profile_picture")
             country_id = request.POST.get("country")
@@ -773,7 +771,7 @@ def extendedUserView(request):
             except:
                 return redirect("extended-user")
             else:
-                SellerAccount.objects.create(user=request.user, email=email,
+                SellerAccount.objects.create(user=request.user,
                                              contact_no=contact_no, profile_picture=profile_picture,
                                              country=country, city=city)
                 return redirect('buying_view')
@@ -922,76 +920,93 @@ def createOfferView(request):
         category = Category.objects.get(title=category)
         # Creating offer object
 
-        if main_image and uploaded_video and document:
-            offer = Offer(slug=slug, user=request.user, offer_title=offer_title, seo_title=seo_title, 
-                        image=main_image, offer_video=uploaded_video, document=document, 
-                        service=service, category=category, description=content)
+        # if main_image and uploaded_video and document:
+        #     offer = Offer(slug=slug, user=request.user, offer_title=offer_title, seo_title=seo_title, 
+        #                 image=main_image, offer_video=uploaded_video, document=document, 
+        #                 service=service, category=category, description=content)
+        #     offer.save()
+        if main_image:
+            offer = Offer(slug=slug, user=request.user, offer_title=offer_title, seo_title=seo_title, image=main_image,
+                service=service, category=category, description=content)
+            if uploaded_video:
+                offer.offer_video = uploaded_video
+            if document:
+                offer.document = document
+                
             offer.save()
-        else:
-            return redirect("create-offer")
         
         if len(uploaded_photo) > 0:
             for item in uploaded_photo[:3]:
                 image_obj = ExtraImage(image=item)
                 image_obj.save()
                 offer.extra_images.add(image_obj.id)
-        else:
-            return redirect("create-offer")
 
         if basic_shortDesc is not None:
-            dt_basic = DeliveryTime.objects.get(title=delivery_time_basic)
-            re_basic = Revision.objects.get(title=revision_basic)
-            num_page_basic = NumberOfPage.objects.get(title=num_pages_basic)
+            try:
+                dt_basic = DeliveryTime.objects.get(title=delivery_time_basic)
+                re_basic = Revision.objects.get(title=revision_basic)
+                num_page_basic = NumberOfPage.objects.get(title=num_pages_basic)
+            except:
+                offer.delete()
+                return redirect("create-offer")
             # print(num_page_basic)
-
-            if is_responsive_basic == "on":
-                is_responsive_basic = True
             else:
-                is_responsive_basic = False
+                if is_responsive_basic == "on":
+                    is_responsive_basic = True
+                else:
+                    is_responsive_basic = False
 
 
-            # Saving Package
-            package = Package(title="Basic", delivery_time=dt_basic, package_desc=basic_shortDesc, 
-                            revision_basic=re_basic, num_of_pages_for_basic=num_page_basic, is_responsive_basic=is_responsive_basic,
-                            )
-            package.save()
-            OfferManager.objects.create(offer=offer, package=package, price=price_basic)
+                # Saving Package
+                package = Package(title="Basic", delivery_time=dt_basic, package_desc=basic_shortDesc, 
+                                revision_basic=re_basic, num_of_pages_for_basic=num_page_basic, is_responsive_basic=is_responsive_basic,
+                                )
+                package.save()
+                OfferManager.objects.create(offer=offer, package=package, price=price_basic)
 
         if standard_shortDesc is not None:
-            dt_standard = DeliveryTime.objects.get(title=delivery_time_standard)
-            re_standard = Revision.objects.get(title=revision_standard)
-            num_page_standard = NumberOfPage.objects.get(title=num_pages_standard)
-            print(num_page_standard)
-
-            if is_responsive_standard == "on":
-                is_responsive_standard = True
+            try:
+                dt_standard = DeliveryTime.objects.get(title=delivery_time_standard)
+                re_standard = Revision.objects.get(title=revision_standard)
+                num_page_standard = NumberOfPage.objects.get(title=num_pages_standard)
+            # print(num_page_standard)
+            except:
+                offer.delete()
+                return redirect("create-offer")
             else:
-                is_responsive_standard = False
+                if is_responsive_standard == "on":
+                    is_responsive_standard = True
+                else:
+                    is_responsive_standard = False
 
-            package = Package(title="Standard", delivery_time=dt_standard, package_desc=standard_shortDesc, 
-                            revision_standard=re_standard, num_of_pages_for_standard=num_page_standard, is_responsive_standard=is_responsive_standard,
-                            )
-            package.save()
-            OfferManager.objects.create(offer=offer, package=package, price=price_standard)
+                package = Package(title="Standard", delivery_time=dt_standard, package_desc=standard_shortDesc, 
+                                revision_standard=re_standard, num_of_pages_for_standard=num_page_standard, is_responsive_standard=is_responsive_standard,
+                                )
+                package.save()
+                OfferManager.objects.create(offer=offer, package=package, price=price_standard)
 
         if premium_shortDesc is not None:
-            dt_premium = DeliveryTime.objects.get(title=delivery_time_premium)
-            re_premium = Revision.objects.get(title=revision_premium)
-            num_page_premium = NumberOfPage.objects.get(title=num_pages_premium)
-            print(num_page_premium)
-
-            if is_responsive_premium == "on":
-                is_responsive_premium = True
+            try:
+                dt_premium = DeliveryTime.objects.get(title=delivery_time_premium)
+                re_premium = Revision.objects.get(title=revision_premium)
+                num_page_premium = NumberOfPage.objects.get(title=num_pages_premium)
+            # print(num_page_premium)
+            except:
+                offer.delete()
+                return redirect("create-offer")
             else:
-                is_responsive_premium = False
+                if is_responsive_premium == "on":
+                    is_responsive_premium = True
+                else:
+                    is_responsive_premium = False
 
-            # Creating package object
-            package = Package(title="Premium", delivery_time=dt_premium, package_desc=premium_shortDesc, 
-                            revision_premium=re_premium, num_of_pages_for_premium=num_page_premium, is_responsive_premium=is_responsive_premium,
-                            )
-            package.save()
-            # Creating offer manager object
-            OfferManager.objects.create(offer=offer, package=package, price=price_premium)
+                # Creating package object
+                package = Package(title="Premium", delivery_time=dt_premium, package_desc=premium_shortDesc, 
+                                revision_premium=re_premium, num_of_pages_for_premium=num_page_premium, is_responsive_premium=is_responsive_premium,
+                                )
+                package.save()
+                # Creating offer manager object
+                OfferManager.objects.create(offer=offer, package=package, price=price_premium)
 
         return redirect("manage-offers")
     args = {
@@ -1094,6 +1109,9 @@ def edit_offer(request, id):
             offer_video = request.FILES.get("offer_video")
             offer_document = request.FILES.get("offer_document")
 
+            print("OFFER EXTRA IMAGES:")
+            print(offer_extraImages)
+
             # Deleting offer main image
             if main_image_id:
                 offer.image = None
@@ -1102,23 +1120,23 @@ def edit_offer(request, id):
             # Deleting an extra image from offer
             if extra_image_id1:
                 offer.extra_images.remove(int(offer_first_img.id))
-                offer.offer_status = "PAUSED"
+                # offer.offer_status = "PAUSED"
             elif extra_image_id2:
                 offer.extra_images.remove(int(offer_second_img.id))
-                offer.offer_status = "PAUSED"
+                # offer.offer_status = "PAUSED"
             elif extra_image_id3:
                 offer.extra_images.remove(int(offer_third_img.id))
-                offer.offer_status = "PAUSED"
+                # offer.offer_status = "PAUSED"
 
             # Deleting offer video
             if offer_video_id:
                 offer.offer_video = None
-                offer.offer_status = "PAUSED"
+                # offer.offer_status = "PAUSED"
 
             # Deleting offer document
             if offer_document_id:
                 offer.document = None
-                offer.offer_status = "PAUSED"
+                # offer.offer_status = "PAUSED"
 
             service = Services.objects.get(title=service)
             category = Category.objects.get(title=category)
@@ -1135,7 +1153,10 @@ def edit_offer(request, id):
 
             print("OFFER EXTRA IMAGE LENGTH:", len(offer.extra_images.all()))
 
-            if offer.image != None and offer.offer_video != None and offer.document != None and len(offer.extra_images.all()) > 0:
+            # if offer.image != None and offer.offer_video != None and offer.document != None and len(offer.extra_images.all()) > 0:
+            #     offer.offer_status = "ACTIVE"
+                
+            if offer.image != None:
                 offer.offer_status = "ACTIVE"
 
             offer.service = service
@@ -1143,7 +1164,8 @@ def edit_offer(request, id):
             offer.description = content
 
             offer.save()
-
+            
+            # Adding offer extra images
             if offer_extraImages:
                 for item in offer_extraImages[:3-len(offer.extra_images.all())]:
                     image_obj = ExtraImage(image=item)
@@ -1622,3 +1644,16 @@ def rafsun_header(request):
 # azim password reset page
 def password_reset_confirm(request):
     return render(request, "accountview/password_reset_confirm.html")
+
+# Paypal Succes URL View Here order will be updated to UNPAID to PAID
+def paypal_success(request, id):
+    body = json.loads(request.body)
+    print("BODY", body)
+    order = Checkout.objects.get(pk=id)
+    order.update(paid=True)
+    args = {
+        "order": order
+    }
+
+    return JsonResponse(body)
+    # return render(request, "buyingview/paypal_success.html", args)

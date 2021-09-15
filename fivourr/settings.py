@@ -151,11 +151,18 @@ STRIPE_PUBLISHABLE_KEY = 'pk_test_51JQ4uaFZa2c48QIFKlw5aHZDFyyKxIbgbuY0BpDiDC3vZ
 
 # SMTP COnfiguration
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'mail.privateemail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'noreply@marketagemail.com'
+# EMAIL_HOST_USER = 'noreply@marketagemail.com'
+# EMAIL_HOST_PASSWORD = 'Fivour123@'
+
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'mail.privateemail.com'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'noreply@marketagemail.com'
-EMAIL_HOST_USER = 'noreply@marketagemail.com'
-EMAIL_HOST_PASSWORD = 'Fivour123@'
-
+EMAIL_HOST_USER = 'itna.sakib@gmail.com'
+EMAIL_HOST_PASSWORD = 'idontthinkso123'

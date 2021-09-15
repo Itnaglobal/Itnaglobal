@@ -1,9 +1,3 @@
-
-
-
-
-
-
 const proLan = document.querySelector('.pro-lan');
 const expertise = document.querySelector('.expertise');
 
@@ -222,5 +216,41 @@ function checkResponsive3() {
 }
 
 function cancel_offer() {
-  window.location.href = "/manage-offers/";
+  window.location.href = "/betaversion/manage-offers/";
 }
+
+
+
+// azim input limit work
+// for offer title textarea
+
+function count_up(obj) {
+  document.getElementById('counter').innerHTML = obj.value.length;
+}
+
+function count_down(obj) {
+   
+  element.innerHTML = 80 - obj.value.length;   
+}
+
+
+// for seo title
+function countUp(obj) {
+  document.getElementById('counter').innerHTML = obj.value.length;
+}
+
+function count_down(obj) {
+   
+  element.innerHTML = 60 - obj.value.length;   
+}
+
+
+
+const onFileUpload = () => {
+  const file = document.querySelector("#main-image").value;
+  let filename = file.split("\\");
+  filename = filename[filename.length - 1];
+  document.querySelector("#uploaded-file").innerText = filename;
+  document.querySelector("#uploaded-file").style.display = "block";
+}
+

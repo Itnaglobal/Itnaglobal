@@ -17,14 +17,13 @@ const deniedTable = document.querySelector('.denied__table')
 const pausedTable = document.querySelector('.paused__table')
 
 activeBtn.addEventListener('click', () => {
-  console.log('hello ')
   // For button text
   activeBtn.classList.add('active__link')
   pendingBtn.classList.remove('active__link')
   modificationBtn.classList.remove('active__link')
   deniedBtn.classList.remove('active__link')
   pausedBtn.classList.remove('active__link')
-  gigsText.innerHTML = 'ACTIVE GIGS'
+  gigsText.innerHTML = 'ACTIVE OFFERS'
 
   // For table container
   activatedTable.classList.add('show__activeTable')
@@ -41,7 +40,7 @@ pendingBtn.addEventListener('click', () => {
   modificationBtn.classList.remove('active__link')
   deniedBtn.classList.remove('active__link')
   pausedBtn.classList.remove('active__link')
-  gigsText.innerHTML = 'GIGS PENDING APPROVAL'
+  gigsText.innerHTML = 'OFFERS PENDING APPROVAL'
 
   // For table container
   activatedTable.classList.remove('show__activeTable')
@@ -58,7 +57,7 @@ modificationBtn.addEventListener('click', () => {
   modificationBtn.classList.add('active__link')
   deniedBtn.classList.remove('active__link')
   pausedBtn.classList.remove('active__link')
-  gigsText.innerHTML = 'GIGS THAT REQUIRE MODIFICATION'
+  gigsText.innerHTML = 'OFFERS THAT REQUIRE MODIFICATION'
 
   // For table container
   activatedTable.classList.remove('show__activeTable')
@@ -75,7 +74,7 @@ deniedBtn.addEventListener('click', () => {
   modificationBtn.classList.remove('active__link')
   deniedBtn.classList.add('active__link')
   pausedBtn.classList.remove('active__link')
-  gigsText.innerHTML = 'DENIED GIGS'
+  gigsText.innerHTML = 'DENIED OFFERS'
 
   // For table container
   activatedTable.classList.remove('show__activeTable')
@@ -92,7 +91,7 @@ pausedBtn.addEventListener('click', () => {
   modificationBtn.classList.remove('active__link')
   deniedBtn.classList.remove('active__link')
   pausedBtn.classList.add('active__link')
-  gigsText.innerHTML = 'PAUSED GIGS'
+  gigsText.innerHTML = 'PAUSED OFFERS'
 
   // For table container
   activatedTable.classList.remove('show__activeTable')

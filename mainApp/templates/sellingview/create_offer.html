@@ -31,8 +31,7 @@
   integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 
-    <link src="{% static 'css/chosen.css' %}"></link>
-    <script src="{% static 'js/chosen.js' %}"defer></script>
+   
    
 
     
@@ -61,19 +60,24 @@
 
                     <!-- gig title -->
                     <div class="gig-card">
-
                         <div class="gig-title mb-4">
                             <p>OFFER TITLE</p>
-                            <textarea name="offer_title" placeholder="I will" required></textarea>
+                            <textarea id="new___textarea" name="offer_title" placeholder="I will" onkeyup="count_up(this);" maxlength="80" required></textarea>              
                         </div>
+                        
+                        <div class="counter"><p class="text-muted"><span id="counter">0</span>/80 MAX</p></div>
+                      </div>
 
 
 
                     <!-- seo title     -->
                         <div class="seo-title">
                             <p>SEO TITLE</p>
-                            <textarea name="seo_title" required> </textarea>
+                            <textarea name="seo_title"  onkeyup="countUp(this);" maxlength="60"  required> </textarea>
                         </div>
+                        <div class="counter"><p class="text-muted"><span id="counter">0</span>/60 MAX</p></div>
+
+
 
                     <!-- category -->
                         <div class="category">
@@ -153,7 +157,7 @@
 
 
                     </div>
-                </div>
+               
 
                 
                 <div class="col-md-3 right-div">
@@ -302,7 +306,7 @@
                             <td></td>
                             
                             <td scope="row">
-                                <select name="delivery_time_basic" id="">
+                                <select name="delivery_time_basic" id="" required>
                                     <option value="">Select Delivery Time</option>
                                     {% for delivery in deliveries %}
                                         <option value="{{delivery.title}}">{{ delivery.title }}</option>
@@ -313,7 +317,7 @@
                             
 
                             <td scope="row">
-                                <select name="delivery_time_standard" id="">
+                                <select name="delivery_time_standard" id="" required>
                                     <option value="">Select Delivery Time</option>
                                     {% for delivery in deliveries %}
                                         <option value="{{delivery.title}}">{{ delivery.title }}</option>
@@ -324,7 +328,7 @@
                             
 
                             <td scope="row">
-                                <select name="delivery_time_premium" id="">
+                                <select name="delivery_time_premium" id="" required>
                                     <option value="">Select Delivery Time</option>
                                     {% for delivery in deliveries %}
                                         <option value="{{delivery.title}}">{{ delivery.title }}</option>
@@ -342,7 +346,7 @@
 
                             
                             <td scope="row">
-                                <select name="num_pages_basic" id="">
+                                <select name="num_pages_basic" id="" required>
                                     <option value="">Select</option>
                                     {% for page in num_of_pages %}
                                         <option value="{{page.title}}">{{ page.title }}</option>
@@ -352,7 +356,7 @@
                             
                             
                             <td scope="row">
-                                <select name="num_pages_standard" id="">
+                                <select name="num_pages_standard" id="" required>
                                     <option value="">Select</option>
                                     {% for page in num_of_pages %}
                                         <option value="{{page.title}}">{{ page.title }}</option>
@@ -362,7 +366,7 @@
                             
                             
                             <td scope="row">
-                                <select name="num_pages_premium" id="">
+                                <select name="num_pages_premium" id="" required>
                                     <option class= value="">Select</option>
                                     {% for page in num_of_pages %}
                                         <option value="{{page.title}}">{{ page.title }}</option>
@@ -524,6 +528,7 @@
 
         <section class="for-gallery container mt-4">
         <div class="row">
+
         <div class="col-md-9 inner-gallery">
 
             
@@ -547,8 +552,11 @@
                                 <span class="iconify" data-icon="bi:image"></span>
                                  <p>  Upload your photo</p>
                             </label>
-                            
-                            <input id="main-image" name="offer_main_image" style="visibility: hidden;" accept="image/*" type="file" required />   
+
+                            <span id=uploaded-file></span>
+
+                            <input id="main-image" name="offer_main_image" style="visibility: hidden;" accept="image/*" type="file" 
+                            onchange="onFileUpload()" required />   
         
         
                 </div>
@@ -564,7 +572,7 @@
                          <p>  Upload your photos</p>
                     </label>
                     
-                    <input id="formFileMultiple" name="uploaded_photo" style="visibility: hidden;" type="file" accept="image/*" multiple required />   
+                    <input id="formFileMultiple" name="uploaded_photo" style="visibility: hidden;" type="file" accept="image/*" multiple />   
 
 
         </div>
@@ -581,7 +589,7 @@
                  <p>  Upload your video</p>
             </label>
             
-            <input id="video-upload" name="uploaded_video" style="visibility: hidden;" type="file" accept="video/mp4,video/x-m4v,video/*" required/>   
+            <input id="video-upload" name="uploaded_video" style="visibility: hidden;" type="file" accept="video/mp4,video/x-m4v,video/*" />   
 
         </div>
 <hr>
@@ -598,7 +606,7 @@
                  <p>  Upload your Document</p>
             </label>
             
-            <input id="document-upload" name="document" style="visibility: hidden;" type="file" accept="application/pdf,application/vnd.ms-excel" required />   
+            <input id="document-upload" name="document" style="visibility: hidden;" type="file" accept="application/pdf,application/vnd.ms-excel" />   
 
         </div>
 

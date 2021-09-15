@@ -242,7 +242,16 @@ div.like-checked:focus{
     padding: 0px !important;
 }
 
-
+/* valur showing  */
+#file_val{
+    font-size: 15px;
+    background: #f5f5f5;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-weight: 600;
+    display: none;
+}
 
 /* multi tag */
 

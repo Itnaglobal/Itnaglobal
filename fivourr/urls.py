@@ -187,6 +187,9 @@ urlpatterns = [
 
     # Test Reafun Part
     path("rafsun/", views.rafsun_header, name="rafsun"),
+    # Complete Paypal URL
+
+    path("paypal_success/<int:id>/", views.paypal_success, name="paypal_success")
 ]   
 
 

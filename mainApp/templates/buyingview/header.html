@@ -241,38 +241,39 @@
              </div>
      
 
-
+             <!--  -->
     <!-- catagory  -->
    
           <div class="catagorysection">
             <div class="container">
                 <div class="Catagorybar">
-                    <ul>
-                        {% for category in cats %}
-                        
-                        <li>
 
-                            <a href="#">{{ category.title }} {% if category.subcategory.all|length > 0 %}&#9662; {% endif %}</a>
-                            <div class="middle">
-                                <ul class="dropdown">
-                                  {% if category.subcategory.all|length > 0 %}
-                                    <div class="under-dropdown">
-                                      <div class="first-line">
-                                          
-                                        <ul class="for-sizing">
-                                          {% for subcat in category.subcategory.all %}
-                                              <li><a href="#">{{ subcat.sub_title }}</a></li>
-                                          {% endfor %}
-                                        </ul>
-                                      </div>
-                                    </div>
-                                  {% endif %}
-                                </ul>
+                  <ul>
+                  {% if cats|length > 0 %}
+                    {% for category in cats %}
+                    <li class="for-hover-active">
+                      <a href="#">{{ category.title }} {% if category.subcategory.all|length > 0 %}▾{% endif %}</a>
+                      {% if category.subcategory.all|length > 0 %}
+                      <div class="hidden">
+                          
+                      <div class="under-category">
+                          <ul>
+                              <li>
+                                  {% for subcat in category.subcategory.all %}
+                                  <a href="#">{{ subcat.sub_title }}</a>
+                                  {% endfor %}
+                                </li>
+                              </ul>
                             </div>
-                        </li>
-                        {% endfor %}
-                        <li><a href="#">View More</a></li>
-                    </ul>
+                          </div>
+                          {% endif %}
+                    
+                    
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+
                 </div>
 
           </div>

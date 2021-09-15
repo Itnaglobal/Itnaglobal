@@ -20,6 +20,18 @@ body{
     border-radius: 50%;
     padding: 5px;
 }
+
+/* for file upload showing  */
+#uploaded-file{
+    background-color: #EDF0F4;
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+
 ol, ul {
     padding-left: 0rem !important;
 }
@@ -847,6 +859,29 @@ ol, ul {
     white-space: nowrap;
     overflow: hidden;
 }
+
+/* azim edit for textarea  limit input word with js */
+.counter_____main___div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.counter p{
+    float: right;
+    margin-top: -22px;
+}
+
+
+
+
+
+
+
+
+
+
+
 @media screen (max-width: 1200px) {
     
     .package-table {
